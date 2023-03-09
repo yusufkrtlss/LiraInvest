@@ -1,17 +1,180 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Monster\\source\\repos\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj": {}
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Monster\\source\\repos\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj": {
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Monster\\source\\repos\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
-        "projectName": "LiraOfInvestment",
-        "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+        "projectUniqueName": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj",
+        "projectName": "BusinessLayer",
+        "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj",
         "packagesPath": "C:\\Users\\Monster\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Monster\\source\\repos\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
+        "outputPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Monster\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
+              },
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.14, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectName": "DataAccessLayer",
+        "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\Monster\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Monster\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.14, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj",
+        "projectName": "EntityLayer",
+        "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj",
+        "packagesPath": "C:\\Users\\Monster\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Monster\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +202,114 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.14, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+        "projectName": "LiraOfInvestment",
+        "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+        "packagesPath": "C:\\Users\\Monster\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\Monster\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj"
+              },
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
+              },
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.14, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.14, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
