@@ -1,0 +1,42 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Access Denied</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta charset="UTF-8">
+<link href="~/inspinia-gh-pages/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+</head>
+<body id="deniedBody">
+<div class="w3-display-middle">
+<h1 id="deniedH1" class="w3-jumbo w3-animate-top w3-center"><code>Erişim Reddedildi</code></h1>
+<hr class="w3-border-white w3-animate-left" style="margin:auto;width:50%">
+<h3 class="w3-center w3-animate-right">Bu siteye ulaşmak için yetkiniz yok.</h3>
+<h3 class="w3-center w3-animate-zoom">🚫🚫🚫🚫</h3>
+<h6 id="deniedH6" class="w3-center w3-animate-zoom">error code:403 forbidden</h6>
+<a class="btn btn-primary" asp-controller="Main" asp-action="Index">Anasayfa</a>
+</div>
+</body>
+</html>
+
+<style>
+    #deniedBody{
+background-color: black;
+color: white;
+}
+
+#deniedH1 {
+color: red;
+}
+
+#deniedH6{
+color: red;
+text-decoration: underline;
+}
+</style>
