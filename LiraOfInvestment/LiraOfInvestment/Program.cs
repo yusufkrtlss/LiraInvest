@@ -39,19 +39,19 @@ builder.Services.AddMvc(config =>
     config.Filters.Add(new AuthorizeFilter(policy));
 });
 
-builder.Services.AddAuthentication(
-    CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(x =>
-    {
-        x.LoginPath = "/Login/Login";
-    });
+//builder.Services.AddAuthentication(
+//    CookieAuthenticationDefaults.AuthenticationScheme)
+//    .AddCookie(x =>
+//    {
+//        x.LoginPath = "/Login/Login";
+//    });
 
 builder.Services.ConfigureApplicationCookie(config =>
 {
     config.Cookie.HttpOnly = true;
     config.ExpireTimeSpan = TimeSpan.FromMinutes(100);
     config.AccessDeniedPath = new PathString("/Login/AccessDenied");
-    config.LoginPath = "/Login/Index/";
+    config.LoginPath = "/Login/Login/";
     config.SlidingExpiration = true;
 });
 
@@ -97,7 +97,7 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Default}/{action=Index}/{id?}");
 
 app.UseEndpoints(endpoints =>
 {
