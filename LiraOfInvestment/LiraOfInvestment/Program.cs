@@ -1,8 +1,12 @@
 using BusinessLayer.Abstract;
+using BusinessLayer.Abstract.Charts;
 using BusinessLayer.Concrete;
+using BusinessLayer.Concrete.Charts;
 using DataAccessLayer.Abstract;
+using DataAccessLayer.Abstract.Charts;
 using DataAccessLayer.Concrete;
 using DataAccessLayer.EntityFramework;
+using DataAccessLayer.EntityFramework.Charts;
 using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
@@ -76,7 +80,11 @@ builder.Services.AddTransient<ITeamDal, EfTeamDal>();
 builder.Services.AddTransient<ITestimonialService, TestimonialManager>();
 builder.Services.AddTransient<ITestimonialDal, EfTestimonialDal>();
 
+builder.Services.AddTransient<IProfileService, ProfileManager>();
+builder.Services.AddTransient<IProfileDal, EfProfileDal>();
 
+builder.Services.AddTransient<ITwoYearsMonthly, TwoYearsMonthlyManager>();
+builder.Services.AddTransient<ITwoYearsMonthlyDal, EfTwoYearsMonthlyDal>();
 
 var app = builder.Build();
 

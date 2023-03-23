@@ -1,4 +1,5 @@
-﻿using EntityLayer.Concrete;
+﻿using EntityLayer.Charts;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +22,8 @@ namespace DataAccessLayer.Concrete
         public DbSet<Share> Shares { get; set; }
         public DbSet<Team> Teams { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
+        public DbSet<Profile> profile_fast_info2 { get; set; }
+        public DbSet<Two_Years_Monthly_Chart> two_years_monthly { get; set; }
 
     }
 }

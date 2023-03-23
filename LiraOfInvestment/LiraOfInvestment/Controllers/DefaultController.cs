@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BusinessLayer.Abstract.Charts;
+using BusinessLayer.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiraOfInvestment.Controllers
@@ -6,6 +8,12 @@ namespace LiraOfInvestment.Controllers
     [AllowAnonymous]
     public class DefaultController : Controller
     {
+        IProfileService _profileService;
+
+        public DefaultController(IProfileService profileService)
+        {
+            _profileService = profileService;
+        }
         public IActionResult Index()
         {
             return View();
@@ -45,5 +53,26 @@ namespace LiraOfInvestment.Controllers
         {
             return PartialView();
         }
+
+        [Produces("application/json")]
+        [ValidateAntiForgeryToken]
+        [Route("/default/search")]
+        public JsonResult SearchAsync()
+        {
+            string term = HttpContext.Request.Query["term"].ToString().ToUpper();
+            var query = _profileService.TGetList().Select(x=>x.Symbol).AsQueryable();
+
+            if (!string.IsNullOrEmpty(term))
+            {
+                query = query.Where(c =>
+
+                        c.Contains(term) 
+                );
+            }
+            var companies = query.ToList();
+
+            return Json(companies);
+        }
+
     }
 }

@@ -1,0 +1,53 @@
+﻿@model EntityLayer.Dto.CompanyProfile
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="ibox">
+
+                    <h2 class="text-navy">
+                        <i class="fa fa-play fa-rotate-270"></i> @Model.Symbol %0,12
+                    </h2>
+                  
+                </div>
+                
+            </li>
+            <a class="btn btn-sm btn-outline-danger btn-block" href="#"><i class="fa fa-heart"></i> Add to fav </a>
+            <li class="active">
+                <a asp-controller="Main" asp-action="Index"><i class="fa fa-th-large"></i> <span class="nav-label">Summary</span> </a>
+
+            </li>
+
+            <li>
+                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Chart</span></a>
+
+            </li>
+            <li>
+                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Analysis </span><span class="label label-warning float-right">16/24</span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="mailbox.html">Earnings Estimate</a></li>
+                    <li><a href="mail_detail.html">Revenue Estimate</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Financials </span><span class="label label-warning float-right">16/24</span></a>
+                <ul class="nav nav-second-level collapse">
+                    <li><a href="mailbox.html">Income Statement</a></li>
+                    <li><a href="mail_detail.html">Balance Sheet</a></li>
+
+                </ul>
+            </li>
+            <li>
+                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Radar </span><span class="label label-warning float-right">16/24</span></a>
+
+            </li>
+            <li>
+                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Compare </span><span class="label label-warning float-right">16/24</span></a>
+            </li>
+
+
+        </ul>
+
+    </div>
+</nav>
