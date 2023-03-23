@@ -39,12 +39,12 @@ builder.Services.AddMvc(config =>
     config.Filters.Add(new AuthorizeFilter(policy));
 });
 
-//builder.Services.AddAuthentication(
-//    CookieAuthenticationDefaults.AuthenticationScheme)
-//    .AddCookie(x =>
-//    {
-//        x.LoginPath = "/Login/Login";
-//    });
+builder.Services.AddAuthentication(
+    CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(x =>
+    {
+        x.LoginPath = "/Login/Login";
+    });
 
 builder.Services.ConfigureApplicationCookie(config =>
 {
