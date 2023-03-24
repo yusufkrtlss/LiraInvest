@@ -24,6 +24,7 @@ namespace DataAccessLayer.Concrete
         public DbSet<Testimonial> Testimonials { get; set; }
         public DbSet<Profile> profile_fast_info2 { get; set; }
         public DbSet<Two_Years_Monthly_Chart> two_years_monthly { get; set; }
+        public DbSet<BarChartYearly> annual_revenue { get; set; }
 
     }
 }

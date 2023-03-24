@@ -12,11 +12,12 @@ namespace LiraOfInvestment.Controllers
     {
         IProfileService _profileService;
         ITwoYearsMonthly _twoYearsMonthlyService;
-
-        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService)
+        IBarChartYearlyService _barChartYearlyService;
+        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService)
         {
             _profileService = profileService;
             _twoYearsMonthlyService = twoYearsMonthlyService;
+            _barChartYearlyService = barChartYearlyService;
         }
 
         [HttpGet("/company/index/{id}")]
@@ -64,14 +65,27 @@ namespace LiraOfInvestment.Controllers
                 datas.Add(data);
             }
 
-            //var getClose = (from data in _context.graphDbModel
-            //                where data.symbol.Equals("AAPL")
-            //                select data.close).ToArray();
-
+         
             var getClose=_twoYearsMonthlyService.TGetList().Where(x=>x.Symbol.Equals(symbol)).Select(x=>x.Close).ToArray();
 
 
             return new JsonResult(new { timestamp = datas, close = getClose });
+        }
+
+        public async Task<JsonResult> GetBarChartData(string id)
+        {
+            var cid = Convert.ToInt32(id);
+            var asset = _profileService.TGetByID(cid);
+            var symbol = asset.Symbol;
+            var dates = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
+
+
+
+            var getRevenue = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Revenue).ToArray();
+            var getEarnings = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Earnings).ToArray();
+
+
+            return new JsonResult(new { timestamp = dates, revenue = getEarnings, earnings = getEarnings });
         }
         public PartialViewResult CompanyNavbarPartial()
         {        

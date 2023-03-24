@@ -33,7 +33,7 @@
             <div class="row">
 
                 <div class="col-sm-4">
-                   
+
                     <div class="row">
                         <div class="col-4">
                             <small class="stats-label">Symbol</small>
@@ -161,14 +161,14 @@
                     <div class="small float-left col-md-3 m-l-lg m-t-md">
                         <strong>@Model.Symbol</strong> 's Monthly 2 year graph.
                     </div>
-                   @* <div class="small float-right col-md-3 m-t-md text-right">
-                        <strong>There are many</strong> variations of passages of Lorem Ipsum available, but the majority have suffered.
+                    @* <div class="small float-right col-md-3 m-t-md text-right">
+                    <strong>There are many</strong> variations of passages of Lorem Ipsum available, but the majority have suffered.
                     </div>*@
-                   
-                        <div>
-                            <canvas id="myChart" ></canvas>
-                        </div>
-                    
+
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+
                 </div>
             </div>
 
@@ -234,7 +234,18 @@
                     </div>
                 </div>
                 <div class="col-lg-4">
-                    @await Component.InvokeAsync("BarChart")
+                    <div class="ibox ">
+                        <div class="ibox-content">
+                            
+
+                            
+
+                            <div>
+                                <canvas id="barChart"></canvas>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-4">
                     <div class="ibox ">
@@ -342,13 +353,11 @@
     <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
     <!-- Flot -->
-    
-
     <!-- Custom and plugin javascript -->
     <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/inspinia.js"></script>
     <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/pace/pace.min.js"></script>
 
-    
+
     <!-- jQuery UI -->
     <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/jquery-ui/jquery-ui.min.js"></script>
 
@@ -367,96 +376,189 @@
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/jquery/dist/jquery.js"></script>
     *@
-    <script>
-       
-        $(document).ready(function () {
-            $.ajax({
-                type: "Get",
-                url: '@Url.Action("GetChartData","Company",new RouteValueDictionary(new {id=Model.Id}))',
-                contentType: "application/json",
-                dataType: "json",
-                success: function (response) {
-                    var data = response.close;
-                    var data2 = response.timestamp;
-                    var ctx = document.getElementById("myChart").getContext('2d');
+</body>
 
-                    var myChart = new Chart(ctx, {
-                        type: 'line',
-                        
-                                data: {
-                            labels: data2,
-                            datasets: [{
-                                label: 'close',
-                                data: data,
-                                borderWidth: 5,
-                                radius: 2,
-                                backgroundColor: 'rgb(151, 198, 131)',
-                                borderColor: 'rgb(151, 198, 131)',
+<script>
 
-                                tension: 0.3
-                            }
-                            ]
-                        },
-                        options: {
-
-                            responsive: true,
-                            interaction: {
-                                intersect: false
-                            },
-                            plugins: {
-                                legend: false,
-                                zoom: {
-                                    pan: {
-                                        enabled: true,
-                                        mode: 'xy',
-                                        modifierKey: 'shift',
-                                        threshold: 10
-                                    },
-                                    zoom: {
-                                        mode: 'x',
-                                        wheel: {
-                                            enabled: true,
-                                            //speed:0.1,
-                                            //modifierKey:'alt',
-
-                                        },
-                                        drag: {
-                                            enabled: true,
-                                            threshold: 100
-                                        },
-                                        pinch: {
-                                            enabled: true
-                                        }
-                                    }
-                                }
-                            },
-                            title: {
-                                display: true,
-                                text: '2 Year Monthly Chart'
-                            },
-                            scales: {
-
-                                y: {
-                                    beginAtZero: true
-                                }
-                            }
-                        },
-                    });
-                },
-                error: function (response) {
-                    alert(response.responseText);
-                    console.log("This is ERROR line");
-                }
+    $.ajax({
+        url: '@Url.Action("GetChartData","Company",new RouteValueDictionary(new {id=Model.Id}))',
+        type: 'GET',
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response) {
+            var data = response.close;
+            var data2 = response.timestamp;
+            var lineChart = {
+                labels: data2,
+                datasets: [{
+                    label: 'close',
+                    data: data,
+                    borderWidth: 5,
+                    radius: 5,
+                    backgroundColor: 'rgb(151, 198, 131)',
+                    borderColor: 'rgb(151, 198, 131)',
+                }]
+            };
+            var ctx1 = document.getElementById('myChart').getContext('2d');
+            var chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: lineChart
             });
-            resetZoomBtn = (chart) => {
-                console.log("merbah")
-                chart.resetZoom()
+        }
+    });
+
+
+    $.ajax({
+        url: '@Url.Action("GetBarChartData","Company",new RouteValueDictionary(new {id=Model.Id}))',
+        type: 'GET',
+        success: function (response) {
+            var rev = response.revenue;
+            var date = response.timestamp;
+            var earn = response.earnings;
+            var chartData = {
+                labels: date,
+                datasets: [{
+                    label: 'Chart 2',
+                    data: rev,
+                    
+                    backgroundColor: 'rgb(151, 198, 131)'
+                }]
             };
 
-        });
+            var ctx2 = document.getElementById('barChart').getContext('2d');
+            var chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: chartData
+            });
+        }
+    });
+        //$(document).ready(function () {
+        //    $.ajax({
+        //        type: "Get",
+        //        url: '@Url.Action("GetChartData","Company",new RouteValueDictionary(new {id=Model.Id}))',
+        //        contentType: "application/json",
+        //        dataType: "json",
+        //        success: function (response) {
+        //            var data = response.close;
+        //            var data2 = response.timestamp;
+        //            var ctx = document.getElementById("myChart").getContext('2d');
 
-    </script>
-</body>
+        //            var myChart = new Chart(ctx, {
+        //                type: 'line',
+
+        //                data: {
+        //                    labels: data2,
+        //                    datasets: [{
+        //                        label: 'close',
+        //                        data: data,
+        //                        borderWidth: 5,
+        //                        radius: 2,
+        //                        backgroundColor: 'rgb(151, 198, 131)',
+        //                        borderColor: 'rgb(151, 198, 131)',
+
+        //                        tension: 0.3
+        //                    }
+        //                    ]
+        //                },
+        //                options: {
+
+        //                    responsive: true,
+        //                    interaction: {
+        //                        intersect: false
+        //                    },
+        //                    plugins: {
+        //                        legend: false,
+        //                        zoom: {
+        //                            pan: {
+        //                                enabled: true,
+        //                                mode: 'xy',
+        //                                modifierKey: 'shift',
+        //                                threshold: 10
+        //                            },
+        //                            zoom: {
+        //                                mode: 'x',
+        //                                wheel: {
+        //                                    enabled: true,
+        //                                    //speed:0.1,
+        //                                    //modifierKey:'alt',
+
+        //                                },
+        //                                drag: {
+        //                                    enabled: true,
+        //                                    threshold: 100
+        //                                },
+        //                                pinch: {
+        //                                    enabled: true
+        //                                }
+        //                            }
+        //                        }
+        //                    },
+        //                    title: {
+        //                        display: true,
+        //                        text: '2 Year Monthly Chart'
+        //                    },
+        //                    scales: {
+
+        //                        y: {
+        //                            beginAtZero: true
+        //                        }
+        //                    }
+        //                },
+        //            });
+        //        },
+        //        error: function (response) {
+        //            alert(response.responseText);
+        //            console.log("This is ERROR line");
+        //        }
+        //    });
+        //    resetZoomBtn = (chart) => {
+        //        console.log("merbah")
+        //        chart.resetZoom()
+        //    };
+
+
+
+
+
+            //$.ajax({
+            //    type: "Get",
+            //    url: '@Url.Action("GetBarChartData","Company",new RouteValueDictionary(new {id=Model.Id}))',
+            //    contentType: "application/json",
+            //    dataType: "json",
+            //    success: function (response) {
+            //        var rev = response.revenue;
+            //        var date = response.timestamp;
+            //        var earn = response.earnings;
+            //        var ctx2 = document.getElementById("barChart").getContext('2d');
+
+            //        var barChart = new Chart(ctx2, {
+            //            type: 'bar',
+
+            //            data: {
+            //                labels: date,
+            //                datasets: [{
+            //                    label: 'Revenue',
+            //                    data: rev,
+            //                    borderWidth: 5,
+            //                    radius: 2,
+            //                    backgroundColor: 'rgb(151, 198, 131)',
+            //                    borderColor: 'rgb(151, 198, 131)',
+            //                },
+
+            //                ]
+            //            },
+
+            //        },
+
+
+
+
+            //    };
+            //});
+        //});
+
+</script>
+
 <style>
     canvas {
         width: 100% !important;

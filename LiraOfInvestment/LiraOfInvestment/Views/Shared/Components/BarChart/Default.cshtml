@@ -18,22 +18,9 @@
                 <div class="col-md-8">
                 </div>
                 <div class="col-md-4">
-                    <ul class="stat-list m-t-lg">
-                        <li>
-                            <h2 class="no-margins">2,346</h2>
-                            <small>Total orders in period</small>
-                            <div class="progress progress-mini">
-                                <div class="progress-bar" style="width: 48%;"></div>
-                            </div>
-                        </li>
-                        <li>
-                            <h2 class="no-margins ">4,422</h2>
-                            <small>Orders in last month</small>
-                            <div class="progress progress-mini">
-                                <div class="progress-bar" style="width: 60%;"></div>
-                            </div>
-                        </li>
-                    </ul>
+                     <div>
+                            <canvas id="barChart" ></canvas>
+                        </div>
                 </div>
             </div>
 
@@ -51,4 +38,67 @@
 
     </div>
 </div>
-                </div>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            type: "Get",
+            url: '@Url.Action("Invoke","BarChart",new RouteValueDictionary(new {id=Model.Id}))',
+            contentType: "application/json",
+            dataType: "json",
+            success: function (response) {
+                var data = response.revenue;
+                var data2 = response.timestamp;
+                var data3 = response.earnings;
+                var ctx = document.getElementById("barChart").getContext('2d');
+
+                var barChart = new Chart(ctx, {
+                    type: 'bar',
+
+                    data: {
+                        labels: data2,
+                        datasets: [{
+                            label: 'Revenue',
+                            data: data,
+                            borderWidth: 5,
+                            radius: 2,
+                            backgroundColor: 'rgb(151, 198, 131)',
+                            borderColor: 'rgb(151, 198, 131)',
+
+                            tension: 0.3
+                        },
+                        {
+                        labels: data2,
+                        datasets: [{
+                            label: 'Earnings',
+                            data: data3,
+                            borderWidth: 5,
+                            radius: 2,
+                            backgroundColor: 'rgb(131, 123, 112)',
+                            borderColor: 'rgb(151, 198, 131)',
+
+                            tension: 0.3
+                        },
+                        ]
+                    },
+                    options: {
+
+                        responsive: true,
+                        scales:{
+                            y:{
+                                beginAtZero:true
+                            }
+                        }
+                });
+            },
+            error: function (response) {
+                alert(response.responseText);
+                console.log("This is ERROR line");
+            }
+        });
+        resetZoomBtn = (chart) => {
+            console.log("merbah")
+            chart.resetZoom()
+        };
+
+    });
+</script>
