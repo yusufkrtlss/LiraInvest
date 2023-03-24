@@ -60,19 +60,12 @@ namespace LiraOfInvestment.Controllers
         public JsonResult SearchAsync()
         {
             string term = HttpContext.Request.Query["term"].ToString().ToUpper();
-            var query = _profileService.TGetList().Select(x=>x.Symbol).AsQueryable();
+            var query = _profileService.TGetList().Where(i=>i.Symbol.Contains(term)).Select(x=> new {id=x.Id,symbol=x.Symbol});
 
-            if (!string.IsNullOrEmpty(term))
-            {
-                query = query.Where(c =>
-
-                        c.Contains(term) 
-                );
-            }
-            var companies = query.ToList();
-
-            return Json(companies);
+            return Json(query);
         }
+
+        
 
     }
 }

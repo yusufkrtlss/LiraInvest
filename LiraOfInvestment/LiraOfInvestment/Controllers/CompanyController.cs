@@ -59,8 +59,9 @@ namespace LiraOfInvestment.Controllers
             var datas = new List<string>();
             foreach (var date in dates)
             {
-                DateTime.Parse(date).Date.ToString("dd/MM/yyyy");
-                datas.Add(date);
+                var dt=DateTime.Parse(date);
+                var data = dt.Date.ToString("MMMM/yy");
+                datas.Add(data);
             }
 
             //var getClose = (from data in _context.graphDbModel
@@ -71,6 +72,10 @@ namespace LiraOfInvestment.Controllers
 
 
             return new JsonResult(new { timestamp = datas, close = getClose });
+        }
+        public PartialViewResult CompanyNavbarPartial()
+        {        
+            return PartialView();
         }
     }
 }

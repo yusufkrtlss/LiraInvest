@@ -9,20 +9,19 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 
 <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
     <div class="navbar-header">
         <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#"><i class="fa fa-bars"></i> </a>
-      
+
         <form autocomplete="off" class="navbar-form-custom " id="searchForm">
-            
-                <input class="form-control" id="searchId" type="text" placeholder="Search for symbol..." name="symbol">
-            
+
+            <input class="form-control" id="searchId" type="text" placeholder="Search for symbol..." name="symbol">
+
         </form>
-        <form asp-controller="Company" asp-action="Index" >
-            <input type="hidden" id="hiddenId"/>
-        </form>
+
     </div>
     <ul class="nav navbar-top-links navbar-right">
 
@@ -46,52 +45,57 @@
             </a>
         </li>
     </ul>
-
+    <input type="hidden" id="search-box-id">
 </nav>
-<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/js/jquery.dataTables.min.js"></script>
-    <script src="~/js/dataTables.bootstrap5.min.js"></script>
-    <script src="https://kit.fontawesome.com/c2396ab2b3.js" crossorigin="anonymous"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/jquery.dataTables.min.js"></script>
+<script src="~/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://kit.fontawesome.com/c2396ab2b3.js" crossorigin="anonymous"></script>
 <script>
     $(document).ready(function () {
-    $("#searchId").autocomplete({
-        source: function (request, response) {
-            $.ajax({
-                url: '@Url.Action("Search", "Default")',
-                headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
-                data: { "term": request.term },
-                dataType: "json",
+        $("#searchId").autocomplete({
+            source: function (request, response) {
+                $.ajax({
+                    url: '@Url.Action("Search", "Default")',
+                    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                    data: { "term": request.term },
+                    dataType: "json",
 
-                success: function (data) {
-                    response($.map(data, function (item) {
-                        return item ;
-                    }))
-                },
-                error: function (xhr, textStatus, error) {
-                    alert(xhr.statusText);
-                    alert(textStatus);
-                    alert("errorr");
-                },
-                failure: function (response) {
-                    alert("failure " + response.responseText);
-                }
-            });
-        },
-        select: function (e, i) {
-            //window.location.href = i.item.value;
+                    success: function (data) {
+                        response($.map(data, function (item) {
+                            return item;
+                        }))
+                    },
+                    error: function (xhr, textStatus, error) {
+                        alert(xhr.statusText);
+                        alert(textStatus);
+                        alert("errorr");
+                    },
+                    failure: function (response) {
+                        alert("failure " + response.responseText);
+                    }
+                });
+            },
+            select: function (e, i) {
+                window.location.href = "/Company/Index/" + i.item.id;
                 //$('#hiddenId').val(i.item.value);
-                var e=i.item;
-                $('#hiddenId').val(e.Id);
-        },
-        
-        minLength: 1
+                return false;
+            },
+
+            minLength: 1
+        }).autocomplete("instance")._renderItem = function(ul, item) {
+    return $("<li>")
+      .append("<div>" + item.symbol + "</div>")
+      .appendTo(ul);
+  };
     });
-});
+
+
 </script>
