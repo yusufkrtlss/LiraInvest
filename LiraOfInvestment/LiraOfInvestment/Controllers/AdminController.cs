@@ -1,8 +1,10 @@
 ﻿using BusinessLayer.Abstract;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LiraOfInvestment.Controllers
 {
+    [AllowAnonymous]
     public class AdminController : Controller
     {
         private readonly IProfileService _profileService;
@@ -11,7 +13,7 @@ namespace LiraOfInvestment.Controllers
         {
             _profileService = profileService;
         }
-        [HttpGet("/Admin/Index")]
+        
         public IActionResult Index()
         {
             var values = _profileService.TGetList();

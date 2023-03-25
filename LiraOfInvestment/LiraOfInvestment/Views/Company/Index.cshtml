@@ -393,16 +393,29 @@
                 datasets: [{
                     label: 'close',
                     data: data,
-                    borderWidth: 5,
-                    radius: 5,
-                    backgroundColor: 'rgb(151, 198, 131)',
+                    borderWidth: 2,
+                    radius: 1,
+                    backgroundColor: 'rgb(75, 192, 192)',
                     borderColor: 'rgb(151, 198, 131)',
+                    tension: 0.3,
+                    fill: {
+                        target: 'origin',
+                        above: 'rgb(151, 198, 131)',   // Area will be red above the origin
+                        below: 'rgb(151, 198, 131)'    // And blue below the origin
+                    }
                 }]
             };
             var ctx1 = document.getElementById('myChart').getContext('2d');
             var chart1 = new Chart(ctx1, {
                 type: 'line',
-                data: lineChart
+                data: lineChart,
+                options: {
+
+                    responsive: true,
+                    interaction: {
+                        intersect: false
+                    },
+                }
             });
         }
     });
@@ -418,17 +431,41 @@
             var chartData = {
                 labels: date,
                 datasets: [{
-                    label: 'Chart 2',
+                    label: 'Revenue',
                     data: rev,
-                    
                     backgroundColor: 'rgb(151, 198, 131)'
-                }]
+                },
+                {
+                    label: 'Earnings',
+                    data: earn,
+                    backgroundColor: 'rgb(131, 128, 135)'
+                }
+                ]
             };
 
             var ctx2 = document.getElementById('barChart').getContext('2d');
             var chart2 = new Chart(ctx2, {
                 type: 'bar',
-                data: chartData
+                data: chartData,
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Annual Financials'
+                        },
+                    },
+
+                    scales: {
+                        y: {
+                            display: false
+                        },
+
+                    }
+
+                }
             });
         }
     });
