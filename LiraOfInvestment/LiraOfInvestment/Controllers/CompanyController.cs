@@ -85,7 +85,7 @@ namespace LiraOfInvestment.Controllers
             var getEarnings = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Earnings).ToArray();
 
 
-            return new JsonResult(new { timestamp = dates, revenue = getEarnings, earnings = getEarnings });
+            return new JsonResult(new { timestamp = dates, revenue = getRevenue, earnings = getEarnings });
         }
         public PartialViewResult CompanyNavbarPartial()
         {        
