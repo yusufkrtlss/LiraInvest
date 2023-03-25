@@ -1,0 +1,97 @@
+﻿@using EntityLayer.Concrete
+@model List<Profile>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="wrapper wrapper-content animated fadeIn">
+
+        <div class="p-w-md m-t-sm">
+            <div class="row">
+                @foreach(var item in Model){
+                <div class="col-sm-4">
+
+                    <div class="row">
+                        <div class="col-4">
+                            <small class="stats-label">Symbol</small>
+                            <h4>@item.Symbol</h4>
+                        </div>
+
+                        <div class="col-4">
+                            <small class="stats-label">Industry</small>
+                            <h4>@item.Industry</h4>
+                        </div>
+                        <div class="col-4">
+                            <small class="stats-label">Sector</small>
+                            <h4>@item.Sector</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <small class="stats-label">Website</small>
+                            <a href="@item.Website" target="_blank"><h4>@item.Website</h4></a>
+                        </div>
+
+                        <div class="col-4">
+                            <small class="stats-label">Phone</small>
+                            <h4>@item.Phone</h4>
+                        </div>
+                        <div class="col-4">
+                            <small class="stats-label">Last week</small>
+                            <h4>432.021</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <p>
+                                <button class="btn btn-sm btn-outline-success col-12 " data-bs-toggle="collapse" data-bs-target="#descCollapse" aria-expanded="false" aria-controls="descCollapse">Company Description</button>
+                            </p>
+                            <div class="collapse" id="descCollapse">
+                                <div class="card card-body">
+                                    <small>
+                                        @item.Description
+                                    </small>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="col-sm-4">
+                    <div class="row">
+                        <div class="col-4">
+                            <small class="stats-label">Day High</small>
+                            <h4>@item.DayHigh</h4>
+                        </div>
+
+                        <div class="col-4">
+                            <small class="stats-label">Day Low</small>
+                            <h4>@item.DayLow</h4>
+                        </div>
+                        <div class="col-4">
+                            <small class="stats-label">Open</small>
+                            <h4>@item.Open</h4>
+                        </div>
+                    </div>
+                   
+                   
+
+
+                </div>
+                
+                }
+            </div>
+
+            
+
+            
+
+        </div>
+
+
+    </div>
+

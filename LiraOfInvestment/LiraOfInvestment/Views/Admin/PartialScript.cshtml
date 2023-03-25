@@ -1,0 +1,107 @@
+﻿<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.2/dist/chart.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+<script src="~/js/jquery.dataTables.min.js"></script>
+<script src="~/js/dataTables.bootstrap5.min.js"></script>
+<script src="https://kit.fontawesome.com/c2396ab2b3.js" crossorigin="anonymous"></script>
+<script>
+    $(document).ready(function() {
+        $("#searchId").autocomplete({
+            source: function(request, response) {
+                $.ajax({
+                    url: '@Url.Action("Search", "Default")',
+                    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                    data: { "term": request.term },
+                    dataType: "json",
+
+                    success: function(data) {
+                        response($.map(data, function(item) {
+                            return item;
+                        }))
+                    },
+                    error: function(xhr, textStatus, error) {
+                        alert(xhr.statusText);
+                        alert(textStatus);
+                        alert("errorr");
+                    },
+                    failure: function(response) {
+                        alert("failure " + response.responseText);
+                    }
+                });
+            },
+            select: function(e, i) {
+                window.location.href = "/Company/Index/" + i.item.id;
+                //$('#hiddenId').val(i.item.value);
+                return false;
+            },
+
+            minLength: 1
+        }).autocomplete("instance")._renderItem = function(ul, item) {
+            return $("<li>")
+                .append("<div>" + item.symbol + "</div>")
+                .appendTo(ul);
+        };
+    });
+
+
+</script>
+<script>
+
+    $.ajax({
+        url: '@Url.Action("GetChartData","Company",new RouteValueDictionary(new {id=Model.Id}))',
+        type: 'GET',
+        contentType: "application/json",
+        dataType: "json",
+        success: function(response) {
+            var data = response.close;
+            var data2 = response.timestamp;
+            var lineChart = {
+                labels: data2,
+                datasets: [{
+                    label: 'close',
+                    data: data,
+                    borderWidth: 5,
+                    radius: 5,
+                    backgroundColor: 'rgb(151, 198, 131)',
+                    borderColor: 'rgb(151, 198, 131)',
+                }]
+            };
+            var ctx1 = document.getElementById('myChart').getContext('2d');
+            var chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: lineChart
+            });
+        }
+    });
+
+
+    $.ajax({
+        url: '@Url.Action("GetBarChartData","Company",new RouteValueDictionary(new {id=Model.Id}))',
+        type: 'GET',
+        success: function(response) {
+            var rev = response.revenue;
+            var date = response.timestamp;
+            var earn = response.earnings;
+            var chartData = {
+                labels: date,
+                datasets: [{
+                    label: 'Chart 2',
+                    data: rev,
+
+                    backgroundColor: 'rgb(151, 198, 131)'
+                }]
+            };
+
+            var ctx2 = document.getElementById('barChart').getContext('2d');
+            var chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: chartData
+            });
+        }
+    });
+</script>
