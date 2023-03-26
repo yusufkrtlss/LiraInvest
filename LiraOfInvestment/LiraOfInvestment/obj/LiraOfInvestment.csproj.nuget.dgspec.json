@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj": {}
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj": {}
   },
   "projects": {
-    "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj",
         "projectName": "BusinessLayer",
-        "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj",
-        "packagesPath": "C:\\Users\\yigit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\obj\\",
+        "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj",
+        "packagesPath": "C:\\Users\\Monster\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\yigit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Monster\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,11 +28,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
               },
-              "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
-                "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
               }
             }
           }
@@ -74,8 +74,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -84,21 +83,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj",
         "projectName": "DataAccessLayer",
-        "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj",
-        "packagesPath": "C:\\Users\\yigit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\obj\\",
+        "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj",
+        "packagesPath": "C:\\Users\\Monster\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\yigit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Monster\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -112,8 +111,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
-                "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
               }
             }
           }
@@ -157,8 +156,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -167,21 +165,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj",
+        "projectUniqueName": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj",
         "projectName": "EntityLayer",
-        "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj",
-        "packagesPath": "C:\\Users\\yigit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\obj\\",
+        "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj",
+        "packagesPath": "C:\\Users\\Monster\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\yigit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Monster\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -222,8 +220,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -232,21 +229,21 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj": {
+    "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+        "projectUniqueName": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
         "projectName": "LiraOfInvestment",
-        "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
-        "packagesPath": "C:\\Users\\yigit\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
+        "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+        "packagesPath": "C:\\Users\\Monster\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\yigit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Monster\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -260,14 +257,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
-                "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj"
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj"
               },
-              "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
-                "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
               },
-              "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
-                "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
+              "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+                "projectPath": "C:\\Users\\Monster\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
               }
             }
           }
@@ -313,8 +310,7 @@
             "net47",
             "net471",
             "net472",
-            "net48",
-            "net481"
+            "net48"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -326,7 +322,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
