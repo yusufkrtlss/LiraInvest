@@ -15,6 +15,6 @@ namespace EntityLayer.Concrete
         public float SharePrice { get; set; }
         public int ShareType { get; set; }
         public string ShareShortName { get; set; }
-        public Company Company { get; set; }
+        
     }
 }

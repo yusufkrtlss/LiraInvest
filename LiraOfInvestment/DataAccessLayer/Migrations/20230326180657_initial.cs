@@ -5,10 +5,26 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace DataAccessLayer.Migrations
 {
-    public partial class liramig : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "Annual_Revenues",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Symbol = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Revenue = table.Column<long>(type: "bigint", nullable: false),
+                    Earnings = table.Column<long>(type: "bigint", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Annual_Revenues", x => x.Id);
+                });
+
             migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
@@ -30,6 +46,11 @@ namespace DataAccessLayer.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CustomerStatus = table.Column<bool>(type: "bit", nullable: false),
+                    CustomerCreatedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CustomerModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -51,49 +72,36 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Companies",
+                name: "Profiles",
                 columns: table => new
                 {
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CompanyName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompanySymbol = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompanyRegularMarketPrice = table.Column<double>(type: "float", nullable: true),
-                    CompanyRegularMarketChange = table.Column<double>(type: "float", nullable: true),
-                    CompanyRegularMarketChangePercent = table.Column<double>(type: "float", nullable: true),
-                    CompanyRegularMarketVolume = table.Column<double>(type: "float", nullable: true),
-                    CompanyRegularMarketDayLow = table.Column<double>(type: "float", nullable: true),
-                    CompanyRegularMarketDayHigh = table.Column<double>(type: "float", nullable: true),
-                    CompanyBalance = table.Column<double>(type: "float", nullable: true),
-                    CompanyIncomeStatement = table.Column<double>(type: "float", nullable: true),
-                    CompanyEBITDA = table.Column<double>(type: "float", nullable: true),
-                    CompanyProfit = table.Column<double>(type: "float", nullable: true),
-                    CompanyPriceGainRate = table.Column<double>(type: "float", nullable: true),
-                    CompanyInformation = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    Symbol = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Country = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Sector = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Industry = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Website = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Currency = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    DayHigh = table.Column<double>(type: "float", nullable: true),
+                    DayLow = table.Column<double>(type: "float", nullable: true),
+                    _50DayAvg = table.Column<double>(type: "float", nullable: true),
+                    MarketCap = table.Column<double>(type: "float", nullable: true),
+                    Open = table.Column<double>(type: "float", nullable: true),
+                    PreviousClose = table.Column<double>(type: "float", nullable: true),
+                    Shares = table.Column<long>(type: "bigint", nullable: true),
+                    _10DaysAvgVol = table.Column<long>(type: "bigint", nullable: true),
+                    _3MonthAvgVol = table.Column<long>(type: "bigint", nullable: true),
+                    _200DaysAvg = table.Column<double>(type: "float", nullable: true),
+                    YearChange = table.Column<double>(type: "float", nullable: true),
+                    YearHigh = table.Column<double>(type: "float", nullable: true),
+                    YearLow = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Companies", x => x.CompanyId);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Customers",
-                columns: table => new
-                {
-                    CustomerId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerFirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerLastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerEmail = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerPhone = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerPassword = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    CustomerStatus = table.Column<bool>(type: "bit", nullable: false),
-                    CustomerCreatedTime = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CustomerModifiedTime = table.Column<DateTime>(type: "datetime2", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Customers", x => x.CustomerId);
+                    table.PrimaryKey("PK_Profiles", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -127,6 +135,21 @@ namespace DataAccessLayer.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Testimonials", x => x.TestimonialID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "two_years_monthly",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Symbol = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Date = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Close = table.Column<double>(type: "float", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_two_years_monthly", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -236,75 +259,52 @@ namespace DataAccessLayer.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "News",
-                columns: table => new
-                {
-                    NewsId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    NewsName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NewsTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NewsInformation = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NewsCreatedDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CompanyId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_News", x => x.NewsId);
-                    table.ForeignKey(
-                        name: "FK_News_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Shares",
-                columns: table => new
-                {
-                    ShareId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    ShareName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    SharePrice = table.Column<float>(type: "real", nullable: true),
-                    ShareType = table.Column<int>(type: "int", nullable: true),
-                    ShareShortName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CompanyId = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Shares", x => x.ShareId);
-                    table.ForeignKey(
-                        name: "FK_Shares_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "CompanyId",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Favorites",
                 columns: table => new
                 {
-                    FavoriteID = table.Column<int>(type: "int", nullable: false)
+                    FavoriteId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CustomerId = table.Column<int>(type: "int", nullable: false),
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                    AppUserId = table.Column<int>(type: "int", nullable: true),
+                    ProfileId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favorites", x => x.FavoriteID);
+                    table.PrimaryKey("PK_Favorites", x => x.FavoriteId);
                     table.ForeignKey(
-                        name: "FK_Favorites_Companies_CompanyId",
-                        column: x => x.CompanyId,
-                        principalTable: "Companies",
-                        principalColumn: "CompanyId",
+                        name: "FK_Favorites_AspNetUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Favorites_Customers_CustomerId",
-                        column: x => x.CustomerId,
-                        principalTable: "Customers",
-                        principalColumn: "CustomerId",
+                        name: "FK_Favorites_Profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalTable: "Profiles",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "News",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Resource = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Type = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Which_Symbols = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProfileId = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_News", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_News_Profiles_ProfileId",
+                        column: x => x.ProfileId,
+                        principalTable: "Profiles",
+                        principalColumn: "Id");
                 });
 
             migrationBuilder.CreateIndex(
@@ -347,28 +347,26 @@ namespace DataAccessLayer.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorites_CompanyId",
+                name: "IX_Favorites_AppUserId",
                 table: "Favorites",
-                column: "CompanyId");
+                column: "AppUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorites_CustomerId",
+                name: "IX_Favorites_ProfileId",
                 table: "Favorites",
-                column: "CustomerId");
+                column: "ProfileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_News_CompanyId",
+                name: "IX_News_ProfileId",
                 table: "News",
-                column: "CompanyId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Shares_CompanyId",
-                table: "Shares",
-                column: "CompanyId");
+                column: "ProfileId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Annual_Revenues");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -391,13 +389,13 @@ namespace DataAccessLayer.Migrations
                 name: "News");
 
             migrationBuilder.DropTable(
-                name: "Shares");
-
-            migrationBuilder.DropTable(
                 name: "Teams");
 
             migrationBuilder.DropTable(
                 name: "Testimonials");
+
+            migrationBuilder.DropTable(
+                name: "two_years_monthly");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -406,10 +404,7 @@ namespace DataAccessLayer.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
-                name: "Customers");
-
-            migrationBuilder.DropTable(
-                name: "Companies");
+                name: "Profiles");
         }
     }
 }

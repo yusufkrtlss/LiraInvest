@@ -4,17 +4,21 @@
 *@
 
 
+@if (Model.favs.Count > 0)
+{
     <h4>Favorites</h4>
     <ul class="list-group clear-list m-t">
-    @foreach(var item in Model.favs)
-    {
-        <li class="list-group-item fist-item">
-            <span class="float-right">
-               
-            </span>
-            <span class="label label-success"></span> @item
-        </li>
-    }
-    
-       
+        @foreach (var item in Model.favs)
+        {
+            <li class="list-group-item fist-item">
+                <span class="float-right">
+
+                </span>
+                <span class="label label-success"></span> @item.Profile.Symbol
+            </li>
+        }
+
+
     </ul>
+}
+

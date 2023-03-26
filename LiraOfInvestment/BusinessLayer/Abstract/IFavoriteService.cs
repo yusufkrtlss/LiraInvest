@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IFavoriteService : IGenericService<Favorite2>
+    public interface IFavoriteService : IGenericService<Favorite>
     {
+        public List<Favorite> GetFavoritesListIncludeProfile(int id);
     }
 }

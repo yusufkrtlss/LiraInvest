@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IFavoriteDal : IGenericDal<Favorite2>
+    public interface IFavoriteDal : IGenericDal<Favorite>
     {
+        public List<Favorite> GetFavoritesListWithProfile(int id);
     }
 }

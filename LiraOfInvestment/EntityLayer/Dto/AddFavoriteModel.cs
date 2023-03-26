@@ -1,4 +1,5 @@
-﻿using System;
+﻿using EntityLayer.Concrete;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ namespace EntityLayer.Dto
 {
     public class AddFavoriteModel
     {
-        public int CompanyId { get; set; }
-        public int UserId { get; set; }
+        public Profile Profile { get; set; }
+        public AppUser User { get; set; }
     }
 }

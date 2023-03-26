@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -9,6 +10,7 @@ namespace EntityLayer.Concrete
 {
     public class Profile
     {
+        [Key]
         public int Id { get; set; }
         public string Symbol { get; set; }
         public string Country { get; set; }
@@ -31,5 +33,7 @@ namespace EntityLayer.Concrete
         public double YearChange { get; set; }
         public double YearHigh { get; set; }
         public double YearLow { get; set; }
+        public ICollection<Favorite> Favorites { get; set; }
+        public ICollection<News> News { get; set; }
     }
 }

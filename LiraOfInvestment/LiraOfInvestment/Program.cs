@@ -59,8 +59,7 @@ builder.Services.ConfigureApplicationCookie(config =>
     config.SlidingExpiration = true;
 });
 
-builder.Services.AddTransient<ICompanyService, CompanyManager>();
-builder.Services.AddTransient<ICompanyDal, EfCompanyDal>();
+
 
 builder.Services.AddTransient<ICustomerService, CustomerManager>();
 builder.Services.AddTransient<ICustomerDal, EfCustomerDal>();
@@ -71,8 +70,8 @@ builder.Services.AddTransient<IFavoriteDal, EfFavoriteDal>();
 builder.Services.AddTransient<INewsService, NewsManager>();
 builder.Services.AddTransient<INewsDal, EfNewsDal>();
 
-builder.Services.AddTransient<IShareService, ShareManager>();
-builder.Services.AddTransient<IShareDal, EfShareDal>();
+builder.Services.AddTransient<IUserService, UserManager>();
+builder.Services.AddTransient<IUserDal, EfUserDal>();
 
 builder.Services.AddTransient<ITeamService, TeamManager>();
 builder.Services.AddTransient<ITeamDal, EfTeamDal>();

@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Abstract
 {
-    public interface IShareDal : IGenericDal<Share>
+    public interface IUserDal:IGenericDal<AppUser>
     {
+        public List<AppUser> GetAppUserWithFavoritesList(int id);
     }
 }

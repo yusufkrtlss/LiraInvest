@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    [Migration("20230310094738_deletecustomer")]
-    partial class deletecustomer
+    [Migration("20230326180657_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -23,6 +23,57 @@ namespace DataAccessLayer.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
+
+            modelBuilder.Entity("EntityLayer.Charts.BarChartYearly", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Earnings")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("Revenue")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Symbol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Annual_Revenues");
+                });
+
+            modelBuilder.Entity("EntityLayer.Charts.Two_Years_Monthly_Chart", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<double>("Close")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Date")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Symbol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("two_years_monthly");
+                });
 
             modelBuilder.Entity("EntityLayer.Concrete.AppRole", b =>
                 {
@@ -139,197 +190,149 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Company", b =>
-                {
-                    b.Property<int>("CompanyId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CompanyId"), 1L, 1);
-
-                    b.Property<double>("CompanyBalance")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CompanyEBITDA")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CompanyIncomeStatement")
-                        .HasColumnType("float");
-
-                    b.Property<string>("CompanyInformation")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CompanyName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<double>("CompanyPriceGainRate")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CompanyProfit")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CompanyRegularMarketChange")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CompanyRegularMarketChangePercent")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CompanyRegularMarketDayHigh")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CompanyRegularMarketDayLow")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CompanyRegularMarketPrice")
-                        .HasColumnType("float");
-
-                    b.Property<double>("CompanyRegularMarketVolume")
-                        .HasColumnType("float");
-
-                    b.Property<string>("CompanySymbol")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CompanyId");
-
-                    b.ToTable("Companies");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Customer", b =>
-                {
-                    b.Property<int>("CustomerId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"), 1L, 1);
-
-                    b.Property<DateTime>("CustomerCreatedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CustomerEmail")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerFirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerLastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CustomerModifiedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("CustomerPassword")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CustomerPhone")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("CustomerStatus")
-                        .HasColumnType("bit");
-
-                    b.HasKey("CustomerId");
-
-                    b.ToTable("Customers");
-                });
-
             modelBuilder.Entity("EntityLayer.Concrete.Favorite", b =>
                 {
-                    b.Property<int>("FavoriteID")
+                    b.Property<int>("FavoriteId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavoriteID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavoriteId"), 1L, 1);
 
-                    b.Property<int?>("AppUserId")
+                    b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CompanyId")
+                    b.Property<int>("ProfileId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.HasKey("FavoriteID");
+                    b.HasKey("FavoriteId");
 
                     b.HasIndex("AppUserId");
 
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("CustomerId");
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("Favorites");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.News", b =>
                 {
-                    b.Property<int>("NewsId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("NewsId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CompanyId")
+                    b.Property<string>("Link")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ProfileId")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("NewsCreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NewsInformation")
+                    b.Property<string>("Resource")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NewsName")
+                    b.Property<string>("Title")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("NewsTitle")
+                    b.Property<string>("Type")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("NewsId");
+                    b.Property<string>("Which_Symbols")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.HasIndex("CompanyId");
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProfileId");
 
                     b.ToTable("News");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Share", b =>
+            modelBuilder.Entity("EntityLayer.Concrete.Profile", b =>
                 {
-                    b.Property<int>("ShareId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ShareId"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("ShareName")
+                    b.Property<string>("Country")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("SharePrice")
-                        .HasColumnType("real");
-
-                    b.Property<string>("ShareShortName")
+                    b.Property<string>("Currency")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ShareType")
-                        .HasColumnType("int");
+                    b.Property<double>("DayHigh")
+                        .HasColumnType("float");
 
-                    b.HasKey("ShareId");
+                    b.Property<double>("DayLow")
+                        .HasColumnType("float");
 
-                    b.HasIndex("CompanyId");
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Shares");
+                    b.Property<string>("Industry")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("MarketCap")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Open")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("PreviousClose")
+                        .HasColumnType("float");
+
+                    b.Property<string>("Sector")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<long>("Shares")
+                        .HasColumnType("bigint");
+
+                    b.Property<string>("Symbol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Website")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<double>("YearChange")
+                        .HasColumnType("float");
+
+                    b.Property<double>("YearHigh")
+                        .HasColumnType("float");
+
+                    b.Property<double>("YearLow")
+                        .HasColumnType("float");
+
+                    b.Property<long>("_10DaysAvgVol")
+                        .HasColumnType("bigint");
+
+                    b.Property<double>("_200DaysAvg")
+                        .HasColumnType("float");
+
+                    b.Property<long>("_3MonthAvgVol")
+                        .HasColumnType("bigint");
+
+                    b.Property<double>("_50DayAvg")
+                        .HasColumnType("float");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Profiles");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.Team", b =>
@@ -499,47 +502,28 @@ namespace DataAccessLayer.Migrations
 
             modelBuilder.Entity("EntityLayer.Concrete.Favorite", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.AppUser", null)
+                    b.HasOne("EntityLayer.Concrete.AppUser", "AppUser")
                         .WithMany("Favorites")
-                        .HasForeignKey("AppUserId");
-
-                    b.HasOne("EntityLayer.Concrete.Company", "Company")
-                        .WithMany("Favorites")
-                        .HasForeignKey("CompanyId")
+                        .HasForeignKey("AppUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EntityLayer.Concrete.Customer", "Customer")
+                    b.HasOne("EntityLayer.Concrete.Profile", "Profile")
                         .WithMany("Favorites")
-                        .HasForeignKey("CustomerId")
+                        .HasForeignKey("ProfileId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Company");
+                    b.Navigation("AppUser");
 
-                    b.Navigation("Customer");
+                    b.Navigation("Profile");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.News", b =>
                 {
-                    b.HasOne("EntityLayer.Concrete.Company", "Company")
+                    b.HasOne("EntityLayer.Concrete.Profile", null)
                         .WithMany("News")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Share", b =>
-                {
-                    b.HasOne("EntityLayer.Concrete.Company", "Company")
-                        .WithMany("Shares")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Company");
+                        .HasForeignKey("ProfileId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
@@ -598,18 +582,11 @@ namespace DataAccessLayer.Migrations
                     b.Navigation("Favorites");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Company", b =>
+            modelBuilder.Entity("EntityLayer.Concrete.Profile", b =>
                 {
                     b.Navigation("Favorites");
 
                     b.Navigation("News");
-
-                    b.Navigation("Shares");
-                });
-
-            modelBuilder.Entity("EntityLayer.Concrete.Customer", b =>
-                {
-                    b.Navigation("Favorites");
                 });
 #pragma warning restore 612, 618
         }

@@ -18,27 +18,27 @@ namespace BusinessLayer.Concrete
             _newsDal = newsDal;
         }
 
-        public void TAdd(news2 t)
+        public void TAdd(News t)
         {
             _newsDal.Insert(t);
         }
 
-        public void TDelete(news2 t)
+        public void TDelete(News t)
         {
             _newsDal.Delete(t);
         }
 
-        public news2 TGetByID(int id)
+        public News TGetByID(int id)
         {
             return _newsDal.GetByID(id);
         }
 
-        public List<news2> TGetList()
+        public List<News> TGetList()
         {
             return _newsDal.GetList();
         }
 
-        public void TUpdate(news2 t)
+        public void TUpdate(News t)
         {
             _newsDal.Update(t);
         }

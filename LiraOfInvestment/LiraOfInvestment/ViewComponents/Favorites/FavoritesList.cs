@@ -1,9 +1,11 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
 using EntityLayer.Concrete;
 using EntityLayer.Dto;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel;
+using System.Data.Entity;
 using System.Linq;
 
 namespace LiraOfInvestment.ViewComponents.Favorites
@@ -13,26 +15,29 @@ namespace LiraOfInvestment.ViewComponents.Favorites
         IFavoriteService _favoriteService;
         private readonly UserManager<AppUser> _userManager;
         private IProfileService _profileService;
-        public FavoritesList(IFavoriteService favoriteService, UserManager<AppUser> userManager, IProfileService profileService)
+        private IUserService _manager;
+        public FavoritesList(IFavoriteService favoriteService, UserManager<AppUser> userManager, IProfileService profileService, IUserService manager)
         {
             _favoriteService = favoriteService;
             _userManager = userManager;
             _profileService = profileService;
+            _manager = manager;
         }
-        public IViewComponentResult Invoke()
+        public async Task<IViewComponentResult> InvokeAsync()
         {
-            var user = _userManager.FindByNameAsync(User.Identity.Name);
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
             //var favs = (from p in _profileService.TGetList()
             //            join f in _favoriteService.TGetList()
             //            on p.Id equals f.CompanyId
             //            where user.Id == f.UserId
             //            select p.Symbol).ToList();
-            var profiles = _profileService.TGetList();
-            var favs = _profileService.TGetList().Join(_favoriteService.TGetList(),compId=>compId.Id,favId=>favId.CompanyId,(compId,favId)=>new {Comp=compId,Fav=favId}).Where(x=>x.Fav.UserId.Equals(user.Id)).ToList();
-            
-            
+            // var favs = _favoriteService.TGetList().AsQueryable().Include(x=>x.Profile).Where(x=>x.AppUserId==user.Id).ToList();
+            //var fav2=favs.Include(x=>x.Profile).Include(y=>y.Profile.Select(z=>z.Symbol)).Where(t=>t.UserId== user.Id).ToList();
+            var fav = _manager.GetAppUserIncludeFavoritesList(user.Id);
+            var favs=_favoriteService.GetFavoritesListIncludeProfile(user.Id).ToList();
+
             var model = new UserProfile();
-            
+            model.favs = favs;
             return View(model);
         }
     }

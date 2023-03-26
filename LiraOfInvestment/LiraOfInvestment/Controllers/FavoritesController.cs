@@ -30,15 +30,19 @@ namespace LiraOfInvestment.Controllers
         [HttpPost]
         public async Task<IActionResult> AddFavoriteAsync(int id)
         {
-            //var company=_companyService.TGetByID(id);
+            var company = _profileService.TGetByID(id);
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var model = new Favorite2();
-            model.UserId = user.Id;
-            model.CompanyId = id;
-            var allFav = _favoriteService.TGetList().Where(x=>x.CompanyId==id).ToList();
-            foreach(var fav in allFav)
+            var model = new Favorite();
+            model.AppUserId=user.Id;
+            model.ProfileId = company.Id;
+            //var favs = _favoriteService.TGetList(company, user);
+            //_favoriteService.TAdd(model);
+            //model.UserId = user.Id;
+            //model.ProfileId = id;
+            var allFav = _favoriteService.TGetList().Where(x => x.ProfileId == id).ToList();
+            foreach (var fav in allFav)
             {
-                if(fav.UserId==user.Id)
+                if (fav.AppUserId == user.Id)
                 {
                     return Redirect("/Company/Index/" + id);
                 }
@@ -47,23 +51,12 @@ namespace LiraOfInvestment.Controllers
                     _favoriteService.TAdd(model);
                 }
             }
-           
-            
+
+
 
             return Redirect("/Company/Index/"+id);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> GetFavorites()
-        {
-            var user = _userManager.FindByNameAsync(User.Identity.Name);
-            var favs = (from f in _favoriteService.TGetList()
-                       join p in _profileService.TGetList()
-                       on f.CompanyId equals p.Id
-                       where f.UserId == user.Id
-                       select p.Symbol).ToList();
-            var model = new Favorite2();
-            return View();
-        }
+        
     }
 }

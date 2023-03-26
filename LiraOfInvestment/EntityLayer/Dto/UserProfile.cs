@@ -10,7 +10,7 @@ namespace EntityLayer.Dto
     public class UserProfile
     {
         public List<Profile> profiles { get; set; }
-        public List<news2> news { get; set; }
-        public List<string> favs { get; set; }
+        public List<News> news { get; set; }
+        public List<Favorite> favs { get; set; }
     }
 }
