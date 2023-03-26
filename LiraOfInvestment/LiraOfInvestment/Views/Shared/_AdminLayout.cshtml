@@ -24,16 +24,18 @@
 <!-- Head -->
 @await Html.PartialAsync("/Views/Admin/PartialHead.cshtml")
 <body>
-    @await Html.PartialAsync("/Views/Company/CompanyNavbarPartial.cshtml")
+    @* @await Html.PartialAsync("/Views/Company/CompanyNavbarPartial.cshtml")
     <div class="container">
         <div class="row">
             <div class="col-sm-3">
                 <h4>Favorites</h4>
                 <div class="col-sm-3">
                     <h4>News</h4>
+                   
                 </div>
             </div>
             <div class="col-sm-9">
+                @await Component.InvokeAsync("UserNewsList")
                 @RenderBody()
             </div>
         </div>
@@ -41,8 +43,24 @@
     </div>
     
     <!-- Scripts -->
-    @await Html.PartialAsync("/Views/Admin/PartialScript.cshtml")
+    @await Html.PartialAsync("/Views/Admin/PartialScript.cshtml")*@
+    
+       
+   
+    <div class="row border-bottom">
+        @await Html.PartialAsync("/Views/Company/CompanyNavbarPartial.cshtml")
+        <div  class="col-3">
+            @await Component.InvokeAsync("UserNewsList")
+            @*@await Component.InvokeAsync("FavoritesList")*@
+        </div>
+        <div class="col-9">
+            @RenderBody()
+        </div>
+        @await Html.PartialAsync("/Views/Admin/PartialFooter.cshtml")
+    </div>
+
 </body>
+
 </html>
 
 <!-- Mainly scripts -->

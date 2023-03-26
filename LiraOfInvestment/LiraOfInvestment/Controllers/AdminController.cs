@@ -1,4 +1,5 @@
 ﻿using BusinessLayer.Abstract;
+using EntityLayer.Dto;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -16,8 +17,10 @@ namespace LiraOfInvestment.Controllers
         
         public IActionResult Index()
         {
-            var values = _profileService.TGetList();
-            return View(values);
+            var values = _profileService.TGetList().Take(9).ToList();
+            var model = new UserProfile();
+            model.profiles = values;
+            return View(model);
         }
         public PartialViewResult PartialNavbar()
         {

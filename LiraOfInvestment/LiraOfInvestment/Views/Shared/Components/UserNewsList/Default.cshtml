@@ -1,0 +1,20 @@
+﻿@model EntityLayer.Dto.UserProfile
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+<h4>News</h4>
+@foreach(var item in Model.news){
+    <div class="ibox-content">
+        <div>
+            <div class="float-right text-right">
+                <br />
+                <small class="font-bold">@item.Resource</small>
+            </div>
+            <h4>
+                <a href="@item.Link" target="_blank">@item.Title</a>
+                <br />
+                <small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>
+            </h4>
+        </div>
+    </div>
+}

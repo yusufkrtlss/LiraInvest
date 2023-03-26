@@ -42,7 +42,7 @@ namespace LiraOfInvestment.Controllers
                     {
                         authClaims.Add(new Claim(ClaimTypes.Role, claim));
                     }
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Index", "Admin");
                 }
                 else if (result.IsLockedOut)
                 {

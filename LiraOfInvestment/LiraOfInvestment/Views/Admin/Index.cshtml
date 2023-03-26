@@ -1,5 +1,5 @@
-﻿@using EntityLayer.Concrete
-@model List<Profile>
+﻿@using EntityLayer.Dto
+@model UserProfile
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
@@ -20,7 +20,7 @@
 
 <div class="wrapper wrapper-content animated fadeInRight">
     <div class="row">
-        @foreach(var item in Model){
+        @foreach(var item in Model.profiles){
         <div class="col-lg-4">
             <div class="contact-box">
                 <a class="row">
@@ -30,7 +30,7 @@
                         <p>Day High : @item.DayHigh $</p>
                         <p>Day Low : @item.DayLow $</p>
                         <p>Market Cap : @item.MarketCap $</p>
-                        <p><a class="navy-link" role="button" asp-controller="Company" asp-action="Index">Learn More &raquo;</a></p>
+                        <p><a class="navy-link" asp-controller="Company" asp-action="Index" asp-route-id="@item.Id">Learn More &raquo;</a></p>
                     </div>
                 </a>
             </div>

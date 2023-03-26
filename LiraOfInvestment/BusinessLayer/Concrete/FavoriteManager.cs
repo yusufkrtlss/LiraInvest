@@ -18,27 +18,27 @@ namespace BusinessLayer.Concrete
             _favoriteDal = favoriteDal;
         }
 
-        public void TAdd(Favorite t)
+        public void TAdd(Favorite2 t)
         {
             _favoriteDal.Insert(t);
         }
 
-        public void TDelete(Favorite t)
+        public void TDelete(Favorite2 t)
         {
             _favoriteDal.Delete(t);
         }
 
-        public Favorite TGetByID(int id)
+        public Favorite2 TGetByID(int id)
         {
             return _favoriteDal.GetByID(id);
         }
 
-        public List<Favorite> TGetList()
+        public List<Favorite2> TGetList()
         {
             return _favoriteDal.GetList();
         }
 
-        public void TUpdate(Favorite t)
+        public void TUpdate(Favorite2 t)
         {
             _favoriteDal.Update(t);
         }

@@ -10,8 +10,8 @@ namespace DataAccessLayer.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "AppUserId",
-                table: "Favorites",
+                name: "UserId",
+                table: "Favorites3",
                 type: "int",
                 nullable: true);
 
@@ -51,14 +51,14 @@ namespace DataAccessLayer.Migrations
                 defaultValue: false);
 
             migrationBuilder.CreateIndex(
-                name: "IX_Favorites_AppUserId",
-                table: "Favorites",
-                column: "AppUserId");
+                name: "IX_Favorites3_UserId",
+                table: "Favorites3",
+                column: "UserId");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Favorites_AspNetUsers_AppUserId",
-                table: "Favorites",
-                column: "AppUserId",
+                name: "FK_Favorites3_AspNetUsers_UserId",
+                table: "Favorites3",
+                column: "UserId",
                 principalTable: "AspNetUsers",
                 principalColumn: "Id");
         }
@@ -66,16 +66,16 @@ namespace DataAccessLayer.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Favorites_AspNetUsers_AppUserId",
+                name: "FK_Favorites3_AspNetUsers_UserId",
                 table: "Favorites");
 
             migrationBuilder.DropIndex(
-                name: "IX_Favorites_AppUserId",
-                table: "Favorites");
+                name: "IX_Favorites3_UserId",
+                table: "Favorites3");
 
             migrationBuilder.DropColumn(
-                name: "AppUserId",
-                table: "Favorites");
+                name: "UserId",
+                table: "Favorites3");
 
             migrationBuilder.DropColumn(
                 name: "CustomerCreatedTime",

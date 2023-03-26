@@ -237,32 +237,32 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("Customers");
                 });
 
-            modelBuilder.Entity("EntityLayer.Concrete.Favorite", b =>
+            modelBuilder.Entity("EntityLayer.Concrete.Favorite2", b =>
                 {
-                    b.Property<int>("FavoriteID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    //b.Property<int>("FavoriteID")
+                    //    .ValueGeneratedOnAdd()
+                    //    .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavoriteID"), 1L, 1);
+                    //SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FavoriteID"), 1L, 1);
 
-                    b.Property<int?>("AppUserId")
+                    b.Property<int?>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CustomerId")
-                        .HasColumnType("int");
+                    //b.Property<int>("CustomerId")
+                    //    .HasColumnType("int");
 
-                    b.HasKey("FavoriteID");
+                    //b.HasKey("FavoriteID");
 
-                    b.HasIndex("AppUserId");
+                    b.HasIndex("UserId");
 
                     b.HasIndex("CompanyId");
 
-                    b.HasIndex("CustomerId");
+                    //b.HasIndex("CustomerId");
 
-                    b.ToTable("Favorites");
+                    b.ToTable("Favorites3");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.News", b =>
@@ -499,7 +499,7 @@ namespace DataAccessLayer.Migrations
                 {
                     b.HasOne("EntityLayer.Concrete.AppUser", null)
                         .WithMany("Favorites")
-                        .HasForeignKey("AppUserId");
+                        .HasForeignKey("UserId");
 
                     b.HasOne("EntityLayer.Concrete.Company", "Company")
                         .WithMany("Favorites")
@@ -507,15 +507,15 @@ namespace DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("EntityLayer.Concrete.Customer", "Customer")
-                        .WithMany("Favorites")
-                        .HasForeignKey("CustomerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    //b.HasOne("EntityLayer.Concrete.Customer", "Customer")
+                    //    .WithMany("Favorites")
+                    //    .HasForeignKey("CustomerId")
+                    //    .OnDelete(DeleteBehavior.Cascade)
+                    //    .IsRequired();
 
                     b.Navigation("Company");
 
-                    b.Navigation("Customer");
+                    //b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("EntityLayer.Concrete.News", b =>

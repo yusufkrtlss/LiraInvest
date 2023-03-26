@@ -1,20 +1,16 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace EntityLayer.Concrete
 {
-
-    public class Favorite
+    public class Favorite2
     {
-        public int FavoriteId { get; set; }
+
         public int UserId { get; set; }
-        
         public int CompanyId { get; set; }
     }
 }

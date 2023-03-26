@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.EntityFramework
 {
-    public class EfFavoriteDal : GenericRepository<Favorite>, IFavoriteDal
+    public class EfFavoriteDal : GenericRepository<Favorite2>, IFavoriteDal
     {
     }
 }
