@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 
 namespace LiraOfInvestment.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class FavoritesController : Controller
     {
         private IFavoriteService _favoriteService;
@@ -40,21 +40,21 @@ namespace LiraOfInvestment.Controllers
             //model.UserId = user.Id;
             //model.ProfileId = id;
             var allFav = _favoriteService.TGetList().Where(x => x.ProfileId == id).ToList();
-            foreach (var fav in allFav)
-            {
-                if (fav.AppUserId == user.Id)
-                {
-                    return Redirect("/Company/Index/" + id);
-                }
-                else
-                {
-                    _favoriteService.TAdd(model);
-                }
-            }
+            //foreach (var fav in allFav)
+            //{
+            //    if (fav.AppUserId == user.Id)
+            //    {
+            //        return Redirect("/Company/Index/" + id);
+            //    }
+            //    else
+            //    {
+            //        
+            //    }
+            //}
 
 
-
-            return Redirect("/Company/Index/"+id);
+            _favoriteService.TAdd(model);
+            return Redirect("/Admin/Index/"+id);
         }
 
         

@@ -53,7 +53,7 @@ namespace LiraOfInvestment.Controllers
         {
             return PartialView();
         }
-
+        [Authorize]
         [Produces("application/json")]
         [ValidateAntiForgeryToken]
         [Route("/default/search")]

@@ -10,15 +10,32 @@
     <ul class="list-group clear-list m-t">
         @foreach (var item in Model.favs)
         {
-            <li class="list-group-item fist-item">
-                <span class="float-right">
+            @*<li class="list-group-item fist-item">
+    <span class="float-right">
 
-                </span>
-                <span class="label label-success"></span> @item.Profile.Symbol
+    </span>
+    <span class="label label-success"></span> @item.Profile.Symbol
+    </li>*@
+    <li>
+            <div class="ibox-content">
+                <div>
+                    <div class="float-right text-right">
+                        <br />
+                        @*<small class="font-bold">@item.</small>*@
+                    </div>
+                    <h4>
+                        <a asp-controller="Company" asp-action="Index" asp-route-id="@item.Profile.Id" target="_blank">@item.Profile.Symbol</a>
+                        <br />
+                        @*<small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>*@
+                    </h4>
+                </div>
+            </div>
             </li>
         }
 
 
     </ul>
+
+
 }
 

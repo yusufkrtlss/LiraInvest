@@ -32,7 +32,7 @@
             </div>
         </div>
     </div>
-
+    @await RenderSectionAsync("Scripts", required: false)
     <!-- Mainly scripts -->
     <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>
     <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/popper.min.js"></script>
@@ -59,7 +59,7 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-    @await RenderSectionAsync("Scripts", required: false)
+    
 
 </body>
 </html>

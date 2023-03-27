@@ -1,13 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using EntityLayer.Concrete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EntityLayer.Dto
 {
-    public class CompanyProfile
+    public class CompanyCompare
     {
         public int Id { get; set; }
         public string Symbol { get; set; }
@@ -30,6 +31,9 @@ namespace EntityLayer.Dto
         public double YearChange { get; set; }
         public double YearHigh { get; set; }
         public double YearLow { get; set; }
+        //public int CompareId { get; set; }
+        public int SelectedId { get; set; }
         public IEnumerable<SelectListItem> profiles { get; set; }
+
     }
 }

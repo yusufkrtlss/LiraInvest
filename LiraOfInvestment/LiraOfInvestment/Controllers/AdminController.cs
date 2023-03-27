@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace LiraOfInvestment.Controllers
 {
-    [AllowAnonymous]
+    [Authorize]
     public class AdminController : Controller
     {
         private readonly IProfileService _profileService;

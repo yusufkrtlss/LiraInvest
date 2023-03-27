@@ -17,7 +17,7 @@
             <button type="submit" class="btn btn-sm btn-outline-danger btn-block" ><i class="fa fa-heart"></i> Add to fav </button>
             </form>
             <li class="active">
-                <a asp-controller="Main" asp-action="Index"><i class="fa fa-th-large"></i> <span class="nav-label">Summary</span> </a>
+                <a asp-controller="Company" asp-action="Index" asp-route-id="@Model.Id"><i class="fa fa-th-large"></i> <span class="nav-label">Summary</span> </a>
 
             </li>
 
@@ -45,7 +45,7 @@
 
             </li>
             <li>
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Compare </span></a>
+                <a asp-controller="Company" asp-action="Compare" asp-route-id="@Model.Id"><i class="fa fa-envelope"></i> <span class="nav-label">Compare </span></a>
             </li>
 
 
