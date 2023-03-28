@@ -5,10 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessLayer.Abstract
+namespace DataAccessLayer.Abstract
 {
-    public interface IUserService : IGenericService<AppUser>
+    public interface IFinancialDataDal : IGenericDal<FinancialData>
     {
-        public AppUser GetAppUserIncludeFavoritesList(int id);
     }
 }

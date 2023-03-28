@@ -1,0 +1,73 @@
+﻿@model EntityLayer.Dto.CompanyProfile
+
+<div id="fruit-details"></div>
+<h2 class="font-bold m-b-xs">
+    @Model.Symbol
+</h2>
+
+<div class="m-t-md">
+    <h2 class="product-main-price">$@Model.FinancialData.CurrentPrice <small class="text-muted">Current Price</small> </h2>
+</div>
+<hr>
+
+<h4>Company Statistics</h4>
+
+<div class="row">
+        <div class="col-4">
+            <ul>
+                <li>
+                    Ebitda: @Model.FinancialData.Ebitda
+                </li>
+                <li>
+                    Quick Ratio: @Model.FinancialData.QuickRatio
+                </li>
+                <li>
+                    Dept To Equity: @Model.FinancialData.DeptToEquity
+                </li>
+                <li>
+                    Profit Margin: @Model.FinancialData.ProfitMargin
+                </li>
+            <li>
+                Free Cash Flow: @Model.FinancialData.FreeCashFlow
+            </li>
+            </ul>
+        </div>
+        <div class="col-4">
+            <ul>
+                <li>Gross Margin: @Model.FinancialData.GrossMargin</li>
+                <li>Earnings Growth: @Model.FinancialData.EarningsGrowth</li>
+                <li>Revenue Per Share: @Model.FinancialData.RevenuePerShare</li>
+                <li>Total Dept: @Model.FinancialData.TotalDept</li>
+                <li>Total Revenue: @Model.FinancialData.TotalRevenue</li>
+            </ul>
+        </div>
+        <div class="col-4">
+        <ul>
+                <li>Shares: @Model.Shares</li>
+                <li>50 Days Avg: @Model._50DayAvg</li>
+                <li>3 Month Avg: @Model._3MonthAvgVol</li>
+                <li>10 Days Avg: @Model._10DaysAvgVol</li>
+                <li>200 Days Avg: @Model._200DaysAvg</li>
+            </ul>
+        </div>
+    
+</div>
+<br />
+<br />
+   
+
+<dl class="small m-t-md">
+    <dt>Should we buy?</dt>
+    <dd>@Model.FinancialData.RecommendationKey</dd>
+    <dt>Mean of Recommendation</dt>
+    <dd>@Model.FinancialData.RecommendationMean</dd>
+    
+</dl>
+<hr>
+
+<div>
+    <div class="btn-group">
+        
+        <a class="btn btn-white btn-sm" asp-controller="Company" asp-action="Index" asp-route-id="@Model.Id"> Go to the Profile </a>
+    </div>
+</div>

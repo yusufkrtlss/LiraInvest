@@ -88,6 +88,9 @@ builder.Services.AddTransient<ITwoYearsMonthlyDal, EfTwoYearsMonthlyDal>();
 builder.Services.AddTransient<IBarChartYearlyService, BarChartYearlyManager>();
 builder.Services.AddTransient<IBarChartDal, EfBarChartYearly>();
 
+builder.Services.AddTransient<IFinancialDataService, FinancialDataManager>();
+builder.Services.AddTransient<IFinancialDataDal, EfFinancialDataDal>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

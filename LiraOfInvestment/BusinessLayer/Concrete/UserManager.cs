@@ -19,7 +19,7 @@ namespace BusinessLayer.Concrete
             _userDal = userDal;
         }
 
-        public List<AppUser> GetAppUserIncludeFavoritesList(int id)
+        public AppUser GetAppUserIncludeFavoritesList(int id)
         {
             return _userDal.GetAppUserWithFavoritesList(id);
         }

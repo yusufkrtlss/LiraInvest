@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace BusinessLayer.Abstract
 {
-    public interface IUserService : IGenericService<AppUser>
+    public interface IFinancialDataService : IGenericService<FinancialData>
     {
-        public AppUser GetAppUserIncludeFavoritesList(int id);
     }
 }

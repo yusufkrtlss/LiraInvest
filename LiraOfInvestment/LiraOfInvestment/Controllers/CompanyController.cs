@@ -1,10 +1,15 @@
 ﻿using BusinessLayer.Abstract;
 using BusinessLayer.Abstract.Charts;
+using BusinessLayer.Concrete;
+using EntityLayer.Concrete;
 using EntityLayer.Dto;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections;
+using System.Collections.Generic;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace LiraOfInvestment.Controllers
 {
@@ -14,17 +19,30 @@ namespace LiraOfInvestment.Controllers
         IProfileService _profileService;
         ITwoYearsMonthly _twoYearsMonthlyService;
         IBarChartYearlyService _barChartYearlyService;
-        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService)
+        IFinancialDataService _financialDataService;
+        INewsService _newsService;
+        private readonly UserManager<AppUser> _userManager;
+        private IUserService _userService;
+        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService, IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService)
         {
             _profileService = profileService;
             _twoYearsMonthlyService = twoYearsMonthlyService;
             _barChartYearlyService = barChartYearlyService;
+            _financialDataService = financialDataService;
+            _newsService = newsService;
+            _userManager = userManager;
+            _userService = userService;
         }
 
         [HttpGet("/company/index/{id}")]
-        public IActionResult Index(int id)
+        public async Task<IActionResult> IndexAsync(int id)
         {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var service=_userService.GetAppUserIncludeFavoritesList(user.Id);
             var company=_profileService.TGetByID(id);
+            var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
+            var news = _newsService.TGetList().Where(x => x.Which_Symbols.Contains(company.Symbol)).Take(4).ToList();
+            var TopFiveCompany=_profileService.TGetList().OrderByDescending(x => x.MarketCap).Take(5).ToList();
             var model = new CompanyProfile()
             {
                 Id= company.Id,
@@ -47,6 +65,10 @@ namespace LiraOfInvestment.Controllers
                 YearChange= company.YearChange,
                 YearHigh= company.YearHigh,
                 YearLow= company.YearLow,
+                FinancialData=financialData,
+                News= news,
+                AppUser=service,
+                TopFiveProfile= TopFiveCompany,
             };
             //var chart = GetChartData(id);
             return View(model);
@@ -98,6 +120,8 @@ namespace LiraOfInvestment.Controllers
                 Text = d.Symbol
             });
             var company = _profileService.TGetByID(id);
+            var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
+
             var model = new CompanyProfile()
             {
                 Id = company.Id,
@@ -121,6 +145,7 @@ namespace LiraOfInvestment.Controllers
                 YearHigh = company.YearHigh,
                 YearLow = company.YearLow,
                 profiles= list,
+                FinancialData=financialData
             };
             //var chart = GetChartData(id);
             return View(model);
@@ -128,6 +153,40 @@ namespace LiraOfInvestment.Controllers
         public PartialViewResult CompanyNavbarPartial()
         {        
             return PartialView();
+        }
+        public PartialViewResult CompanySidebarPartial()
+        {           
+            return PartialView();
+        }
+        public PartialViewResult CompareCompanies(int id)
+        {
+            var company = _profileService.TGetByID(id);
+            var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
+            var model = new CompanyProfile()
+            {
+                Id = company.Id,
+                Symbol = company.Symbol,
+                Country = company.Country,
+                Industry = company.Industry,
+                Description = company.Description,
+                Website = company.Website,
+                Phone = company.Phone,
+                DayHigh = company.DayHigh,
+                DayLow = company.DayLow,
+                _50DayAvg = company._50DayAvg,
+                MarketCap = company.MarketCap,
+                Open = company.Open,
+                PreviousClose = company.PreviousClose,
+                Shares = company.Shares,
+                _10DaysAvgVol = company._10DaysAvgVol,
+                _3MonthAvgVol = company._3MonthAvgVol,
+                _200DaysAvg = company._200DaysAvg,
+                YearChange = company.YearChange,
+                YearHigh = company.YearHigh,
+                YearLow = company.YearLow,
+                FinancialData=financialData
+            };
+            return PartialView("_CompareCompanies",model);
         }
     }
 }

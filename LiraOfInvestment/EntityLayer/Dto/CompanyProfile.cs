@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using EntityLayer.Concrete;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,5 +32,9 @@ namespace EntityLayer.Dto
         public double YearHigh { get; set; }
         public double YearLow { get; set; }
         public IEnumerable<SelectListItem> profiles { get; set; }
+        public List<News> News { get; set; }
+        public FinancialData FinancialData { get; set; }
+        public AppUser AppUser { get; set; }
+        public List<Profile> TopFiveProfile { get; set; }
     }
 }

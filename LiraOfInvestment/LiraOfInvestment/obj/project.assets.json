@@ -11489,19 +11489,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yigit\\.nuget\\packages\\": {}
+    "C:\\Users\\yigitcan.cirpan\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+      "projectUniqueName": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
       "projectName": "LiraOfInvestment",
-      "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
-      "packagesPath": "C:\\Users\\yigit\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
+      "projectPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+      "packagesPath": "C:\\Users\\yigitcan.cirpan\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\yigit\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\yigitcan.cirpan\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11515,14 +11515,14 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
-              "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj"
+            "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
+              "projectPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj"
             },
-            "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
+            "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
             },
-            "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
-              "projectPath": "C:\\Users\\yigit\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
+            "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+              "projectPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
             }
           }
         }
@@ -11581,7 +11581,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
       }
     }
   },

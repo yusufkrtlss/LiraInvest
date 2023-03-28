@@ -13,10 +13,10 @@ namespace DataAccessLayer.EntityFramework
 {
     public class EfUserDal:GenericRepository<AppUser>, IUserDal
     {
-        public List<AppUser> GetAppUserWithFavoritesList(int id)
+        public AppUser GetAppUserWithFavoritesList(int id)
         {
             using var c = new Context();
-            var result= c.Users.Where(x => x.Id == id).Include(y => y.Favorites).ToList();
+            var result= c.Users.Where(x => x.Id == id).Include(y => y.Favorites).FirstOrDefault();
             return result;
         }
     }

@@ -9,10 +9,12 @@ namespace LiraOfInvestment.Controllers
     public class DefaultController : Controller
     {
         IProfileService _profileService;
+        IFinancialDataService _financialDataService;
 
-        public DefaultController(IProfileService profileService)
+        public DefaultController(IProfileService profileService, IFinancialDataService financialDataService)
         {
             _profileService = profileService;
+            _financialDataService = financialDataService;
         }
         public IActionResult Index()
         {
@@ -60,7 +62,7 @@ namespace LiraOfInvestment.Controllers
         public JsonResult SearchAsync()
         {
             string term = HttpContext.Request.Query["term"].ToString().ToUpper();
-            var query = _profileService.TGetList().Where(i=>i.Symbol.Contains(term)).Select(x=> new {id=x.Id,symbol=x.Symbol});
+            var query = _financialDataService.TGetList().Where(i=>i.Symbol.Contains(term)).Select(x=> new {id=x.Id,symbol=x.Symbol});
 
             return Json(query);
         }

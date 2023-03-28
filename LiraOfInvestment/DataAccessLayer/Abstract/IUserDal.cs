@@ -9,6 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IUserDal:IGenericDal<AppUser>
     {
-        public List<AppUser> GetAppUserWithFavoritesList(int id);
+        public AppUser GetAppUserWithFavoritesList(int id);
     }
 }

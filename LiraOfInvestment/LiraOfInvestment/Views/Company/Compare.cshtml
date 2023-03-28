@@ -4,34 +4,34 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <head>
-<link href="~/inspinia-gh-pages/inspinia-gh-pages/css/bootstrap.min.css" rel="stylesheet">
-<link href="~/inspinia-gh-pages/inspinia-gh-pages/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/inspinia-gh-pages/inspinia-gh-pages/font-awesome/css/font-awesome.css" rel="stylesheet">
 
-<!-- Toastr style -->
-<link href="~/inspinia-gh-pages/inspinia-gh-pages/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+    <!-- Toastr style -->
+    <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/plugins/toastr/toastr.min.css" rel="stylesheet">
 
-<!--     G    ritter -->
-<link href="~/inspinia-gh-pages/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+    <!--     G    ritter -->
+    <link href="~/inspinia-gh-pages/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
 
-<link href="~/inspinia-gh-pages/inspinia-gh-pages/css/animate.css" rel="stylesheet">
-<link href="~/inspinia-gh-pages/inspinia-gh-pages/css/style.css" rel="stylesheet">
-<!--     Morris -->
-<link href="~/inspinia-gh-pages/inspinia-gh-pages/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+    <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/animate.css" rel="stylesheet">
+    <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/style.css" rel="stylesheet">
+    <!--     Morris -->
+    <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
 </head>
 <form asp-controller="Company" asp-action="Compare">
-<div class="form-group">
-    <label asp-for="Id" class="control-label">Company</label>
-    <select id="profile_select" asp-for="Id" class="form-control" asp-items="Model.profiles">
-    </select>
-    <span asp-validation-for="Id" class="text-danger"></span>
-</div>
-<div>
-    <button type="submit" class="btn btn-warning">Compare!</button>
-</div>
+    <div class="form-group">
+        <label asp-for="Id" class="control-label">Company</label>
+        <select id="profile_select" asp-for="Id" class="form-control" asp-items="Model.profiles">
+        </select>
+        <span asp-validation-for="Id" class="text-danger"></span>
+    </div>
+    <div>
+        <button type="submit" class="btn btn-warning">Compare!</button>
+    </div>
 </form>
 
-<div id="fruit-details"></div>
-<div id="CompareCompanyContainer"></div>
+@*<div id="fruit-details"></div>
+<div id="CompareCompanyContainer"></div>*@
 @*<div class="form-group">
     <label asp-for="Id" class="control-label">Company</label>
     <select asp-for="Id" class="form-control" asp-items="ViewBag.Companies">
@@ -39,60 +39,92 @@
     <span asp-validation-for="Id" class="text-danger"></span>
 </div>*@
 
-@*<div class="row">
+<div class="row">
 <div class="col-md-6">
 
-    <h2 class="font-bold m-b-xs">
-        Desktop publishing software
-    </h2>
-    <small>Many desktop publishing packages and web page editors now.</small>
-    <div class="m-t-md">
-        <h2 class="product-main-price">$406,602 <small class="text-muted">Exclude Tax</small> </h2>
-    </div>
-    <hr>
+        <h2 class="font-bold m-b-xs">
+            @Model.Symbol
+        </h2>
 
-    <h4>Product description</h4>
+        <div class="m-t-md">
+            <h2 class="product-main-price">$@Model.FinancialData.CurrentPrice <small class="text-muted">Current Price</small> </h2>
+        </div>
+        <hr>
 
-    <div class="small text-muted">
-        It is a long established fact that a reader will be distracted by the readable
-        content of a page when looking at its layout. The point of using Lorem Ipsum is
+        <h4>Company Statistics</h4>
 
+        <div class="row">
+            <div class="col-4">
+                <ul>
+                    <li>
+                        Ebitda: @Model.FinancialData.Ebitda
+                    </li>
+                    <li>
+                        Quick Ratio: @Model.FinancialData.QuickRatio
+                    </li>
+                    <li>
+                        Dept To Equity: @Model.FinancialData.DeptToEquity
+                    </li>
+                    <li>
+                        Profit Margin: @Model.FinancialData.ProfitMargin
+                    </li>
+                    <li>
+                        Free Cash Flow: @Model.FinancialData.FreeCashFlow
+                    </li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <ul>
+                    <li>Gross Margin: @Model.FinancialData.GrossMargin</li>
+                    <li>Earnings Growth: @Model.FinancialData.EarningsGrowth</li>
+                    <li>Revenue Per Share: @Model.FinancialData.RevenuePerShare</li>
+                    <li>Total Dept: @Model.FinancialData.TotalDept</li>
+                    <li>Total Revenue: @Model.FinancialData.TotalRevenue</li>
+                </ul>
+            </div>
+            <div class="col-4">
+                <ul>
+                    <li>Shares: @Model.Shares</li>
+                    <li>50 Days Avg: @Model._50DayAvg</li>
+                    <li>3 Month Avg: @Model._3MonthAvgVol</li>
+                    <li>10 Days Avg: @Model._10DaysAvgVol</li>
+                    <li>200 Days Avg: @Model._200DaysAvg</li>
+                </ul>
+            </div>
+
+        </div>
         <br />
         <br />
-        There are many variations of passages of Lorem Ipsum available, but the majority
-        have suffered alteration in some form, by injected humour, or randomised words
-        which don't look even slightly believable.
-    </div>
-    <dl class="small m-t-md">
-        <dt>Description lists</dt>
-        <dd>A description list is perfect for defining terms.</dd>
-        <dt>Euismod</dt>
-        <dd>Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.</dd>
-        <dd>Donec id elit non mi porta gravida at eget metus.</dd>
-        <dt>Malesuada porta</dt>
-        <dd>Etiam porta sem malesuada magna mollis euismod.</dd>
-    </dl>
-    <hr>
 
-    <div>
-        <div class="btn-group">
-            <button class="btn btn-primary btn-sm"><i class="fa fa-cart-plus"></i> Add to cart</button>
-            <button class="btn btn-white btn-sm"><i class="fa fa-star"></i> Add to wishlist </button>
-            <button class="btn btn-white btn-sm"><i class="fa fa-envelope"></i> Contact with author </button>
+
+        <dl class="small m-t-md">
+            <dt>Should we buy?</dt>
+            <dd>@Model.FinancialData.RecommendationKey</dd>
+            <dt>Mean of Recommendation</dt>
+            <dd>@Model.FinancialData.RecommendationMean</dd>
+
+        </dl>
+        <hr>
+
+        <div>
+            <div class="btn-group">
+
+                <a class="btn btn-white btn-sm" asp-controller="Company" asp-action="Index" asp-route-id="@Model.Id"> Go to the Profile </a>
+            </div>
         </div>
     </div>
 
 
-
-</div>
     <div class="col-md-6">
 
-        @await Component.InvokeAsync("CompareCompany")
-
+        @*@await Html.PartialAsync("_CompareCompanies")*@
+        <div id="CompareCompanyContainer"></div>
 
 
     </div>
-</div>*@
+</div>
+    
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
@@ -153,12 +185,14 @@
     $(document).ready(function () {
         $('#profile_select').change(function () {
             var selectedItemId = $(this).val(); // get the selected item value (which is the ID)
-
+            console.log(selectedItemId);
             // send the ID to a .NET Core view component using AJAX
             $.ajax({
                 type: 'GET',
-                url: '/CompareCompany?id=' + selectedItemId,
+                url: '/Company/CompareCompanies?id=' + selectedItemId,
                 success: function (response) {
+                    console.log(selectedItemId);
+
                     // update the view with the response HTML
                     $('#CompareCompanyContainer').html(response);
                 },

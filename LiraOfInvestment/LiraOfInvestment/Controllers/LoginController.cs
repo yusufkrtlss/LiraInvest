@@ -97,6 +97,7 @@ namespace LiraOfInvestment.Controllers
             }
             return View(esv);
         }
+        
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
