@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mT4Xo9Pai9T6wexwxUGTo90ZpZx6D5+2SmpMjBPbTMwVLY4gqxTRyzHqF5r0WpDk1dWcuJhzQHGLmiO88cFSaA==",
+  "dgSpecHash": "73b6Ql8C/bscYpHJHm15c/TTlxFc+nL2R2raPaJM+rqvfZ+vo9eyST/3/u7HDUBEd+gFKJEbNIb8038GF2iklQ==",
   "success": true,
-  "projectFilePath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+  "projectFilePath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\yigitcan.cirpan\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
     "C:\\Users\\yigitcan.cirpan\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",

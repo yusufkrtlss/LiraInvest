@@ -1,13 +1,15 @@
-﻿@model EntityLayer.Dto.CompanyProfile
+﻿@using Microsoft.Extensions.Caching.Memory;
+@model EntityLayer.Dto.CompanyProfile
+
 
 <nav class="navbar-default navbar-static-side" role="navigation">
     <div class="sidebar-collapse">
         <ul class="nav metismenu" id="side-menu">
             <li class="nav-header">
                 <div class="ibox">
+                    
 
-
-                    @if (Model.FinancialData.EarningsGrowth > 0)
+                   @* @if (Model.FinancialData.EarningsGrowth > 0)
                     {
                         <h2 class="text-navy">
                             <i class="fa fa-play fa-rotate-270"></i> @Model.Symbol @Model.FinancialData.EarningsGrowth
@@ -20,27 +22,27 @@
                             <i class="fa fa-play fa-rotate-90"></i> @Model.Symbol @Model.FinancialData.EarningsGrowth
                         </h2>
                     }
-
+*@
 
 
                 </div>
 
             </li>
-            @if (Model.AppUser.Favorites.Any(x => x.ProfileId == Model.Id))
+            @*@if (Model.AppUser.Favorites.Any(x => x.ProfileId == Model.Id))
             {
-                
-            }
-            else
+
+            }*@
+         @*   else
             {
-                    <form asp-controller="Favorites" asp-action="AddFavorite" asp-route-id="@Model.Id">
-                        <button type="submit" class="btn btn-sm btn-outline-danger btn-block"><i class="fa fa-heart"></i> Add to fav </button>
-                    </form>
-            }
+            <form asp-controller="Favorites" asp-action="AddFavorite" asp-route-id="@Model.Id">
+                <button type="submit" class="btn btn-sm btn-outline-danger btn-block"><i class="fa fa-heart"></i> Add to fav </button>
+            </form>
+            }*@
 
 
 
 
-            <li class="active">
+            <li >
                 <a asp-controller="Company" asp-action="Index" asp-route-id="@Model.Id"><i class="fa fa-th-large"></i> <span class="nav-label">Summary</span> </a>
 
             </li>
@@ -65,7 +67,7 @@
                 </ul>
             </li>
             <li>
-                <a href="mailbox.html"><i class="fa fa-envelope"></i> <span class="nav-label">Radar </span></a>
+                <a asp-controller="Company" asp-action="Radar"><i class="fa fa-envelope"></i> <span class="nav-label">Radar </span></a>
 
             </li>
             <li>

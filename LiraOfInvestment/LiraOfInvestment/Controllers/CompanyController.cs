@@ -3,10 +3,13 @@ using BusinessLayer.Abstract.Charts;
 using BusinessLayer.Concrete;
 using EntityLayer.Concrete;
 using EntityLayer.Dto;
+using LiraOfInvestment.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.CodeAnalysis;
+using Microsoft.Extensions.Caching.Memory;
 using System.Collections;
 using System.Collections.Generic;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
@@ -16,14 +19,15 @@ namespace LiraOfInvestment.Controllers
     [Authorize]
     public class CompanyController : Controller
     {
-        IProfileService _profileService;
-        ITwoYearsMonthly _twoYearsMonthlyService;
-        IBarChartYearlyService _barChartYearlyService;
-        IFinancialDataService _financialDataService;
-        INewsService _newsService;
+        private IProfileService _profileService;
+        private ITwoYearsMonthly _twoYearsMonthlyService;
+        private IBarChartYearlyService _barChartYearlyService;
+        private IFinancialDataService _financialDataService;
+        private INewsService _newsService;
         private readonly UserManager<AppUser> _userManager;
         private IUserService _userService;
-        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService, IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService)
+        private IMemoryCache _cache;
+        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService, IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService, IMemoryCache cache)
         {
             _profileService = profileService;
             _twoYearsMonthlyService = twoYearsMonthlyService;
@@ -32,11 +36,13 @@ namespace LiraOfInvestment.Controllers
             _newsService = newsService;
             _userManager = userManager;
             _userService = userService;
+            _cache = cache;
         }
 
         [HttpGet("/company/index/{id}")]
         public async Task<IActionResult> IndexAsync(int id)
         {
+           
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var service=_userService.GetAppUserIncludeFavoritesList(user.Id);
             var company=_profileService.TGetByID(id);
@@ -150,12 +156,69 @@ namespace LiraOfInvestment.Controllers
             //var chart = GetChartData(id);
             return View(model);
         }
+        [HttpGet]
+        public async Task<IActionResult> Radar(string symbolFilter,
+    string nameFilter,
+    string industryFilter,
+    double? MinPriceFilter,
+    double? MaxPriceFilter,
+    double? MinChangeFilter,
+    double? MaxChangeFilter)
+        {
+            var model = new RadarViewModel();
+            var query = _profileService.TGetList().AsQueryable();
+            model.profiles = query;
+            if (!string.IsNullOrEmpty(symbolFilter))
+            {
+                query = query.Where(s => s.Symbol.Contains(symbolFilter));
+                model.profiles = query;
+            }
+
+            if (!string.IsNullOrEmpty(nameFilter))
+            {
+                query = query.Where(s => s.Symbol.Contains(nameFilter));
+                model.profiles = query;
+            }
+
+            if (!string.IsNullOrEmpty(industryFilter))
+            {
+                query = query.Where(s => s.Industry.Contains(industryFilter));
+                model.profiles = query;
+            }
+
+            if (MinPriceFilter.HasValue)
+            {
+                query = query.Where(s => s.DayLow >= MinPriceFilter.Value);
+                model.profiles = query;
+            }
+
+            if (MaxPriceFilter.HasValue)
+            {
+                query = query.Where(s => s.DayLow <= MaxPriceFilter.Value);
+                model.profiles = query;
+            }
+
+            if (MinChangeFilter.HasValue)
+            {
+                query = query.Where(s => s.YearChange >= MinChangeFilter.Value);
+                model.profiles = query;
+            }
+
+            if (MaxChangeFilter.HasValue)
+            {
+                query = query.Where(s => s.YearChange <= MaxChangeFilter.Value);
+                model.profiles = query;
+            }
+            
+            return View(model);
+        }
         public PartialViewResult CompanyNavbarPartial()
         {        
             return PartialView();
         }
-        public PartialViewResult CompanySidebarPartial()
-        {           
+        public PartialViewResult CompanySidebarPartial(int id)
+        {
+            
             return PartialView();
         }
         public PartialViewResult CompareCompanies(int id)

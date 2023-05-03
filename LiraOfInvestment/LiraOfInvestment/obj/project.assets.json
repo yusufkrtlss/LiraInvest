@@ -11489,19 +11489,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yigitcan.cirpan\\.nuget\\packages\\": {}
+    "C:\\Users\\yigitcan.cirpan\\.nuget\\packages\\": {},
+    "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+      "projectUniqueName": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
       "projectName": "LiraOfInvestment",
-      "projectPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+      "projectPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
       "packagesPath": "C:\\Users\\yigitcan.cirpan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
+      "outputPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
       "projectStyle": "PackageReference",
+      "fallbackFolders": [
+        "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages"
+      ],
       "configFilePaths": [
         "C:\\Users\\yigitcan.cirpan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11509,20 +11514,22 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "https://api.nuget.org/v3/index.json": {}
+        "C:\\Program Files\\DevExpress 22.2\\Components\\System\\Components\\Packages": {},
+        "https://api.nuget.org/v3/index.json": {},
+        "https://nuget.devexpress.com/DvsbSzyVs68JfANpy6DLmxvbjVIkTdi8aM6TO15DYjpXQOEAwm/api": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
-              "projectPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj"
+            "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
+              "projectPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj"
             },
-            "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
+            "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
             },
-            "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
-              "projectPath": "C:\\Users\\yigitcan.cirpan\\Source\\Repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
+            "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+              "projectPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
             }
           }
         }
@@ -11581,7 +11588,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
       }
     }
   },

@@ -14,7 +14,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=tcp:liraofinvestment.database.windows.net,1433;Initial Catalog=LiraDbTest;Persist Security Info=False;User ID=lirainvestment;Password=Lira2022;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
+            optionsBuilder.UseSqlServer("Server=tcp:lirainvestment.database.windows.net,1433;Initial Catalog=LiraInvestment;Persist Security Info=False;User ID=lirainvestment;Password=Lira2022;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
         }
        // public DbSet<Company> Companies { get; set; }      
         public DbSet<Favorite> Favorites { get; set; }

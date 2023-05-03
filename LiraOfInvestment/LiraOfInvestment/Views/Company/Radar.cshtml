@@ -1,0 +1,143 @@
+﻿@model RadarViewModel
+@{
+    ViewData["Title"] = "Radar";
+    Layout = "~/Views/Shared/_RadarLayout.cshtml";
+}
+
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="ibox ">
+            <div class="ibox-title">
+                <h5>Custom responsive table </h5>
+                <div class="ibox-tools">
+                    <a class="collapse-link">
+                        <i class="fa fa-chevron-up"></i>
+                    </a>
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-wrench"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 1</a>
+                        </li>
+                        <li>
+                            <a href="#" class="dropdown-item">Config option 2</a>
+                        </li>
+                    </ul>
+                    <a class="close-link">
+                        <i class="fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="ibox-content">
+                <div class="row">
+                   
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal4">
+                        Filter Options
+                    </button>
+                    <div class="modal inmodal fade" id="myModal4" tabindex="-1" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg">
+                            <div class="modal-content animated fadeIn">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                    
+                                    <h4 class="modal-title">Filter Options</h4>
+                                    
+                                </div>
+                                <form asp-action="Radar" method="get">
+                                <div class="modal-body">
+                                    
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-control">
+                                                    <label for="SymbolFilter">Symbol:</label>
+                                                    <input type="text" asp-for="SymbolFilter" />
+                                                </div>
+
+                                                <div class="form-control">
+                                                    <label for="NameFilter">Name:</label>
+                                                    <input type="text" asp-for="NameFilter" />
+                                                </div>
+
+                                                <div class="form-control">
+                                                    <label for="IndustryFilter">Industry:</label>
+                                                    <input type="text" asp-for="IndustryFilter" />
+                                                </div>
+
+                                                <div class="form-control">
+                                                    <label for="MinPriceFilter">Min Price:</label>
+                                                    <input type="number" asp-for="MinPriceFilter" />
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-control">
+                                                    <label for="MaxPriceFilter">Max Price:</label>
+                                                    <input type="number" asp-for="MaxPriceFilter" />
+                                                </div>
+
+                                                <div class="form-control">
+                                                    <label for="MinChangeFilter">Min Change:</label>
+                                                    <input type="number" asp-for="MinChangeFilter" />
+                                                </div>
+
+                                                <div class="form-control">
+                                                    <label for="MaxChangeFilter">Max Change:</label>
+                                                    <input type="number" asp-for="MaxChangeFilter" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+
+                                        
+                                        
+                                    
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                        <button class="btn btn-outline-primary" type="submit">Filter</button>
+                                </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+
+                                <th>#</th>
+                                <th>Symbol </th>
+                                <th>Close </th>
+                                <th>Daily Income </th>
+                                <th>Daily Volume </th>
+                                <th>Market Price </th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.profiles)
+                            {
+                                <tr>
+                                    <td>1</td>
+                                    <td>@item.Symbol <small>This is example of project</small></td>
+                                    <td>@item.DayLow</td>
+                                    <td>@item.DayHigh</td>
+                                    <td>@item._10DaysAvgVol</td>
+                                    <td><span class="pie">0.52/1.561</span></td>
+                                   
+                                </tr>
+                            }
+
+
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</div>
