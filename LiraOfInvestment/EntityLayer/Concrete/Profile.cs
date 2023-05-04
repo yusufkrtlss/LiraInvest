@@ -21,6 +21,6 @@ namespace EntityLayer.Concrete
         public string Phone { get; set; }
        
         public ICollection<Favorite> Favorites { get; set; }
-        public ICollection<News> News { get; set; }
+       // public ICollection<News> News { get; set; }
     }
 }

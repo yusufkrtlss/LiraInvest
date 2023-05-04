@@ -25,20 +25,20 @@ namespace LiraOfInvestment.ViewComponents.Favorites
         }
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            //var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            ////var favs = (from p in _profileService.TGetList()
-            ////            join f in _favoriteService.TGetList()
-            ////            on p.Id equals f.CompanyId
-            ////            where user.Id == f.UserId
-            ////            select p.Symbol).ToList();
-            //// var favs = _favoriteService.TGetList().AsQueryable().Include(x=>x.Profile).Where(x=>x.AppUserId==user.Id).ToList();
-            ////var fav2=favs.Include(x=>x.Profile).Include(y=>y.Profile.Select(z=>z.Symbol)).Where(t=>t.UserId== user.Id).ToList();
-            //var fav = _manager.GetAppUserIncludeFavoritesList(user.Id);
-            //var favs=_favoriteService.GetFavoritesListIncludeProfile(user.Id).ToList();
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            //var favs = (from p in _profileService.TGetList()
+            //            join f in _favoriteService.TGetList()
+            //            on p.Id equals f.CompanyId
+            //            where user.Id == f.UserId
+            //            select p.Symbol).ToList();
+            // var favs = _favoriteService.TGetList().AsQueryable().Include(x=>x.Profile).Where(x=>x.AppUserId==user.Id).ToList();
+            //var fav2=favs.Include(x=>x.Profile).Include(y=>y.Profile.Select(z=>z.Symbol)).Where(t=>t.UserId== user.Id).ToList();
+            var fav = _manager.GetAppUserIncludeFavoritesList(user.Id);
+            var favs = _favoriteService.GetFavoritesListIncludeProfile(user.Id).ToList();
 
-            //var model = new UserProfile();
-            //model.favs = favs;
-            return View();
+            var model = new UserProfile();
+            model.favs = favs;
+            return View(model);
         }
     }
 }

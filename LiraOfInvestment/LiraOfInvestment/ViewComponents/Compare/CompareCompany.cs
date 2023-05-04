@@ -30,6 +30,7 @@ namespace LiraOfInvestment.ViewComponents.Compare
             var model = new CompanyCompare();
             model.profiles = list;
             
+            
             return View("CompareCompany",model);
         }
     }

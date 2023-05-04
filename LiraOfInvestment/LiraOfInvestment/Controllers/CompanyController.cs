@@ -27,7 +27,8 @@ namespace LiraOfInvestment.Controllers
         private readonly UserManager<AppUser> _userManager;
         private IUserService _userService;
         private IMemoryCache _cache;
-        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService, IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService, IMemoryCache cache)
+        private IPricesService _priceService;
+        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService, IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService, IMemoryCache cache, IPricesService priceService)
         {
             _profileService = profileService;
             _twoYearsMonthlyService = twoYearsMonthlyService;
@@ -37,6 +38,7 @@ namespace LiraOfInvestment.Controllers
             _userManager = userManager;
             _userService = userService;
             _cache = cache;
+            _priceService = priceService;
         }
 
         [HttpGet("/company/index/{id}")]
@@ -47,6 +49,7 @@ namespace LiraOfInvestment.Controllers
             var service=_userService.GetAppUserIncludeFavoritesList(user.Id);
             var company=_profileService.TGetByID(id);
             var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
+            //var news = _newsService.TGetList().Where(x => x.Which_Symbols.Contains(company.Symbol)).Take(4).ToList();
             var news = _newsService.TGetList().Where(x => x.Which_Symbols.Contains(company.Symbol)).Take(4).ToList();
             var TopFiveCompany=_profileService.TGetList().OrderByDescending(x => x.LongName).Take(5).ToList();
             var model = new CompanyProfile()
@@ -122,7 +125,7 @@ namespace LiraOfInvestment.Controllers
                 Website = company.Website,
                 Phone = company.Phone,
                 profiles= list,
-                FinancialData=financialData
+                //FinancialData=financialData
             };
             //var chart = GetChartData(id);
             return View(model);
@@ -138,23 +141,31 @@ namespace LiraOfInvestment.Controllers
         {
             var model = new RadarViewModel();
             var query = _profileService.TGetList().AsQueryable();
+            var prices = _priceService.TGetList().AsQueryable();
+            model.prices = prices;
             model.profiles = query;
             if (!string.IsNullOrEmpty(symbolFilter))
             {
                 query = query.Where(s => s.Symbol.Contains(symbolFilter));
                 model.profiles = query;
+                prices = prices.Where(s => s.Symbol.Contains(symbolFilter));
+                model.prices = prices;
             }
 
             if (!string.IsNullOrEmpty(nameFilter))
             {
                 query = query.Where(s => s.Symbol.Contains(nameFilter));
                 model.profiles = query;
+                prices = prices.Where(s => s.Symbol.Contains(symbolFilter));
+                model.prices = prices;
             }
 
             if (!string.IsNullOrEmpty(industryFilter))
             {
                 query = query.Where(s => s.Industry.Contains(industryFilter));
                 model.profiles = query;
+                prices = prices.Where(s => s.Symbol.Contains(symbolFilter));
+                model.prices = prices;
             }
 
             //if (MinPriceFilter.HasValue)
@@ -196,6 +207,7 @@ namespace LiraOfInvestment.Controllers
         {
             var company = _profileService.TGetByID(id);
             var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
+            var Prices=_priceService.TGetList().Where(x=>x.Symbol==company.Symbol).FirstOrDefault();
             var model = new CompanyProfile()
             {
                 Id = company.Id,
@@ -203,7 +215,8 @@ namespace LiraOfInvestment.Controllers
                 Industry = company.Industry,
                 Website = company.Website,
                 Phone = company.Phone,
-                FinancialData=financialData
+                FinancialData=financialData,
+                prices=Prices
             };
             return PartialView("_CompareCompanies",model);
         }

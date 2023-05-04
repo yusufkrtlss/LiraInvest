@@ -5,8 +5,8 @@
     @Model.Symbol
 </h2>
 
-@*<div class="m-t-md">
-    <h2 class="product-main-price">$@Model.FinancialData.CurrentPrice <small class="text-muted">Current Price</small> </h2>
+<div class="m-t-md">
+    <h2 class="product-main-price">$@Model.prices.Price <small class="text-muted">Current Price</small> </h2>
 </div>
 <hr>
 
@@ -16,38 +16,38 @@
         <div class="col-4">
             <ul>
                 <li>
-                    Ebitda: @Model.FinancialData.Ebitda
+                    Ebitda: @Model.FinancialData.ebitdaMargins
                 </li>
                 <li>
-                    Quick Ratio: @Model.FinancialData.QuickRatio
+                    Market Capacity: @Model.FinancialData.marketCap
                 </li>
                 <li>
-                    Dept To Equity: @Model.FinancialData.DeptToEquity
+                    50 Day Average: @Model.FinancialData.fiftyDayAverage
                 </li>
                 <li>
-                    Profit Margin: @Model.FinancialData.ProfitMargin
+                    Average Volume 10 Days: @Model.FinancialData.averageVolume10days
                 </li>
             <li>
-                Free Cash Flow: @Model.FinancialData.FreeCashFlow
+                Year High: @Model.FinancialData.fiftyTwoWeekHigh
             </li>
             </ul>
         </div>
         <div class="col-4">
             <ul>
-                <li>Gross Margin: @Model.FinancialData.GrossMargin</li>
+                @*<li>Gross Margin: @Model.FinancialData.GrossMargin</li>
                 <li>Earnings Growth: @Model.FinancialData.EarningsGrowth</li>
                 <li>Revenue Per Share: @Model.FinancialData.RevenuePerShare</li>
                 <li>Total Dept: @Model.FinancialData.TotalDept</li>
-                <li>Total Revenue: @Model.FinancialData.TotalRevenue</li>
+                <li>Total Revenue: @Model.FinancialData.TotalRevenue</li>*@
             </ul>
         </div>
         <div class="col-4">
         <ul>
-                <li>Shares: @Model.Shares</li>
+                @*<li>Shares: @Model.Shares</li>
                 <li>50 Days Avg: @Model._50DayAvg</li>
                 <li>3 Month Avg: @Model._3MonthAvgVol</li>
                 <li>10 Days Avg: @Model._10DaysAvgVol</li>
-                <li>200 Days Avg: @Model._200DaysAvg</li>
+                <li>200 Days Avg: @Model._200DaysAvg</li>*@
             </ul>
         </div>
     
@@ -56,14 +56,14 @@
 <br />
    
 
-<dl class="small m-t-md">
+@*<dl class="small m-t-md">
     <dt>Should we buy?</dt>
     <dd>@Model.FinancialData.RecommendationKey</dd>
     <dt>Mean of Recommendation</dt>
     <dd>@Model.FinancialData.RecommendationMean</dd>
     
-</dl>
-<hr>*@
+</dl>*@
+<hr>
 
 <div>
     <div class="btn-group">

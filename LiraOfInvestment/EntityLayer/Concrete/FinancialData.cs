@@ -30,7 +30,7 @@ namespace EntityLayer.Concrete
         public long totalDebt { get; set; }
         public long totalRevenue { get; set; }
         public string Symbol { get; set; }
-        public Profile Profile { get; set; }
+        //public Profile Profile { get; set; }
 
     }
 }

@@ -21,7 +21,7 @@ namespace EntityLayer.Concrete
         public double Price { get; set; }
         public long Volume { get; set; }
         public string Symbol { get; set; }
-        public Profile Profile { get; set; }
+       
 
     }
 }
