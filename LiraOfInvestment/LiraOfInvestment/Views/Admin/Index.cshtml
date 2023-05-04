@@ -27,10 +27,10 @@
                     <div class="col-12">
                         <h3><strong>Symbol : @item.Symbol</strong></h3>
                         <p>Industry : @item.Industry</p>
-                        <p>Day High : @item.DayHigh $</p>
-                        <p>Day Low : @item.DayLow $</p>
-                        <p>Market Cap : @item.MarketCap $</p>
-                        <p><a class="navy-link" asp-controller="Company" asp-action="Index" asp-route-id="@item.Id">Learn More &raquo;</a></p>
+                        <p>Name : @item.LongName</p>
+                        <p>Sector : @item.Sector</p>
+                        <p>Web Site : @item.Website</p>
+                        @*<p><a class="navy-link" asp-controller="Company" asp-action="Index" asp-route-id="@item.Id">Learn More &raquo;</a></p>*@
                     </div>
                 </a>
             </div>

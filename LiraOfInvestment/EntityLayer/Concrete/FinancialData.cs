@@ -9,25 +9,28 @@ namespace EntityLayer.Concrete
     public class FinancialData
     {
         public int Id { get; set; }
+        public double fiftyDayAverage { get; set; }
+        public long marketCap { get; set; }
+        public long averageVolume10days { get; set; }
+        public double twoHundredDayAverage { get; set; }
+        public double fiftyTwoWeekHigh { get; set; }
+        public double fiftyTwoWeekLow { get; set; }
+        public double ebitdaMargins { get; set; }
+        public string financialCurrency { get; set; }
+        public double grossMargins { get; set; }
+        public long grossProfits { get; set; }
+        public double revenueGrowth { get; set; }
+        public double revenuePerShare { get; set; }
+        public double targetHighPrice { get; set; }
+        public double targetLowPrice { get; set; }
+        public double targetMeanPrice { get; set; }
+        public double targetMedianPrice { get; set; }
+        public long totalCash { get; set; }
+        public double totalCashPerShare { get; set; }
+        public long totalDebt { get; set; }
+        public long totalRevenue { get; set; }
         public string Symbol { get; set; }
-        public double CurrentPrice { get; set; }
-        public double Ratio { get; set; }
-        public double DeptToEquity { get; set; }
-        public double EarningsGrowth{ get; set; }
-        public long Ebitda{ get; set; }
-        public long FreeCashFlow{ get; set; }
-        public double GrossMargin{ get; set; }
-        public string RecommendationKey{ get; set; }
-        public double RecommendationMean{ get; set; }
-        public double ReturnOnAssets { get; set; }
-        public double ReturnOnEquity { get; set; }
-        public long TotalCash{ get; set; }
-        public double TotalCashPerShare { get; set; }
-        public long TotalDept{ get; set; }
-        public long TotalRevenue{ get; set; }
-        public double RevenueGrowth { get; set; }
-        public double RevenuePerShare { get; set; }
-        public double ProfitMargin { get; set; }
-        public double QuickRatio { get; set; }
+        public Profile Profile { get; set; }
+
     }
 }

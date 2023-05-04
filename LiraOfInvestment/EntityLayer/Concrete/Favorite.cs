@@ -17,7 +17,7 @@ namespace EntityLayer.Concrete
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int FavoriteId { get; set; }
         //[ForeignKey("Profile")]
-        public int ProfileId { get; set; }
+        //public int ProfileId { get; set; }
         //[ForeignKey("AppUser")]
         public int AppUserId { get; set; }
         

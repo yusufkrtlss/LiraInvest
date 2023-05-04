@@ -48,29 +48,15 @@ namespace LiraOfInvestment.Controllers
             var company=_profileService.TGetByID(id);
             var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
             var news = _newsService.TGetList().Where(x => x.Which_Symbols.Contains(company.Symbol)).Take(4).ToList();
-            var TopFiveCompany=_profileService.TGetList().OrderByDescending(x => x.MarketCap).Take(5).ToList();
+            var TopFiveCompany=_profileService.TGetList().OrderByDescending(x => x.LongName).Take(5).ToList();
             var model = new CompanyProfile()
             {
                 Id= company.Id,
                 Symbol = company.Symbol,
-                Country = company.Country,
+                
                 Industry = company.Industry,
-                Description = company.Description,
                 Website = company.Website,
                 Phone = company.Phone,
-                DayHigh= company.DayHigh,
-                DayLow= company.DayLow,
-                _50DayAvg= company._50DayAvg,
-                MarketCap= company.MarketCap,
-                Open= company.Open,
-                PreviousClose= company.PreviousClose,
-                Shares= company.Shares,
-                _10DaysAvgVol= company._10DaysAvgVol,
-                _3MonthAvgVol= company._3MonthAvgVol,
-                _200DaysAvg= company._200DaysAvg,
-                YearChange= company.YearChange,
-                YearHigh= company.YearHigh,
-                YearLow= company.YearLow,
                 FinancialData=financialData,
                 News= news,
                 AppUser=service,
@@ -132,24 +118,9 @@ namespace LiraOfInvestment.Controllers
             {
                 Id = company.Id,
                 Symbol = company.Symbol,
-                Country = company.Country,
                 Industry = company.Industry,
-                Description = company.Description,
                 Website = company.Website,
                 Phone = company.Phone,
-                DayHigh = company.DayHigh,
-                DayLow = company.DayLow,
-                _50DayAvg = company._50DayAvg,
-                MarketCap = company.MarketCap,
-                Open = company.Open,
-                PreviousClose = company.PreviousClose,
-                Shares = company.Shares,
-                _10DaysAvgVol = company._10DaysAvgVol,
-                _3MonthAvgVol = company._3MonthAvgVol,
-                _200DaysAvg = company._200DaysAvg,
-                YearChange = company.YearChange,
-                YearHigh = company.YearHigh,
-                YearLow = company.YearLow,
                 profiles= list,
                 FinancialData=financialData
             };
@@ -186,29 +157,29 @@ namespace LiraOfInvestment.Controllers
                 model.profiles = query;
             }
 
-            if (MinPriceFilter.HasValue)
-            {
-                query = query.Where(s => s.DayLow >= MinPriceFilter.Value);
-                model.profiles = query;
-            }
+            //if (MinPriceFilter.HasValue)
+            //{
+            //    query = query.Where(s => s.DayLow >= MinPriceFilter.Value);
+            //    model.profiles = query;
+            //}
 
-            if (MaxPriceFilter.HasValue)
-            {
-                query = query.Where(s => s.DayLow <= MaxPriceFilter.Value);
-                model.profiles = query;
-            }
+            //if (MaxPriceFilter.HasValue)
+            //{
+            //    query = query.Where(s => s.DayLow <= MaxPriceFilter.Value);
+            //    model.profiles = query;
+            //}
 
-            if (MinChangeFilter.HasValue)
-            {
-                query = query.Where(s => s.YearChange >= MinChangeFilter.Value);
-                model.profiles = query;
-            }
+            //if (MinChangeFilter.HasValue)
+            //{
+            //    query = query.Where(s => s.YearChange >= MinChangeFilter.Value);
+            //    model.profiles = query;
+            //}
 
-            if (MaxChangeFilter.HasValue)
-            {
-                query = query.Where(s => s.YearChange <= MaxChangeFilter.Value);
-                model.profiles = query;
-            }
+            //if (MaxChangeFilter.HasValue)
+            //{
+            //    query = query.Where(s => s.YearChange <= MaxChangeFilter.Value);
+            //    model.profiles = query;
+            //}
             
             return View(model);
         }
@@ -229,24 +200,9 @@ namespace LiraOfInvestment.Controllers
             {
                 Id = company.Id,
                 Symbol = company.Symbol,
-                Country = company.Country,
                 Industry = company.Industry,
-                Description = company.Description,
                 Website = company.Website,
                 Phone = company.Phone,
-                DayHigh = company.DayHigh,
-                DayLow = company.DayLow,
-                _50DayAvg = company._50DayAvg,
-                MarketCap = company.MarketCap,
-                Open = company.Open,
-                PreviousClose = company.PreviousClose,
-                Shares = company.Shares,
-                _10DaysAvgVol = company._10DaysAvgVol,
-                _3MonthAvgVol = company._3MonthAvgVol,
-                _200DaysAvg = company._200DaysAvg,
-                YearChange = company.YearChange,
-                YearHigh = company.YearHigh,
-                YearLow = company.YearLow,
                 FinancialData=financialData
             };
             return PartialView("_CompareCompanies",model);

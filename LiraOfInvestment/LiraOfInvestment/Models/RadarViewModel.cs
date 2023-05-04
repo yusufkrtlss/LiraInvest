@@ -12,5 +12,6 @@ namespace LiraOfInvestment.Models
         public double? MinChangeFilter { get; set; }
         public double? MaxChangeFilter { get; set; }
         public IQueryable<Profile> profiles { get; set; }
+        public IQueryable<Prices> prices { get; set; }
     }
 }

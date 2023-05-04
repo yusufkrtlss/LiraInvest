@@ -118,14 +118,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.profiles)
+                            @foreach (var item in Model.prices)
                             {
                                 <tr>
                                     <td>1</td>
                                     <td>@item.Symbol <small>This is example of project</small></td>
-                                    <td>@item.DayLow</td>
-                                    <td>@item.DayHigh</td>
-                                    <td>@item._10DaysAvgVol</td>
+                                    <td>@item.Open</td>
+                                    <td>@item.Volume</td>
+                                    <td>@item.MarketChange</td>
                                     <td><span class="pie">0.52/1.561</span></td>
                                    
                                 </tr>
