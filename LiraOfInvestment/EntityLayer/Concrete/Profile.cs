@@ -19,7 +19,7 @@ namespace EntityLayer.Concrete
         public string Industry { get; set; }
         public string Website { get; set; }
         public string Phone { get; set; }
-        //public ICollection<Prices> Prices { get; set; }
+       
         public ICollection<Favorite> Favorites { get; set; }
         public ICollection<News> News { get; set; }
     }

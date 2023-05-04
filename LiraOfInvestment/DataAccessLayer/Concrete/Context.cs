@@ -26,7 +26,7 @@ namespace DataAccessLayer.Concrete
         public DbSet<Prices> Prices { get; set; }
         public DbSet<Two_Years_Monthly_Chart> two_years_monthly { get; set; }
         public DbSet<BarChartYearly> Annual_Revenues { get; set; }
-        public DbSet<FinancialData> financial_data_info{ get; set; }
+        public DbSet<FinancialData> FinancialData{ get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

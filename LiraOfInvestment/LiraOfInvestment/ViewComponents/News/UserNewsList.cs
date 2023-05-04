@@ -14,10 +14,10 @@ namespace LiraOfInvestment.ViewComponents.News
         }
         public IViewComponentResult Invoke()
         {
-            var values = _newsService.TGetList().Where(x=>x.Which_Symbols.Contains("AAPL")).Take(5).ToList();
-            var model = new UserProfile();
-            model.news = values;
-            return View(model);
+            //var values = _newsService.TGetList().Where(x=>x.Which_Symbols.Contains("AAPL")).Take(5).ToList();
+            //var model = new UserProfile();
+            //model.news = values;
+            return View();
         }
     }
 }

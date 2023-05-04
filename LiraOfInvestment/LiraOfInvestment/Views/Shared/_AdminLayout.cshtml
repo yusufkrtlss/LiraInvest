@@ -50,8 +50,8 @@
     <div class="row border-bottom">
         @await Html.PartialAsync("/Views/Company/CompanyNavbarPartial.cshtml")
         <div  class="col-3">
-            @await Component.InvokeAsync("UserNewsList")
-            @await Component.InvokeAsync("FavoritesList")
+           @* @await Component.InvokeAsync("UserNewsList")
+            @await Component.InvokeAsync("FavoritesList")*@
         </div>
         <div class="col-9">
             @RenderBody()
