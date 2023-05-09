@@ -9,5 +9,6 @@ namespace BusinessLayer.Abstract
 {
     public interface IProfileService : IGenericService<Profile>
     {
+        //public List<Profile> GetProfileWithFavoritesList(int id);
     }
 }

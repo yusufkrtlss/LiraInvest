@@ -9,5 +9,6 @@ namespace DataAccessLayer.Abstract
 {
     public interface IProfileDal : IGenericDal<Profile>
     {
+        public List<Profile> GetProfileWithFavoritesList(int id);
     }
 }

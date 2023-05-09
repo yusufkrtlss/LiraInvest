@@ -1,7 +1,12 @@
 ﻿using BusinessLayer.Abstract;
+using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
 using EntityLayer.Dto;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Data.Entity;
 
 namespace LiraOfInvestment.Controllers
 {
@@ -9,17 +14,30 @@ namespace LiraOfInvestment.Controllers
     public class AdminController : Controller
     {
         private readonly IProfileService _profileService;
-
-        public AdminController(IProfileService profileService)
+        private readonly IFavoriteService _favoriteService;
+        private readonly IUserService _userService;
+        private readonly UserManager<AppUser> _userManager;
+        public AdminController(IProfileService profileService, IFavoriteService favoriteService, IUserService userService, UserManager<AppUser> userManager)
         {
             _profileService = profileService;
+            _favoriteService = favoriteService;
+            _userService = userService;
+            _userManager = userManager;
         }
-        
-        public IActionResult Index()
+
+        public async Task<IActionResult> Index()
         {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var values = _profileService.TGetList().Take(9).ToList();
+            var favorites = _favoriteService.TGetList();
+            var userfavs = _userService.GetAppUserIncludeFavoritesList(user.Id);
+            //var favs=userfavs.Favorites.Any(t => t.AppUserId);
+            var c = new Context();
+            var fav = c.Profiles.Include(x => x.Favorites).Where(f => f.Favorites.Any(f => f.AppUser.Id.Equals(user.Id))).ToList();
+            var f2=_favoriteService.GetFavoritesListIncludeProfile(user.Id);
             var model = new UserProfile();
             model.profiles = values;
+            model.favs = f2;
             return View(model);
         }
         public PartialViewResult PartialNavbar()
