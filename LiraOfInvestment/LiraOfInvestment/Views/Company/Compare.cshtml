@@ -18,114 +18,121 @@
     <!--     Morris -->
     <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
 </head>
-<form asp-controller="Company" asp-action="Compare">
-    <div class="form-group">
-        <label asp-for="Id" class="control-label">Company</label>
-        <select id="profile_select" asp-for="Id" class="form-control" asp-items="Model.profiles">
+<body>
+
+    <div class="content-wrapper" style="padding-top: 80px;">
+
+
+        <form asp-controller="Company" asp-action="Compare">
+            <div class="form-group">
+                <label asp-for="Profile.Id" class="control-label">Select Company to Compare</label>
+                <select id="profile_select" asp-for="Profile.Id" class="form-control" asp-items="Model.profiles">
+                </select>
+                <span asp-validation-for="Profile.Id" class="text-danger"></span>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-warning">Compare!</button>
+            </div>
+        </form>
+
+       @* <div id="fruit-details"></div>
+        <div id="CompareCompanyContainer"></div>
+        <div class="form-group">
+        <label asp-for="Profile.Id" class="control-label">Company</label>
+        <select asp-for="Profile.Id" class="form-control" asp-items="ViewBag.Companies">
         </select>
-        <span asp-validation-for="Id" class="text-danger"></span>
-    </div>
-    <div>
-        <button type="submit" class="btn btn-warning">Compare!</button>
-    </div>
-</form>
-
-@*<div id="fruit-details"></div>
-<div id="CompareCompanyContainer"></div>*@
-@*<div class="form-group">
-    <label asp-for="Id" class="control-label">Company</label>
-    <select asp-for="Id" class="form-control" asp-items="ViewBag.Companies">
-    </select>
-    <span asp-validation-for="Id" class="text-danger"></span>
-</div>*@
-
-<div class="row">
-<div class="col-md-6">
-
-        @*<h2 class="font-bold m-b-xs">
-            @Model.Symbol
-        </h2>
-
-        <div class="m-t-md">
-            <h2 class="product-main-price">$@Model.FinancialData.CurrentPrice <small class="text-muted">Current Price</small> </h2>
-        </div>
-        <hr>
-
-        <h4>Company Statistics</h4>
+            <span asp-validation-for="Profile.Id" class="text-danger"></span>
+        </div>*@
 
         <div class="row">
-            <div class="col-4">
-                <ul>
-                    <li>
-                        Ebitda: @Model.FinancialData.Ebitda
-                    </li>
-                    <li>
-                        Quick Ratio: @Model.FinancialData.QuickRatio
-                    </li>
-                    <li>
-                        Dept To Equity: @Model.FinancialData.DeptToEquity
-                    </li>
-                    <li>
-                        Profit Margin: @Model.FinancialData.ProfitMargin
-                    </li>
-                    <li>
-                        Free Cash Flow: @Model.FinancialData.FreeCashFlow
-                    </li>
-                </ul>
-            </div>
-            <div class="col-4">
-                <ul>
+            <div class="col-md-6">
+
+                <h2 class="font-bold m-b-xs">
+                    @Model.Profile.Symbol
+                </h2>
+                <div>
+                    <div class="btn-group">
+
+                        <a class="btn btn-white btn-sm" asp-controller="Company" asp-action="Index" asp-route-id="@Model.Profile.Id"> Go to the Profile </a>
+                    </div>
+                </div>
+                <div class="m-t-md">
+                    <h2 class="product-main-price">$@Model.prices.Price <small class="text-muted">Current Price</small> </h2>
+                </div>
+                <hr>
+
+                <h4>Company Statistics</h4>
+
+                <div class="row">
+                    <div class="col-4">
+                        <ul>
+                            <li>
+                                Market Change: @Model.prices.MarketChange
+                            </li>
+                            <li>
+                                Market Capacity: @Model.FinancialData.marketCap
+                            </li>
+                            <li>
+                                Gross Profit: @Model.FinancialData.grossProfits
+                            </li>
+                            <li>
+                                Target Mean Price: @Model.FinancialData.targetMeanPrice
+                            </li>
+                            <li>
+                                Target Median Price: @Model.FinancialData.targetMedianPrice
+                            </li>
+                        </ul>
+                    </div>
+                    @*<div class="col-4">
+                    <ul>
                     <li>Gross Margin: @Model.FinancialData.GrossMargin</li>
                     <li>Earnings Growth: @Model.FinancialData.EarningsGrowth</li>
                     <li>Revenue Per Share: @Model.FinancialData.RevenuePerShare</li>
                     <li>Total Dept: @Model.FinancialData.TotalDept</li>
                     <li>Total Revenue: @Model.FinancialData.TotalRevenue</li>
-                </ul>
-            </div>
-            <div class="col-4">
-                <ul>
-                    <li>Shares: @Model.Shares</li>
-                    <li>50 Days Avg: @Model._50DayAvg</li>
-                    <li>3 Month Avg: @Model._3MonthAvgVol</li>
-                    <li>10 Days Avg: @Model._10DaysAvgVol</li>
-                    <li>200 Days Avg: @Model._200DaysAvg</li>
-                </ul>
+                    </ul>
+                    </div>*@
+                    <div class="col-4">
+                        <ul>
+                            <li>Total Cash Per Share: @Model.FinancialData.totalCashPerShare</li>
+                            <li>50 Days Avg: @Model.FinancialData.fiftyDayAverage</li>
+                            <li>Year High: @Model.FinancialData.fiftyTwoWeekHigh</li>
+                            <li>Year Low: @Model.FinancialData.fiftyTwoWeekLow</li>
+                            <li>200 Days Avg: @Model.FinancialData.twoHundredDayAverage</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <br />
+                <br />
+
+
+                @* <dl class="small m-t-md">
+                <dt>Should we buy?</dt>
+                <dd>@Model.FinancialData.RecommendationKey</dd>
+                <dt>Mean of Recommendation</dt>
+                <dd>@Model.FinancialData.RecommendationMean</dd>
+
+                </dl>*@
+                <hr>
+
+              
             </div>
 
+
+            <div class="col-md-6">
+
+                
+                <div id="CompareCompanyContainer">
+                    @await Html.PartialAsync("_CompareCompanies")
+                </div>
+
+
+            </div>
         </div>
-        <br />
-        <br />
 
-
-        <dl class="small m-t-md">
-            <dt>Should we buy?</dt>
-            <dd>@Model.FinancialData.RecommendationKey</dd>
-            <dt>Mean of Recommendation</dt>
-            <dd>@Model.FinancialData.RecommendationMean</dd>
-
-        </dl>
-        <hr>
-
-        <div>
-            <div class="btn-group">
-
-                <a class="btn btn-white btn-sm" asp-controller="Company" asp-action="Index" asp-route-id="@Model.Id"> Go to the Profile </a>
-            </div>
-        </div>
     </div>
-
-
-    <div class="col-md-6">
-
-        @await Html.PartialAsync("_CompareCompanies")
-        <div id="CompareCompanyContainer"></div>
-
-
-    </div>*@
-</div>
-    
-</div>
-
+</body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 

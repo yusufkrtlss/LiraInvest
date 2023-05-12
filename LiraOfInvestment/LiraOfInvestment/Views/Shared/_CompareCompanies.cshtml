@@ -2,9 +2,14 @@
 
 <div id="fruit-details"></div>
 <h2 class="font-bold m-b-xs">
-    @Model.Symbol
+    @Model.Profile.Symbol
 </h2>
+<div>
+    <div class="btn-group">
 
+        <a class="btn btn-white btn-sm" asp-controller="Company" asp-action="Index" asp-route-id="@Model.Profile.Id"> Go to the Profile </a>
+    </div>
+</div>
 <div class="m-t-md">
     <h2 class="product-main-price">$@Model.prices.Price <small class="text-muted">Current Price</small> </h2>
 </div>
@@ -13,34 +18,34 @@
 <h4>Company Statistics</h4>
 
 <div class="row">
-        <div class="col-4">
-            <ul>
-                <li>
-                    Ebitda: @Model.FinancialData.ebitdaMargins
-                </li>
-                <li>
-                    Market Capacity: @Model.FinancialData.marketCap
-                </li>
-                <li>
-                    50 Day Average: @Model.FinancialData.fiftyDayAverage
-                </li>
-                <li>
-                    Average Volume 10 Days: @Model.FinancialData.averageVolume10days
-                </li>
+    <div class="col-4">
+        <ul>
             <li>
-                Year High: @Model.FinancialData.fiftyTwoWeekHigh
+                Market Change: @Model.prices.MarketChange
             </li>
-            </ul>
-        </div>
-        <div class="col-4">
-            <ul>
-                @*<li>Gross Margin: @Model.FinancialData.GrossMargin</li>
-                <li>Earnings Growth: @Model.FinancialData.EarningsGrowth</li>
-                <li>Revenue Per Share: @Model.FinancialData.RevenuePerShare</li>
-                <li>Total Dept: @Model.FinancialData.TotalDept</li>
-                <li>Total Revenue: @Model.FinancialData.TotalRevenue</li>*@
-            </ul>
-        </div>
+            <li>
+                Market Capacity: @Model.FinancialData.marketCap
+            </li>
+            <li>
+                Gross Profit: @Model.FinancialData.grossProfits
+            </li>
+            <li>
+                Target Mean Price: @Model.FinancialData.targetMeanPrice
+            </li>
+            <li>
+                Target Median Price: @Model.FinancialData.targetMedianPrice
+            </li>
+        </ul>
+    </div>
+    <div class="col-4">
+        <ul>
+            <li>Total Cash Per Share: @Model.FinancialData.totalCashPerShare</li>
+            <li>50 Days Avg: @Model.FinancialData.fiftyDayAverage</li>
+            <li>Year High: @Model.FinancialData.fiftyTwoWeekHigh</li>
+            <li>Year Low: @Model.FinancialData.fiftyTwoWeekLow</li>
+            <li>200 Days Avg: @Model.FinancialData.twoHundredDayAverage</li>
+        </ul>
+    </div>
         <div class="col-4">
         <ul>
                 @*<li>Shares: @Model.Shares</li>
@@ -65,9 +70,3 @@
 </dl>*@
 <hr>
 
-<div>
-    <div class="btn-group">
-        
-        <a class="btn btn-white btn-sm" asp-controller="Company" asp-action="Index" asp-route-id="@Model.Id"> Go to the Profile </a>
-    </div>
-</div>

@@ -32,8 +32,7 @@ namespace LiraOfInvestment.Controllers
             var favorites = _favoriteService.TGetList();
             var userfavs = _userService.GetAppUserIncludeFavoritesList(user.Id);
             //var favs=userfavs.Favorites.Any(t => t.AppUserId);
-            var c = new Context();
-            var fav = c.Profiles.Include(x => x.Favorites).Where(f => f.Favorites.Any(f => f.AppUser.Id.Equals(user.Id))).ToList();
+
             var f2=_favoriteService.GetFavoritesListIncludeProfile(user.Id);
             var model = new UserProfile();
             model.profiles = values;

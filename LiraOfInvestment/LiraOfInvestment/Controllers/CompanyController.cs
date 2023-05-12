@@ -10,9 +10,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Caching.Memory;
-using System.Collections;
-using System.Collections.Generic;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using Newtonsoft.Json.Linq;
+using System.Globalization;
 
 namespace LiraOfInvestment.Controllers
 {
@@ -28,7 +27,10 @@ namespace LiraOfInvestment.Controllers
         private IUserService _userService;
         private IMemoryCache _cache;
         private IPricesService _priceService;
-        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService, IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService, IMemoryCache cache, IPricesService priceService)
+        private readonly IIncomeStatementService _incomeStatementService;
+        private IFavoriteService _favoriteService;
+        public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService,
+            IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService, IMemoryCache cache, IPricesService priceService, IIncomeStatementService incomeStatementService, IFavoriteService favoriteService)
         {
             _profileService = profileService;
             _twoYearsMonthlyService = twoYearsMonthlyService;
@@ -39,6 +41,8 @@ namespace LiraOfInvestment.Controllers
             _userService = userService;
             _cache = cache;
             _priceService = priceService;
+            _incomeStatementService = incomeStatementService;
+            _favoriteService = favoriteService;
         }
 
         [HttpGet("/company/index/{id}")]
@@ -49,61 +53,25 @@ namespace LiraOfInvestment.Controllers
             var service=_userService.GetAppUserIncludeFavoritesList(user.Id);
             var company=_profileService.TGetByID(id);
             var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
-            //var news = _newsService.TGetList().Where(x => x.Which_Symbols.Contains(company.Symbol)).Take(4).ToList();
-            var news = _newsService.TGetList().Where(x => x.Which_Symbols.Contains(company.Symbol)).Take(4).ToList();
+            var f2 = _favoriteService.GetFavoritesListIncludeProfile(user.Id);
+            var prices=_priceService.TGetList().Where(x=>x.Symbol==company.Symbol).First();
+            var news = _newsService.TGetList().Where(x => x.Which_Symbols.Contains(company.Symbol)).Take(5).ToList();
             var TopFiveCompany=_profileService.TGetList().OrderByDescending(x => x.LongName).Take(5).ToList();
+            var incomeStatement=_incomeStatementService.TGetList().Where(x=>x.Symbol==company.Symbol).ToList();
+            
             var model = new CompanyProfile()
             {
-                Id= company.Id,
-                Symbol = company.Symbol,
-                
-                Industry = company.Industry,
-                Website = company.Website,
-                Phone = company.Phone,
+                Profile = company,
                 FinancialData=financialData,
                 News= news,
                 AppUser=service,
                 TopFiveProfile= TopFiveCompany,
+                prices=prices,
+                incomeStatement=incomeStatement,
+                favorites=f2
             };
             //var chart = GetChartData(id);
             return View(model);
-        }
-        
-        public async Task<JsonResult> GetChartData(string id)
-        {
-            var cid=Convert.ToInt32(id);
-            var asset = _profileService.TGetByID(cid);
-            var symbol=asset.Symbol;
-            var dates = _twoYearsMonthlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
-            var datas = new List<string>();
-            foreach (var date in dates)
-            {
-                var dt=DateTime.Parse(date);
-                var data = dt.Date.ToString("MMMM/yy");
-                datas.Add(data);
-            }
-
-         
-            var getClose=_twoYearsMonthlyService.TGetList().Where(x=>x.Symbol.Equals(symbol)).Select(x=>x.Close).ToArray();
-
-
-            return new JsonResult(new { timestamp = datas, close = getClose });
-        }
-
-        public async Task<JsonResult> GetBarChartData(string id)
-        {
-            var cid = Convert.ToInt32(id);
-            var asset = _profileService.TGetByID(cid);
-            var symbol = asset.Symbol;
-            var dates = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
-
-
-
-            var getRevenue = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Revenue).ToArray();
-            var getEarnings = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Earnings).ToArray();
-
-
-            return new JsonResult(new { timestamp = dates, revenue = getRevenue, earnings = getEarnings });
         }
         [HttpGet]
         public async Task<IActionResult> Compare(int id)
@@ -114,20 +82,21 @@ namespace LiraOfInvestment.Controllers
                 Value = d.Id.ToString(),
                 Text = d.Symbol
             });
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
             var company = _profileService.TGetByID(id);
             var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
-
+            var prices = _priceService.TGetList().Where(x => x.Symbol == company.Symbol).First();
+            var f2 = _favoriteService.GetFavoritesListIncludeProfile(user.Id);
             var model = new CompanyProfile()
             {
-                Id = company.Id,
-                Symbol = company.Symbol,
-                Industry = company.Industry,
-                Website = company.Website,
-                Phone = company.Phone,
-                profiles= list,
+                Profile = company,
+                FinancialData=financialData,
+                prices=prices,
+                profiles=list,
+                favorites= f2
                 //FinancialData=financialData
             };
-            //var chart = GetChartData(id);
+            
             return View(model);
         }
         [HttpGet]
@@ -191,9 +160,120 @@ namespace LiraOfInvestment.Controllers
             //    query = query.Where(s => s.YearChange <= MaxChangeFilter.Value);
             //    model.profiles = query;
             //}
-            
+
             return View(model);
         }
+        public async Task<JsonResult> GetChartData(string id)
+        {
+            var cid=Convert.ToInt32(id);
+            var asset = _profileService.TGetByID(cid);
+            var symbol=asset.Symbol;
+            var dates = _twoYearsMonthlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
+            var datas = new List<string>();
+            foreach (var date in dates)
+            {
+                var dt=DateTime.Parse(date);
+                var data = dt.Date.ToString("MMMM/yy");
+                datas.Add(data);
+            }
+
+         
+            var getClose=_twoYearsMonthlyService.TGetList().Where(x=>x.Symbol.Equals(symbol)).Select(x=>x.Close).ToArray();
+
+
+            return new JsonResult(new { timestamp = datas, close = getClose });
+        }
+
+        public async Task<JsonResult> GetBarChartData(string id)
+        {
+            var cid = Convert.ToInt32(id);
+            var asset = _profileService.TGetByID(cid);
+            var symbol = asset.Symbol;
+            var dates = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
+
+
+
+            var getRevenue = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Revenue).ToArray();
+            var getEarnings = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Earnings).ToArray();
+
+
+            return new JsonResult(new { timestamp = dates, revenue = getRevenue, earnings = getEarnings });
+        }
+
+        public async Task<JsonResult> GetBubbleChartData(string id)
+        {
+            var cid = Convert.ToInt32(id);
+            var asset = _profileService.TGetByID(cid);
+            var symbol = asset.Symbol;
+            var dates = _incomeStatementService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
+            var newDates=new List<int>();
+            foreach (var date in dates)
+            {              
+                newDates.Add(date.Year);
+            }
+
+            var getRevenue = _incomeStatementService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.NetInterestIncome).ToArray();
+            //var getEarnings = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Earnings).ToArray();
+
+
+            return new JsonResult(new { timestamp = newDates, revenue = getRevenue });
+        }
+        public async Task<JsonResult> GetCostOfRevenueChartData(string id)
+        {
+            var cid = Convert.ToInt32(id);
+            var asset = _profileService.TGetByID(cid);
+            var symbol = asset.Symbol;
+            var dates = _incomeStatementService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
+            var newDates = new List<int>();
+            foreach (var date in dates)
+            {
+                newDates.Add(date.Year);
+            }
+
+            var getRevenue = _incomeStatementService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.CostOfRevenue).ToArray();
+            //var getEarnings = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Earnings).ToArray();
+
+
+            return new JsonResult(new { timestamp = newDates, revenue = getRevenue });
+        }
+        public async Task<JsonResult> GetNetInterestIncomeChartData(string id)
+        {
+            var cid = Convert.ToInt32(id);
+            var asset = _profileService.TGetByID(cid);
+            var symbol = asset.Symbol;
+            var dates = _incomeStatementService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
+            var newDates = new List<int>();
+            foreach (var date in dates)
+            {
+                newDates.Add(date.Year);
+            }
+
+            var getRevenue = _incomeStatementService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.EBIT).ToArray();
+            //var getEarnings = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Earnings).ToArray();
+
+
+            return new JsonResult(new { timestamp = newDates, revenue = getRevenue });
+        }
+        public async Task<JsonResult> GetNetDeptChartData(string id)
+        {
+            var cid = Convert.ToInt32(id);
+            var asset = _profileService.TGetByID(cid);
+            var symbol = asset.Symbol;
+            var dates = _incomeStatementService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
+            var newDates = new List<int>();
+            foreach (var date in dates)
+            {
+                newDates.Add(date.Year);
+            }
+
+            var getRevenue = _incomeStatementService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.NetDebt).ToArray();
+            //var getEarnings = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Earnings).ToArray();
+
+
+            return new JsonResult(new { timestamp = newDates, revenue = getRevenue });
+        }
+
+        
         public PartialViewResult CompanyNavbarPartial()
         {        
             return PartialView();
@@ -210,11 +290,7 @@ namespace LiraOfInvestment.Controllers
             var Prices=_priceService.TGetList().Where(x=>x.Symbol==company.Symbol).FirstOrDefault();
             var model = new CompanyProfile()
             {
-                Id = company.Id,
-                Symbol = company.Symbol,
-                Industry = company.Industry,
-                Website = company.Website,
-                Phone = company.Phone,
+                Profile=company,
                 FinancialData=financialData,
                 prices=Prices
             };

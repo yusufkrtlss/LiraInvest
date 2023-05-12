@@ -1,7 +1,10 @@
 ﻿@model EntityLayer.Dto.CompanyProfile
+@using System.Globalization;
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    CultureInfo cultureInfo = new CultureInfo("en-US");
+
 }
 
 <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/bootstrap.min.css" rel="stylesheet">
@@ -17,6 +20,7 @@
 <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/style.css" rel="stylesheet">
 <!-- Morris -->
 <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
+
 @*<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 <link rel="stylesheet" href="~/LiraOfInvestment.styles.css" asp-append-version="true" />*@
@@ -26,277 +30,14 @@
 
 
 
-@*
-    <div class="wrapper wrapper-content animated fadeIn">
 
-        <div class="p-w-md m-t-sm">
-            <div class="row">
-
-                <div class="col-sm-4">
-
-                    <div class="row">
-                        <div class="col-4">
-                            <small class="stats-label">Symbol</small>
-                            <h4>@Model.Symbol</h4>
-                        </div>
-
-                        <div class="col-4">
-                            <small class="stats-label">Industry</small>
-                            <h4>@Model.Industry</h4>
-                        </div>
-                        <div class="col-4">
-                            <small class="stats-label">Sector</small>
-                            <h4>@Model.Sector</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <small class="stats-label">Website</small>
-                            <a href="@Model.Website" target="_blank"><h4>@Model.Website</h4></a>
-                        </div>
-
-                        <div class="col-4">
-                            <small class="stats-label">Phone</small>
-                            <h4>@Model.Phone</h4>
-                        </div>
-                        <div class="col-4">
-                            <small class="stats-label">Last week</small>
-                            <h4>432.021</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-12">
-                            <p>
-                                <button class="btn btn-sm btn-outline-success col-12 " data-bs-toggle="collapse" data-bs-target="#descCollapse" aria-expanded="false" aria-controls="descCollapse">Company Description</button>
-                            </p>
-                            <div class="collapse" id="descCollapse">
-                                <div class="card card-body">
-                                    <small>
-                                        @Model.Description
-                                    </small>
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                    </div>
-
-                </div>
-         @*       <div class="col-sm-4">
-                    <div class="row">
-                        <div class="col-4">
-                            <small class="stats-label">Day High</small>
-                            <h4>@Model.DayHigh</h4>
-                        </div>
-
-                        <div class="col-4">
-                            <small class="stats-label">Day Low</small>
-                            <h4>@Model.DayLow</h4>
-                        </div>
-                        <div class="col-4">
-                            <small class="stats-label">Open</small>
-                            <h4>@Model.Open</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <small class="stats-label">Previous Close</small>
-                            <h4>@Model.PreviousClose</h4>
-                        </div>
-
-                        <div class="col-4">
-                            <small class="stats-label">Year High</small>
-                            <h4>@Model.YearHigh</h4>
-                        </div>
-                        <div class="col-4">
-                            <small class="stats-label">Year Low</small>
-                            <h4>@Model.YearLow</h4>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-4">
-                            <small class="stats-label">Shares</small>
-                            <h4>@Model.Shares</h4>
-                        </div>
-
-                        <div class="col-4">
-                            <small class="stats-label">Market Capacity</small>
-                            <h4>@Model.MarketCap</h4>
-                        </div>
-                        <div class="col-4">
-                            <small class="stats-label">50 Days Average</small>
-                            <h4>@Model._50DayAvg</h4>
-                        </div>
-                    </div>
-
-
-                </div>*@
-               @* <div class="col-sm-4">
-                    <div class="row">
-                        <div class="col-4">
-                            <small class="stats-label">10 Days Avg Vol</small>
-                            <h4>@Model._10DaysAvgVol</h4>
-                        </div>
-
-                        <div class="col-4">
-                            <small class="stats-label">3 Months Avg Vol</small>
-                            <h4>@Model._3MonthAvgVol</h4>
-                        </div>
-                        <div class="col-4">
-                            <small class="stats-label">200 Days Avg</small>
-                            <h4>@Model._200DaysAvg</h4>
-                        </div>
-                    </div>
-
-
-
-
-                </div>*@
-@*
-            </div>
-
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="small float-left col-md-3 m-l-lg m-t-md">
-                        <strong>@Model.Symbol</strong> 's Monthly 2 year graph.
-                    </div>
-                    @* <div class="small float-right col-md-3 m-t-md text-right">
-                    <strong>There are many</strong> variations of passages of Lorem Ipsum available, but the majority have suffered.
-                    </div>*@
-@*
-                    <div>
-                        <canvas id="myChart"></canvas>
-                    </div>
-
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-lg-4">
-                    <h4>People Also Watch</h4>
-                    @foreach (var item in Model.TopFiveProfile)
-                    {
-                        <div class="ibox-content">
-                            <div>
-                                <div class="float-right text-right">
-                                    <br />
-                                    <small class="font-bold">@item.LongName</small>
-                                </div>
-                                <h4>
-                                    <a asp-controller="Company" asp-action="Index" asp-route-id="@item.Id" target="_blank">@item.Symbol</a>
-                                    <br />
-                                    <small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>
-                                </h4>
-                            </div>
-                        </div>
-                        }
-                        @* <div class="ibox ">
-                    <div class="ibox-title">
-                    <span class="label label-warning float-right">Data has changed</span>
-                    <h5>User activity</h5>
-                    </div>
-                    <div class="ibox-content">
-                    <div class="row">
-                    <div class="col-4">
-                    <small class="stats-label">Pages / Visit</small>
-                    <h4>236 321.80</h4>
-                    </div>
-
-                    <div class="col-4">
-                    <small class="stats-label">% New Visits</small>
-                    <h4>46.11%</h4>
-                    </div>
-                    <div class="col-4">
-                    <small class="stats-label">Last week</small>
-                    <h4>432.021</h4>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="ibox-content">
-                    <div class="row">
-                    <div class="col-4">
-                    <small class="stats-label">Pages / Visit</small>
-                    <h4>643 321.10</h4>
-                    </div>
-
-                    <div class="col-4">
-                    <small class="stats-label">% New Visits</small>
-                    <h4>92.43%</h4>
-                    </div>
-                    <div class="col-4">
-                    <small class="stats-label">Last week</small>
-                    <h4>564.554</h4>
-                    </div>
-                    </div>
-                    </div>
-                    <div class="ibox-content">
-                    <div class="row">
-                    <div class="col-4">
-                    <small class="stats-label">Pages / Visit</small>
-                    <h4>436 547.20</h4>
-                    </div>
-
-                    <div class="col-4">
-                    <small class="stats-label">% New Visits</small>
-                    <h4>150.23%</h4>
-                    </div>
-                    <div class="col-4">
-                    <small class="stats-label">Last week</small>
-                    <h4>124.990</h4>
-                    </div>
-                    </div>
-                    </div>
-                    </div>*@
-  @*                  </div>
-                    <div class="col-lg-4">
-                        <div class="ibox ">
-                            <div class="ibox-content">
-
-
-
-
-                                <div>
-                                    <canvas id="barChart"></canvas>
-                                </div>
-
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4">
-                        <h4>News</h4>
-                            @foreach (var item in Model.News)
-                            {
-                            <div class="ibox-content">
-                                <div>
-                                    <div class="float-right text-right">
-                                        <br />
-                                        <small class="font-bold">@item.Resource</small>
-                                    </div>
-                                    <h4>
-                                        <a href="@item.Link" target="_blank">@item.Title</a>
-                                        <br />
-                                            @*<small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>*@
-            @*                        </h4>
-                                </div>
-                            </div>
-                            }
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-
-        </div>*@
     <div class="content-wrapper" style="padding-top: 80px;">
         <!-- Content Header (Page header) -->
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-6">
-                        <h1 class="m-0">MAVI Summary</h1>
+                        <h1 class="m-0">@Model.Profile.LongName Summary</h1>
                     </div><!-- /.col -->
 
                 </div><!-- /.row -->
@@ -309,102 +50,71 @@
                 <div class="row">
                     <div class="col-lg-6">
                         <div class="card">
-                            <div class="card-header border-0">
-                                <h3 class="card-title">Infos</h3>
-                                <div class="card-tools">
-                                    <a href="#" class="btn btn-tool btn-sm">
-                                        <i class="fa fa-download"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-tool btn-sm">
-                                        <i class="fa fa-bars"></i>
-                                    </a>
-                                </div>
-                            </div>
+
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
                                         <tr>
-                                            <th>Financel Statement Sum<small>(x1000)</small></th>
+                                            <th>Financial Statement Summary<small>(x1000)</small></th>
+
                                             <th>2022/12</th>
                                             <th>2021/12</th>
-                                            <th>%</th>
+                                            <th>2020/12</th>
+                                            <th>2019/12</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
+
                                         <tr>
                                             <td>
-                                                Sales
+                                                Total Revenue
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-success mr-1">
-                                                    <i class="fa fa-arrow-up"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.TotalRevenue.ToString("#.##").TrimEnd('0').Insert(3, ".")</td>
+                                            }
+
                                         </tr>
                                         <tr>
                                             <td>
-                                                Sales
+                                                Gross Profit
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-success mr-1">
-                                                    <i class="fa fa-arrow-up"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.GrossProfit.ToString("#.##").TrimEnd('0').Insert(3, ".")</td>
+                                            }
+
                                         </tr>
                                         <tr>
                                             <td>
-                                                Sales
+                                                Net Interest Income
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-success mr-1">
-                                                    <i class="fa fa-arrow-up"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.NetInterestIncome.ToString("#.##")</td>
+                                            }
+
                                         </tr>
                                         <tr>
                                             <td>
-                                                Sales
+                                                EBITDA
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-success mr-1">
-                                                    <i class="fa fa-arrow-up"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.NormalizedEBITDA.ToString("#.##").TrimEnd('0').Insert(3, ".")</td>
+                                            }
+
                                         </tr>
                                         <tr>
                                             <td>
-                                                Sales
+                                                Free Cash Flow
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-success mr-1">
-                                                    <i class="fa fa-arrow-up"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.FreeCashFlow.ToString("#.##").TrimEnd('0').Insert(3, ".")</td>
+                                            }
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -418,102 +128,69 @@
 
 
                         <div class="card">
-                            <div class="card-header border-0">
-                                <h3 class="card-title">Infos</h3>
-                                <div class="card-tools">
-                                    <a href="#" class="btn btn-tool btn-sm">
-                                        <i class="fa fa-download"></i>
-                                    </a>
-                                    <a href="#" class="btn btn-tool btn-sm">
-                                        <i class="fa fa-bars"></i>
-                                    </a>
-                                </div>
-                            </div>
+
                             <div class="card-body table-responsive p-0">
                                 <table class="table table-striped table-valign-middle">
                                     <thead>
                                         <tr>
-                                            <th>Financel Statement Sum<small>(x1000)</small></th>
+                                            <th>Balances Summary<small>(x1000)</small></th>
                                             <th>2022/12</th>
                                             <th>2021/12</th>
-                                            <th>%</th>
+                                            <th>2020/12</th>
+                                            <th>2019/12</th>
+
                                         </tr>
                                     </thead>
                                     <tbody>
                                         <tr>
                                             <td>
-                                                Sales
+                                                Total Assets
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-success mr-1">
-                                                    <i class="fa fa-arrow-up"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.TotalAssets.ToString("#.##").TrimEnd('0').Insert(3, ".")</td>
+                                            }
+
                                         </tr>
                                         <tr>
                                             <td>
-                                                Sales
+                                                Current Assets
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-success mr-1">
-                                                    <i class="fa fa-arrow-up"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.CurrentAssets.ToString("#.##").TrimEnd('0').Insert(3, ".")</td>
+                                            }
+
                                         </tr>
                                         <tr>
                                             <td>
-                                                Sales
+                                                Total Dept
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-danger mr-1">
-                                                    <i class="fa fa-arrow-down"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.TotalDebt.ToString("#.##").TrimEnd('0').Insert(3, ".")</td>
+                                            }
+
                                         </tr>
                                         <tr>
                                             <td>
-                                                Sales
+                                                Current Dept
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-success mr-1">
-                                                    <i class="fa fa-arrow-up"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.CurrentDebt.ToString("#.##").TrimEnd('0')</td>
+                                            }
+
                                         </tr>
                                         <tr>
                                             <td>
-                                                Sales
+                                                Long Term Dept
                                             </td>
-                                            <td>10.591.901</td>
-                                            <td>
-                                                4.619.319
-                                            </td>
-                                            <td>
-                                                <small class="text-success mr-1">
-                                                    <i class="fa fa-arrow-up"></i>
-                                                    125%
-                                                </small>
-                                            </td>
+                                            @foreach (var item in Model.incomeStatement)
+                                            {
+                                                <td>@cultureInfo.NumberFormat.CurrencySymbol@item.LongTermDebt.ToString("#.##").TrimEnd('0').Insert(3, ".")</td>
+                                            }
+
                                         </tr>
                                     </tbody>
                                 </table>
@@ -529,61 +206,38 @@
                     <div class="col-lg-4">
                         <div class="ibox ">
                             <div class="ibox-title">
-                                <h5>Bar Chart Example <small>With custom colors.</small></h5>
-                                <div class="ibox-tools">
-                                    <a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
-                                    </a>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        <i class="fa fa-wrench"></i>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-user">
-                                        <li>
-                                            <a href="#" class="dropdown-item">Config option 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="dropdown-item">Config option 2</a>
-                                        </li>
-                                    </ul>
-                                    <a class="close-link">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
+                                <h5>News <small>News about @Model.Profile.LongName</small></h5>
+
                             </div>
                             <div class="ibox-content">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="flot-bar-chart"></div>
-                                </div>
+                                @foreach (var item in Model.News)
+                                {
+                                    <div class="ibox-content">
+                                        <div>
+                                            <div class="float-right text-right">
+                                                <br />
+                                                <small class="font-bold">@item.Resource</small>
+                                            </div>
+                                            <h4>
+                                                <a href="@item.Link" class="small" target="_blank">@item.Title</a>
+                                                <br />
+                                                @*<small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>*@
+                                            </h4>
+                                        </div>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-4">
+                    <div class="col-lg-4" style="max-height:fit-content;">
                         <div class="ibox ">
                             <div class="ibox-title">
-                                <h5>Bar Chart Example <small>With custom colors.</small></h5>
-                                <div class="ibox-tools">
-                                    <a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
-                                    </a>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        <i class="fa fa-wrench"></i>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-user">
-                                        <li>
-                                            <a href="#" class="dropdown-item">Config option 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="dropdown-item">Config option 2</a>
-                                        </li>
-                                    </ul>
-                                    <a class="close-link">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
+                                <h5>Annual Revenue & Earnings <small>of @Model.Profile.LongName</small></h5>
+
                             </div>
                             <div class="ibox-content">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="flot-bar-chart"></div>
+                                <div class="bar-chart">
+                                    <canvas id="barChart1"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -592,215 +246,558 @@
                     <div class="col-lg-4">
                         <div class="ibox ">
                             <div class="ibox-title">
-                                <h5>Bar Chart Example <small>With custom colors.</small></h5>
-                                <div class="ibox-tools">
-                                    <a class="collapse-link">
-                                        <i class="fa fa-chevron-up"></i>
-                                    </a>
-                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                                        <i class="fa fa-wrench"></i>
-                                    </a>
-                                    <ul class="dropdown-menu dropdown-user">
-                                        <li>
-                                            <a href="#" class="dropdown-item">Config option 1</a>
-                                        </li>
-                                        <li>
-                                            <a href="#" class="dropdown-item">Config option 2</a>
-                                        </li>
-                                    </ul>
-                                    <a class="close-link">
-                                        <i class="fa fa-times"></i>
-                                    </a>
-                                </div>
+                                <h5>Company Details <small>of @Model.Profile.LongName</small></h5>
+
                             </div>
-                            <div class="ibox-content">
-                                <div class="flot-chart">
-                                    <div class="flot-chart-content" id="flot-bar-chart"></div>
-                                </div>
+                            <div class="row ibox-content">
+                                <table class="col-6">
+                                    <tbody class="">
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Day High</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">@Model.prices.DayHigh</td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Day Low</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">@Model.prices.DayLow</td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Open</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">@Model.prices.Open</td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Volume</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">@Model.prices.Volume</td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Sectors</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">
+                                                @Model.Profile.Sector
+                                            </td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Industry</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">
+                                                @Model.Profile.Industry
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <table class="col-6">
+                                    <tbody class="">
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Day High</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">@Model.prices.DayHigh</td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Day Low</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">@Model.prices.DayLow</td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Open</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">@Model.prices.Open</td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Volume</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">@Model.prices.Volume</td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Sectors</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">
+                                                @Model.Profile.Sector
+                                            </td>
+                                        </tr>
+                                        <tr class="group hover:bg-gray-800">
+                                            <td class="px-3 md:px-3 text-sm py-2 whitespace-nowrap text-left"><strong>Industry</strong></td>
+                                            <td class="px-3 md:px-3 text-sm py-0 whitespace-nowrap text-right">
+                                                @Model.Profile.Industry
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+            <!-- /.col-md-6 -->
+            <div class="row" style="padding-top: 10px;" !important>
+                <div class="col-lg-4">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>Cost Of Revenue <small>of @Model.Profile.LongName</small></h5>
+
+                        </div>
+                        <div class="ibox-content">
+                            <div class="line-chart">
+                                <canvas id="lineChart1"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" style="max-height:fit-content;">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>EBIT <small>of @Model.Profile.LongName</small></h5>
+
+                        </div>
+                        <div class="ibox-content">
+                            <div class="line-chart">
+                                <canvas id="lineChart2"></canvas>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- /.row -->
-                <!-- /.container-fluid -->
+                <div class="col-lg-4">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>Net Dept <small>of @Model.Profile.LongName</small></h5>
+
+                        </div>
+                        <div class="ibox-content">
+                            <div class="line-chart">
+                                <canvas id="lineChart3"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <!-- /.content -->
+            <div class="row" style="padding-top: 10px;" !important>
+                <div class="col-lg-4">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>News <small>News about @Model.Profile.LongName</small></h5>
+
+                        </div>
+                        <div class="ibox-content">
+                            @foreach (var item in Model.News)
+                            {
+                                <div class="ibox-content">
+                                    <div>
+                                        <div class="float-right text-right">
+                                            <br />
+                                            <small class="font-bold">@item.Resource</small>
+                                        </div>
+                                        <h4>
+                                            <a href="@item.Link" class="small" target="_blank">@item.Title</a>
+                                            <br />
+                                            @*<small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>*@
+                                        </h4>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4" style="max-height:fit-content;">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>Annual Revenue & Earnings <small>of @Model.Profile.LongName</small></h5>
+
+                        </div>
+                        <div class="ibox-content">
+                            <div class="bar-chart">
+                                <canvas id="barChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>Net Interest Income <small>of @Model.Profile.LongName</small></h5>
+
+                        </div>
+                        <div class="ibox-content">
+                            <div class="line-chart">
+                                <canvas id="lineChartx"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.row -->
+            <!-- /.container-fluid -->
         </div>
-        <div class="footer">
-            <div class="float-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2018
-            </div>
+        <!-- /.content -->
+    </div>
+    <div class="footer">
+        <div class="float-right">
+            <strong>All Rights Reserved</strong>
         </div>
+        <div>
+            <strong>Copyright</strong> Lira Of Investment Project &copy; 2023
+        </div>
+    </div>
 
     </div>
-        <div class="footer">
-            <div class="float-right">
-                10GB of <strong>250GB</strong> Free.
-            </div>
-            <div>
-                <strong>Copyright</strong> Example Company &copy; 2014-2018
-            </div>
-        </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"
             integrity="sha512-UXumZrZNiOwnTcZSHLOfcTs0aos2MzBWHXOHOuB0J/R44QB0dwY5JgfbvljXcklVf65Gc4El6RjZ+lnwd2az2g=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer">
-        </script>
+    </script>
 
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.0.0/dist/chart.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
 
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.0/chartjs-plugin-zoom.min.js"
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/chartjs-plugin-zoom/2.0.0/chartjs-plugin-zoom.min.js"
             integrity="sha512-B6F98QATBNaDHSE7uANGo5h0mU6fhKCUD+SPAY7KZDxE8QgZw9rewDtNiu3mbbutYDWOKT3SPYD8qDBpG2QnEg=="
             crossorigin="anonymous"
             referrerpolicy="no-referrer">
-        </script>
+    </script>
 
 
 
 
 
 
-        <!-- Mainly scripts -->
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/popper.min.js"></script>
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/bootstrap.js"></script>
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+    <!-- Mainly scripts -->
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/jquery-3.1.1.min.js"></script>
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/popper.min.js"></script>
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/bootstrap.js"></script>
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
 
-        <!-- Flot -->
-        <!-- Custom and plugin javascript -->
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/inspinia.js"></script>
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/pace/pace.min.js"></script>
-
-
-        <!-- jQuery UI -->
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/jquery-ui/jquery-ui.min.js"></script>
-
-        <!-- Jvectormap -->
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
-        <!-- Peity -->
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/peity/jquery.peity.min.js"></script>
-        <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/demo/peity-demo.js"></script>
+    <!-- Flot -->
+    <!-- Custom and plugin javascript -->
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/inspinia.js"></script>
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/pace/pace.min.js"></script>
 
 
+    <!-- jQuery UI -->
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+
+    <!-- Jvectormap -->
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/jvectormap/jquery-jvectormap-2.0.2.min.js"></script>
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js"></script>
+    <!-- Peity -->
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/peity/jquery.peity.min.js"></script>
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/demo/peity-demo.js"></script>
 
 
-                        @*<script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+    <!-- ChartJS-->
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/plugins/chartJs/Chart.min.js"></script>
+    <script src="~/inspinia-gh-pages/inspinia-gh-pages/js/demo/chartjs-demo.js"></script>
+    @*<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.3.0/chart.min.js" integrity="sha512-mlz/Fs1VtBou2TrUkGzX4VoGvybkD9nkeXWJm3rle0DPHssYYx4j+8kIS15T78ttGfmOjH0lLaBXGcShaVkdkg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+*@
+    @*<script src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="/lib/bootstrap/dist/js/bootstrap.js"></script>
     <script src="/lib/jquery/dist/jquery.min.js"></script>
     <script src="/lib/jquery/dist/jquery.js"></script>
     *@
-    </body>
+</body>
 
-    <script>
+<script>
 
-        $.ajax({
-            url: '@Url.Action("GetChartData","Company",new RouteValueDictionary(new {id=Model.Id}))',
-            type: 'GET',
-            contentType: "application/json",
-            dataType: "json",
-            success: function (response) {
-                var data = response.close;
-                var data2 = response.timestamp;
-                var lineChart = {
-                    labels: data2,
-                    datasets: [{
-                        label: 'close',
-                        data: data,
-                        borderWidth: 2,
-                        radius: 1,
-                        backgroundColor: 'rgb(75, 192, 192)',
-                        borderColor: 'rgb(151, 198, 131)',
-                        tension: 0.3,
-                        fill: {
-                            target: 'origin',
-                            above: 'rgb(151, 198, 131)',   // Area will be red above the origin
-                            below: 'rgb(151, 198, 131)'    // And blue below the origin
-                        }
-                    }]
-                };
-                var ctx1 = document.getElementById('myChart').getContext('2d');
-                var chart1 = new Chart(ctx1, {
-                    type: 'line',
-                    data: lineChart,
-                    options: {
-
-                        responsive: true,
-                        interaction: {
-                            intersect: false
-                        },
+    $.ajax({
+        url: '@Url.Action("GetChartData","Company",new RouteValueDictionary(new {id=Model.Profile.Id}))',
+        type: 'GET',
+        contentType: "application/json",
+        dataType: "json",
+        success: function (response) {
+            var data = response.close;
+            var data2 = response.timestamp;
+            var lineChart = {
+                labels: data2,
+                datasets: [{
+                    label: 'close',
+                    data: data,
+                    borderWidth: 2,
+                    radius: 1,
+                    backgroundColor: 'rgb(75, 192, 192)',
+                    borderColor: 'rgb(151, 198, 131)',
+                    tension: 0.3,
+                    fill: {
+                        target: 'origin',
+                        above: 'rgb(151, 198, 131)',   // Area will be red above the origin
+                        below: 'rgb(151, 198, 131)'    // And blue below the origin
                     }
-                });
-            }
-        });
+                }]
+            };
+            var ctx1 = document.getElementById('myChart').getContext('2d');
+            var chart1 = new Chart(ctx1, {
+                type: 'line',
+                data: lineChart,
+                options: {
 
-
-        $.ajax({
-            url: '@Url.Action("GetBarChartData","Company",new RouteValueDictionary(new {id=Model.Id}))',
-            type: 'GET',
-            success: function (response) {
-                var rev = response.revenue;
-                var date = response.timestamp;
-                var earn = response.earnings;
-                var chartData = {
-                    labels: date,
-                    datasets: [{
-                        label: 'Revenue',
-                        data: rev,
-                        backgroundColor: 'rgb(151, 198, 131)'
+                    responsive: true,
+                    interaction: {
+                        intersect: false
                     },
-                    {
-                        label: 'Earnings',
-                        data: earn,
-                        backgroundColor: 'rgb(131, 128, 135)'
-                    }
-                    ]
-                };
+                }
+            });
+        }
+    });
 
-                var ctx2 = document.getElementById('barChart').getContext('2d');
-                var chart2 = new Chart(ctx2, {
-                    type: 'bar',
-                    data: chartData,
-                    options: {
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            title: {
-                                display: true,
-                                text: 'Annual Financials'
-                            },
+
+    $.ajax({
+        url: '@Url.Action("GetBarChartData","Company",new RouteValueDictionary(new {id=Model.Profile.Id}))',
+        type: 'GET',
+        success: function (response) {
+            var rev = response.revenue;
+            var date = response.timestamp;
+            var earn = response.earnings;
+            var chartData = {
+                labels: date,
+                datasets: [{
+                    label: 'Revenue',
+                    data: rev,
+                    backgroundColor: 'rgba(26,179,148,0.5)',
+                    borderColor: "rgba(26,179,148,0.7)",
+                    pointBackgroundColor: "rgba(26,179,148,1)",
+                    pointBorderColor: "#fff",
+                },
+                {
+                    label: 'Earnings',
+                    data: earn,
+                    backgroundColor: '#bdab74'
+                }
+                ]
+            };
+
+            var ctx2 = document.getElementById('barChart1').getContext('2d');
+            var chart2 = new Chart(ctx2, {
+                type: 'bar',
+                data: chartData,
+                options: {
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Annual Financials'
+                        },
+                    },
+
+                    scales: {
+                        y: {
+                            display: false
                         },
 
-                        scales: {
-                            y: {
-                                display: false
-                            },
+                    }
 
-                        }
+                }
+            });
+        }
+    });
+
+
+    $.ajax({
+        url: '@Url.Action("GetBubbleChartData","Company",new RouteValueDictionary(new {id=Model.Profile.Id}))',
+        type: 'GET',
+        success: function (response) {
+            var rev = response.revenue;
+            var date = response.timestamp;
+            //var earn = response.earnings;
+            var chartData = {
+                labels: date,
+                datasets: [{
+                    label: 'Net Interest Income(Annually)',
+                    data: rev,
+                    backgroundColor: 'rgba(26,179,148,0.5)',
+                    borderColor: "rgba(26,179,148,0.7)",
+                    pointBackgroundColor: "rgba(26,179,148,1)",
+                    pointBorderColor: "#fff",
+                },
+                    //{
+                    //    label: 'Earnings',
+                    //    data: earn,
+                    //    backgroundColor: 'rgb(131, 128, 135)'
+                    //}
+                ]
+            };
+
+            var ctx2 = document.getElementById('lineChartx').getContext('2d');
+            var chart2 = new Chart(ctx2, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Net Interest Income'
+                        },
+                    },
+
+                    scales: {
+
 
                     }
-                });
-            }
-        });
 
-
-    </script>
-
-    <style>
-        canvas {
-            width: 100% !important;
-            height: 350px !important;
+                }
+            });
         }
-    </style>
+    });
+    $.ajax({
+        url: '@Url.Action("GetCostOfRevenueChartData","Company",new RouteValueDictionary(new {id=Model.Profile.Id}))',
+        type: 'GET',
+        success: function (response) {
+            var rev = response.revenue;
+            var date = response.timestamp;
+            //var earn = response.earnings;
+            var chartData = {
+                labels: date,
+                datasets: [{
+                    label: 'Cost Of Revenue(Annually)',
+                    data: rev,
+                    backgroundColor: 'rgba(26,179,148,0.5)',
+                    borderColor: "rgba(26,179,148,0.7)",
+                    pointBackgroundColor: "rgba(26,179,148,1)",
+                    pointBorderColor: "#fff",
+                },
+                    //{
+                    //    label: 'Earnings',
+                    //    data: earn,
+                    //    backgroundColor: 'rgb(131, 128, 135)'
+                    //}
+                ]
+            };
+
+            var ctx2 = document.getElementById('lineChart1').getContext('2d');
+            var chart2 = new Chart(ctx2, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Cost Of Revenue'
+                        },
+                    },
+
+                    scales: {
+
+
+                    }
+
+                }
+            });
+        }
+    });
+    $.ajax({
+        url: '@Url.Action("GetNetInterestIncomeChartData","Company",new RouteValueDictionary(new {id=Model.Profile.Id}))',
+        type: 'GET',
+        success: function (response) {
+            var rev = response.revenue;
+            var date = response.timestamp;
+            //var earn = response.earnings;
+            var chartData = {
+                labels: date,
+                datasets: [{
+                    label: 'EBIT(Annually)',
+                    data: rev,
+                    backgroundColor: 'rgba(26,179,148,0.5)',
+                    borderColor: "rgba(26,179,148,0.7)",
+                    pointBackgroundColor: "rgba(26,179,148,1)",
+                    pointBorderColor: "#fff",
+                },
+                    //{
+                    //    label: 'Earnings',
+                    //    data: earn,
+                    //    backgroundColor: 'rgb(131, 128, 135)'
+                    //}
+                ]
+            };
+
+            var ctx2 = document.getElementById('lineChart2').getContext('2d');
+            var chart2 = new Chart(ctx2, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'EBIT'
+                        },
+                    },
+
+                    scales: {
+
+
+                    }
+
+                }
+            });
+        }
+    });
+    $.ajax({
+        url: '@Url.Action("GetNetDeptChartData","Company",new RouteValueDictionary(new {id=Model.Profile.Id}))',
+        type: 'GET',
+        success: function (response) {
+            var rev = response.revenue;
+            var date = response.timestamp;
+            //var earn = response.earnings;
+            var chartData = {
+                labels: date,
+                datasets: [{
+                    label: 'Net Dept(Annually)',
+                    data: rev,
+                    backgroundColor: 'rgba(26,179,148,0.5)',
+                    borderColor: "rgba(26,179,148,0.7)",
+                    pointBackgroundColor: "rgba(26,179,148,1)",
+                    pointBorderColor: "#fff",
+                },
+                    //{
+                    //    label: 'Earnings',
+                    //    data: earn,
+                    //    backgroundColor: 'rgb(131, 128, 135)'
+                    //}
+                ]
+            };
+
+            var ctx2 = document.getElementById('lineChart3').getContext('2d');
+            var chart2 = new Chart(ctx2, {
+                type: 'line',
+                data: chartData,
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                        },
+                        title: {
+                            display: true,
+                            text: 'Net Dept'
+                        },
+                    },
+
+                    scales: {
+
+
+                    }
+
+                }
+            });
+        }
+    });
+</script>
+
+<style>
+    canvas {
+        width: 100% !important;
+        height: 350px !important;
+    }
+</style>
 
