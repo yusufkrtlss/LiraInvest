@@ -103,7 +103,7 @@
                     </row>
                     <row>
 
-                        @if (Model.favorites.Any(x => x.Profile.Id == Model.Profile.Id))
+                        @if (!Model.favorites.Any(x => x.Profile.Id == Model.Profile.Id))
                         {
                             <form asp-controller="Favorites" asp-action="AddFavorite" asp-route-id="@Model.Profile.Id">
                                 <button type="submit" class="btn btn-sm btn-outline-danger btn-block"><i class="fa fa-star"></i> Add to fav </button>
@@ -111,7 +111,7 @@
                         }
                         else
                         {
-                            <form asp-controller="Favorites" asp-action="AddFavorite" asp-route-id="@Model.Profile.Id">
+                            <form asp-controller="Favorites" asp-action="RemoveFavorite" asp-route-id="@Model.Profile.Id">
                                 <button type="submit" class="btn btn-sm btn-danger btn-block"><i class="fa fa-star"></i> Remove from fav </button>
                             </form>
                         }
