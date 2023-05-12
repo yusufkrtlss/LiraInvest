@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.CodeAnalysis;
 using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json.Linq;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace LiraOfInvestment.Controllers
@@ -25,12 +26,11 @@ namespace LiraOfInvestment.Controllers
         private INewsService _newsService;
         private readonly UserManager<AppUser> _userManager;
         private IUserService _userService;
-        private IMemoryCache _cache;
         private IPricesService _priceService;
         private readonly IIncomeStatementService _incomeStatementService;
         private IFavoriteService _favoriteService;
         public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService,
-            IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService, IMemoryCache cache, IPricesService priceService, IIncomeStatementService incomeStatementService, IFavoriteService favoriteService)
+            IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService, IPricesService priceService, IIncomeStatementService incomeStatementService, IFavoriteService favoriteService)
         {
             _profileService = profileService;
             _twoYearsMonthlyService = twoYearsMonthlyService;
@@ -39,7 +39,6 @@ namespace LiraOfInvestment.Controllers
             _newsService = newsService;
             _userManager = userManager;
             _userService = userService;
-            _cache = cache;
             _priceService = priceService;
             _incomeStatementService = incomeStatementService;
             _favoriteService = favoriteService;
@@ -71,6 +70,24 @@ namespace LiraOfInvestment.Controllers
                 favorites=f2
             };
             //var chart = GetChartData(id);
+            return View(model);
+        }
+        [HttpGet]
+        public async Task<IActionResult> CompanyInformation(int id)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            var company = _profileService.TGetByID(id);
+            var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
+            var prices = _priceService.TGetList().Where(x => x.Symbol == company.Symbol).First();
+            var f2 = _favoriteService.GetFavoritesListIncludeProfile(user.Id);
+            var model = new CompanyProfile()
+            {
+                Profile = company,
+                FinancialData = financialData,
+                prices = prices,
+                favorites = f2
+                //FinancialData=financialData
+            };
             return View(model);
         }
         [HttpGet]
