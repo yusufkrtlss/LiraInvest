@@ -22,6 +22,9 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.ui-menu{
+    z-index: 10000;
+}
 .glyphicon-asterisk:before {
   content: "\002a";
 }

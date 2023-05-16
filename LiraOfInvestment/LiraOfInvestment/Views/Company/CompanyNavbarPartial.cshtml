@@ -162,7 +162,7 @@
             minLength: 1
         }).autocomplete("instance")._renderItem = function(ul, item) {
     return $("<li>")
-      .append("<div>" + item.symbol + "</div>")
+                .append("<a class='search-item'> " + item.symbol + "</a>")
       .appendTo(ul);
   };
     });

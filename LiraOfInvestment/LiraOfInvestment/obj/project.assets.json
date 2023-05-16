@@ -11489,24 +11489,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\yigitcan.cirpan\\.nuget\\packages\\": {},
-    "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages": {}
+    "C:\\Users\\berka\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+      "projectUniqueName": "C:\\Users\\berka\\Source\\Repos\\LiraInvest5-15-9\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
       "projectName": "LiraOfInvestment",
-      "projectPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
-      "packagesPath": "C:\\Users\\yigitcan.cirpan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
+      "projectPath": "C:\\Users\\berka\\Source\\Repos\\LiraInvest5-15-9\\LiraOfInvestment\\LiraOfInvestment\\LiraOfInvestment.csproj",
+      "packagesPath": "C:\\Users\\berka\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\berka\\Source\\Repos\\LiraInvest5-15-9\\LiraOfInvestment\\LiraOfInvestment\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\DevExpress 22.2\\Components\\Offline Packages"
-      ],
       "configFilePaths": [
-        "C:\\Users\\yigitcan.cirpan\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 22.2.config",
+        "C:\\Users\\berka\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -11514,22 +11509,20 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\DevExpress 22.2\\Components\\System\\Components\\Packages": {},
-        "https://api.nuget.org/v3/index.json": {},
-        "https://nuget.devexpress.com/DvsbSzyVs68JfANpy6DLmxvbjVIkTdi8aM6TO15DYjpXQOEAwm/api": {}
+        "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
-              "projectPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj"
+            "C:\\Users\\berka\\Source\\Repos\\LiraInvest5-15-9\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj": {
+              "projectPath": "C:\\Users\\berka\\Source\\Repos\\LiraInvest5-15-9\\LiraOfInvestment\\BusinessLayer\\BusinessLayer.csproj"
             },
-            "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
-              "projectPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
+            "C:\\Users\\berka\\Source\\Repos\\LiraInvest5-15-9\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj": {
+              "projectPath": "C:\\Users\\berka\\Source\\Repos\\LiraInvest5-15-9\\LiraOfInvestment\\DataAccessLayer\\DataAccessLayer.csproj"
             },
-            "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
-              "projectPath": "C:\\Users\\yigitcan.cirpan\\source\\repos\\LiraInvest\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
+            "C:\\Users\\berka\\Source\\Repos\\LiraInvest5-15-9\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj": {
+              "projectPath": "C:\\Users\\berka\\Source\\Repos\\LiraInvest5-15-9\\LiraOfInvestment\\EntityLayer\\EntityLayer.csproj"
             }
           }
         }
@@ -11588,7 +11581,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   },
@@ -11597,7 +11590,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Identity.Core 2.2.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "message": "'Microsoft.AspNet.Identity.Core 2.2.0' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
       "libraryId": "Microsoft.AspNet.Identity.Core",
       "targetGraphs": [
         "net6.0"
@@ -11607,7 +11600,7 @@
       "code": "NU1701",
       "level": "Warning",
       "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNet.Identity.EntityFramework 2.2.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' instead of the project target framework 'net6.0'. This package may not be fully compatible with your project.",
+      "message": "'Microsoft.AspNet.Identity.EntityFramework 2.2.0' paketi, proje hedef çerçevesi 'net6.0' yerine '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8, .NETFramework,Version=v4.8.1' kullanılarak geri yüklendi. Bu paket projenizle tamamen uyumlu olmayabilir.",
       "libraryId": "Microsoft.AspNet.Identity.EntityFramework",
       "targetGraphs": [
         "net6.0"
