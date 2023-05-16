@@ -29,8 +29,11 @@ namespace LiraOfInvestment.Controllers
         private IPricesService _priceService;
         private readonly IIncomeStatementService _incomeStatementService;
         private IFavoriteService _favoriteService;
+        private ICorporateEventsService _corporateEventsService;
+        private IKeyExecutivesService _keyExecutivesService;
         public CompanyController(IProfileService profileService, ITwoYearsMonthly twoYearsMonthlyService, IBarChartYearlyService barChartYearlyService,
-            IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService, IPricesService priceService, IIncomeStatementService incomeStatementService, IFavoriteService favoriteService)
+            IFinancialDataService financialDataService, INewsService newsService, UserManager<AppUser> userManager, IUserService userService, IPricesService priceService,
+            IIncomeStatementService incomeStatementService, IFavoriteService favoriteService, ICorporateEventsService corporateEventsService, IKeyExecutivesService keyExecutivesService)
         {
             _profileService = profileService;
             _twoYearsMonthlyService = twoYearsMonthlyService;
@@ -42,6 +45,8 @@ namespace LiraOfInvestment.Controllers
             _priceService = priceService;
             _incomeStatementService = incomeStatementService;
             _favoriteService = favoriteService;
+            _corporateEventsService = corporateEventsService;
+            _keyExecutivesService = keyExecutivesService;
         }
 
         [HttpGet("/company/index/{id}")]
@@ -58,6 +63,7 @@ namespace LiraOfInvestment.Controllers
             var TopFiveCompany=_profileService.TGetList().OrderByDescending(x => x.LongName).Take(5).ToList();
             var incomeStatement=_incomeStatementService.TGetList().Where(x=>x.Symbol==company.Symbol).ToList();
             
+            
             var model = new CompanyProfile()
             {
                 Profile = company,
@@ -67,7 +73,8 @@ namespace LiraOfInvestment.Controllers
                 TopFiveProfile= TopFiveCompany,
                 prices=prices,
                 incomeStatement=incomeStatement,
-                favorites=f2
+                favorites=f2,
+                
             };
             //var chart = GetChartData(id);
             return View(model);
@@ -80,12 +87,16 @@ namespace LiraOfInvestment.Controllers
             var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
             var prices = _priceService.TGetList().Where(x => x.Symbol == company.Symbol).First();
             var f2 = _favoriteService.GetFavoritesListIncludeProfile(user.Id);
+            var corporateEvent=_corporateEventsService.TGetList().Where(x=>x.Symbol == company.Symbol).ToList();
+            var executives = _keyExecutivesService.TGetList().Where(x => x.Symbol == company.Symbol).ToList();
             var model = new CompanyProfile()
             {
                 Profile = company,
                 FinancialData = financialData,
                 prices = prices,
-                favorites = f2
+                favorites = f2,
+                corporateEvents=corporateEvent,
+                keyExecutives = executives,
                 //FinancialData=financialData
             };
             return View(model);
@@ -182,6 +193,9 @@ namespace LiraOfInvestment.Controllers
         }
         public async Task<JsonResult> GetChartData(string id)
         {
+            CultureInfo cultureInfo = new CultureInfo("en-US");
+            DateTimeFormatInfo dateTimeFormat = cultureInfo.DateTimeFormat;
+            dateTimeFormat.MonthDayPattern = "MMMM d";
             var cid=Convert.ToInt32(id);
             var asset = _profileService.TGetByID(cid);
             var symbol=asset.Symbol;
@@ -190,7 +204,7 @@ namespace LiraOfInvestment.Controllers
             foreach (var date in dates)
             {
                 var dt=DateTime.Parse(date);
-                var data = dt.Date.ToString("MMMM/yy");
+                var data = dt.ToString("MMMM/yy",dateTimeFormat);
                 datas.Add(data);
             }
 

@@ -15,6 +15,6 @@ namespace EntityLayer.Concrete
         public string Resource { get; set; }
         public string Link { get; set; }
         public string Type { get; set; }
-        public string Which_Symbols { get; set; }
+        public string? Which_Symbols { get; set; }
     }
 }

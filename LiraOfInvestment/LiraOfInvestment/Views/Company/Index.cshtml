@@ -394,12 +394,12 @@
                 <div class="col-lg-4" style="max-height:fit-content;">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>Annual Revenue & Earnings <small>of @Model.Profile.LongName</small></h5>
+                            <h5>2 years Monthly Data <small>of @Model.Profile.LongName</small></h5>
 
                         </div>
                         <div class="ibox-content">
-                            <div class="bar-chart">
-                                <canvas id="barChart"></canvas>
+                            <div class="line-chart">
+                                <canvas id="myChart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -513,7 +513,7 @@
                     data: data,
                     borderWidth: 2,
                     radius: 1,
-                    backgroundColor: 'rgb(75, 192, 192)',
+                    backgroundColor: 'rgba(26,179,148,0.5)',
                     borderColor: 'rgb(151, 198, 131)',
                     tension: 0.3,
                     fill: {

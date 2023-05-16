@@ -96,6 +96,12 @@ builder.Services.AddTransient<IPricesDal, EfPricesDal>();
 
 builder.Services.AddTransient<IIncomeStatementService, IncomeStatementManager>();
 builder.Services.AddTransient<IIncomeStatementDal, EfIncomeStatement>();
+
+builder.Services.AddTransient<ICorporateEventsService, CorporateEventsManager>();
+builder.Services.AddTransient<ICorporateEventsDal, EfCorporateEventsDal>();
+
+builder.Services.AddTransient<IKeyExecutivesService, KeyExecutivesManager>();
+builder.Services.AddTransient<IKeyExecutivesDal, EfKeyExecutivesDal>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

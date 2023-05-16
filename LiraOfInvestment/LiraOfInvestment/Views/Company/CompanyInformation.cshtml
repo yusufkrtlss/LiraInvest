@@ -1,10 +1,12 @@
-﻿
+﻿@model EntityLayer.Dto.CompanyProfile
+@using System.Globalization;
 @{
     ViewData["Title"] = "CompanyInformation";
     Layout = "~/Views/Shared/_Layout.cshtml";
+    CultureInfo cultureInfo = new CultureInfo("en-US");
 }
 
-<h1>CompanyInformation</h1>
+
 <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/bootstrap.min.css" rel="stylesheet">
 <link href="~/inspinia-gh-pages/inspinia-gh-pages/font-awesome/css/font-awesome.css" rel="stylesheet">
 
@@ -19,7 +21,164 @@
 <!-- Morris -->
 <link href="~/inspinia-gh-pages/inspinia-gh-pages/css/plugins/morris/morris-0.4.3.min.css" rel="stylesheet">
 <body>
+    <div class="wrapper wrapper-content" >
 
+
+        <div class="row m-b-lg m-t-lg">
+            <div class="col-md-3">
+
+                @*<div class="profile-image">
+                    <img src="img/a4.jpg" class="rounded-circle circle-border m-b-md" alt="profile">
+                </div>*@
+                <div class="profile-info">
+                    <div class="">
+                        <div>
+                            <h2 class="no-margins">
+                                @Model.Profile.LongName
+                            </h2>
+                            <h4> Industry: @Model.Profile.Industry</h4>
+                            <small>
+                                Sector: @Model.Profile.Sector
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <table class="table small m-b-xs">
+                    <tbody>
+                        <tr>
+                            <td>
+                                <strong>Industry</strong> @Model.Profile.Industry
+                            </td>
+                            <td>
+                                <strong>Sector</strong> @Model.Profile.Sector
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>Phone</strong> @Model.Profile.Phone
+                            </td>
+                            <td>
+                                <strong>Website</strong><a href="@Model.Profile.Website" target="_blank"> @Model.Profile.Website</a>
+                            </td>
+                        </tr>
+                       
+                    </tbody>
+                </table>
+            </div>
+         @*   <div class="col-md-3">
+                <small>Sales in last 24h</small>
+                <h2 class="no-margins">206 480</h2>
+                <div id="sparkline1"></div>
+            </div>*@
+
+
+        </div>
+        <div class="row">
+
+          
+
+            <div class="col-lg-8">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <h3>About @Model.Profile.LongName</h3>
+
+                        <p class="small">
+                            @Model.Profile.LongBusinessSummary
+                        </p>
+
+                       
+
+                    </div>
+                </div>
+                <div class="ibox">
+                    <div class="ibox-title">
+                        <h4>Key Executives</h4>
+                        
+                    </div>
+                    <div class="ibox-content table-responsive p-0">
+                        <table class="table table-striped table-valign-middle">
+                            <thead>
+                                <tr>
+                                    @*<th>Key Executives<small></small></th>
+*@
+                                    <th>Name</th>
+                                    <th>Title</th>
+                                    <th>Pay</th>
+                                    <th>Year Born</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach(var item in Model.keyExecutives)
+                                {
+                                    <tr>
+                                        <td>@item.Name </td>
+                                        <td>@item.Title </td>
+                                        @if (item.TotalPay is null)
+                                        {
+                                            <td>N/A </td>
+                                        }
+                                        else
+                                        {
+                                            <td>@item.TotalPay </td>
+                                        }
+                                        
+                                        @if (item.YearBorn is null)
+                                        {
+                                            <td>N/A </td>
+                                        }
+                                        else
+                                        {
+                                            <td>@item.YearBorn </td>
+                                        }
+                                        
+
+
+                                    </tr>
+                                }
+                                
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-lg-4 m-b-lg">
+                <div id="vertical-timeline" class="vertical-container light-timeline no-margins">
+                    @foreach(var item in Model.corporateEvents.OrderByDescending(x=>x.Date).ToList())
+                    {
+                        <div class="vertical-timeline-block">
+                            <div class="vertical-timeline-icon navy-bg">
+                                <i class="fa fa-briefcase"></i>
+                            </div>
+
+                            <div class="vertical-timeline-content">
+                                <h2>@item.Headline</h2>
+                                <p>
+                                    @item.Description
+                                </p>
+                                <a href="#" class="btn btn-sm btn-primary"> More info</a>
+                                <span class="vertical-date">
+                                    Today <br>
+                                    <small>@item.Date.ToString("d")</small>
+                                </span>
+                            </div>
+                        </div>
+                    }
+                   
+
+               
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 </body>
 
 <!-- Mainly scripts -->

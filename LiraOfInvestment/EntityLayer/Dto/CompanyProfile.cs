@@ -20,5 +20,7 @@ namespace EntityLayer.Dto
         public Prices prices { get; set; }
         public List<IncomeStatement> incomeStatement { get; set; }
         public List<Favorite> favorites { get; set; }
+        public List<CorporateEvents> corporateEvents { get; set;}
+        public List<KeyExecutives> keyExecutives { get; set;}
     }
 }

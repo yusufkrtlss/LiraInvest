@@ -28,6 +28,8 @@ namespace DataAccessLayer.Concrete
         public DbSet<BarChartYearly> Annual_Revenues { get; set; }
         public DbSet<FinancialData> FinancialData{ get; set; }
         public DbSet<IncomeStatement> IncomeStatement{ get; set; }
+        public DbSet<CorporateEvents> CorporateEvents { get; set; }
+        public DbSet<KeyExecutives> KeyExecutives { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
