@@ -13,6 +13,7 @@ using Microsoft.Extensions.Caching.Memory;
 using Newtonsoft.Json.Linq;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 
 namespace LiraOfInvestment.Controllers
 {
@@ -59,8 +60,8 @@ namespace LiraOfInvestment.Controllers
             var financialData = _financialDataService.TGetList().Where(x => x.Symbol == company.Symbol).FirstOrDefault();
             var f2 = _favoriteService.GetFavoritesListIncludeProfile(user.Id);
             var prices=_priceService.TGetList().Where(x=>x.Symbol==company.Symbol).First();
-            var news = _newsService.TGetList().Where(x => x.Which_Symbols.Contains(company.Symbol)).Take(5).ToList();
-            var TopFiveCompany=_profileService.TGetList().OrderByDescending(x => x.LongName).Take(5).ToList();
+            var news = _newsService.TGetList().Where(x => x.Which_Symbols.Contains(company.Symbol)).Take(4).ToList();
+            var TopFiveCompany=_profileService.TGetList().Where(x=>x.Sector==company.Sector && x.Symbol!=company.Symbol).Take(4).ToList();
             var incomeStatement=_incomeStatementService.TGetList().Where(x=>x.Symbol==company.Symbol).ToList();
             
             
@@ -131,19 +132,43 @@ namespace LiraOfInvestment.Controllers
         public async Task<IActionResult> Radar(string symbolFilter,
     string nameFilter,
     string industryFilter,
+    string? SectorFilter,
     double? MinPriceFilter,
     double? MaxPriceFilter,
-    double? MinChangeFilter,
-    double? MaxChangeFilter)
+    double? MinVolumeFilter,
+    double? MaxVolumeFilter,
+    long? MinTotalCash,
+    double? MinTotalCashPerShare,
+    long? MinTotalDept,
+    long? MinTotalRevenue,
+    double? MinRevenueGrowth,
+    double? MinRevenuePerShare
+    )
         {
+            List<SelectListItem> sectorList = (from sector in _profileService.TGetList().OrderBy(x => x.Sector).DistinctBy(x=>x.Sector).ToList()
+                                               select new SelectListItem()
+                                               {
+                                                   Text = sector.Sector,
+                                                   //Value = sector.Sector.ToString()
+                                               }).ToList();
+            List<SelectListItem> industryList = (from industry in _profileService.TGetList().OrderBy(x => x.Industry).DistinctBy(x => x.Industry).ToList()
+                                               select new SelectListItem()
+                                               {
+                                                   Text = industry.Industry,
+                                                   //Value = sector.Sector.ToString()
+                                               }).ToList();
+            ViewBag.sectors = sectorList;
+            ViewBag.industries = industryList;
             var model = new RadarViewModel();
+
             var query = _profileService.TGetList().AsQueryable();
             var prices = _priceService.TGetList().AsQueryable();
+            var financials = _financialDataService.TGetList().AsQueryable();
             model.prices = prices;
             model.profiles = query;
             if (!string.IsNullOrEmpty(symbolFilter))
             {
-                query = query.Where(s => s.Symbol.Contains(symbolFilter));
+                query = query.Where(s => s.Symbol.Contains(symbolFilter.ToUpper()));
                 model.profiles = query;
                 prices = prices.Where(s => s.Symbol.Contains(symbolFilter));
                 model.prices = prices;
@@ -151,43 +176,119 @@ namespace LiraOfInvestment.Controllers
 
             if (!string.IsNullOrEmpty(nameFilter))
             {
-                query = query.Where(s => s.Symbol.Contains(nameFilter));
+                query = query.Where(s => s.Symbol.Contains(nameFilter.ToUpper()));
                 model.profiles = query;
                 prices = prices.Where(s => s.Symbol.Contains(symbolFilter));
                 model.prices = prices;
             }
 
-            if (!string.IsNullOrEmpty(industryFilter))
+            if (!string.IsNullOrWhiteSpace(industryFilter))
             {
                 query = query.Where(s => s.Industry.Contains(industryFilter));
                 model.profiles = query;
-                prices = prices.Where(s => s.Symbol.Contains(symbolFilter));
+                var symbols = query.Select(p => p.Symbol).ToList();
+                prices = prices.Where(s => symbols.Contains(s.Symbol));
+                model.prices = prices;
+            }
+            if (!string.IsNullOrEmpty(SectorFilter))
+            {
+                query = query.Where(s => s.Sector.Contains(SectorFilter));
+                model.profiles = query;
+                var symbols = query.Select(p => p.Symbol).ToList();
+                prices = prices.Where(s => symbols.Contains(s.Symbol));
                 model.prices = prices;
             }
 
-            //if (MinPriceFilter.HasValue)
-            //{
-            //    query = query.Where(s => s.DayLow >= MinPriceFilter.Value);
-            //    model.profiles = query;
-            //}
+            if (MinPriceFilter.HasValue)
+            {
+                prices = prices.Where(s => s.DayLow >= MinPriceFilter.Value);
+                model.prices = prices;
+                var symbols = prices.Select(p => p.Symbol).ToList();
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+            }
 
-            //if (MaxPriceFilter.HasValue)
-            //{
-            //    query = query.Where(s => s.DayLow <= MaxPriceFilter.Value);
-            //    model.profiles = query;
-            //}
+            if (MaxPriceFilter.HasValue)
+            {
+                prices = prices.Where(s => s.DayLow <= MaxPriceFilter.Value);
+                model.prices = prices;
+                var symbols = prices.Select(p => p.Symbol).ToList();
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+            }
 
-            //if (MinChangeFilter.HasValue)
-            //{
-            //    query = query.Where(s => s.YearChange >= MinChangeFilter.Value);
-            //    model.profiles = query;
-            //}
+            if (MinVolumeFilter.HasValue)
+            {
+                prices = prices.Where(s => s.Volume >= MinVolumeFilter.Value);
+                model.prices = prices;
+                var symbols = prices.Select(p => p.Symbol).ToList();
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+            }
 
-            //if (MaxChangeFilter.HasValue)
-            //{
-            //    query = query.Where(s => s.YearChange <= MaxChangeFilter.Value);
-            //    model.profiles = query;
-            //}
+            if (MaxVolumeFilter.HasValue)
+            {
+                prices = prices.Where(s => s.Volume <= MaxVolumeFilter.Value);
+                model.prices = prices;
+                var symbols = prices.Select(p => p.Symbol).ToList();
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+            }
+            if (MinTotalCash.HasValue)
+            {
+                financials = financials.Where(s => s.totalCash >= MinTotalCash.Value);
+                var symbols = financials.Select(p => p.Symbol).ToList();
+                prices = prices.Where(s => symbols.Contains(s.Symbol));
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+                model.prices = prices;
+            }
+            if (MinTotalCashPerShare.HasValue)
+            {
+                financials = financials.Where(s => s.totalCashPerShare >= MinTotalCashPerShare.Value);
+                var symbols = financials.Select(p => p.Symbol).ToList();
+                prices = prices.Where(s => symbols.Contains(s.Symbol));
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+                model.prices = prices;
+            }
+            if (MinTotalDept.HasValue)
+            {
+                financials = financials.Where(s => s.totalDebt >= MinTotalDept.Value);
+                var symbols = financials.Select(p => p.Symbol).ToList();
+                prices = prices.Where(s => symbols.Contains(s.Symbol));
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+                model.prices = prices;
+            }
+            if (MinTotalRevenue.HasValue)
+            {
+                financials = financials.Where(s => s.totalRevenue >= MinTotalRevenue.Value);
+                model.financials = financials;
+                var symbols = financials.Select(p => p.Symbol).ToList();
+                prices = prices.Where(s => symbols.Contains(s.Symbol));
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+                model.prices= prices;
+            }
+            if (MinRevenueGrowth.HasValue)
+            {
+                financials = financials.Where(s => s.revenueGrowth >= MinRevenueGrowth.Value);
+                var symbols = financials.Select(p => p.Symbol).ToList();
+                prices = prices.Where(s => symbols.Contains(s.Symbol));
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+                model.prices = prices;
+            }
+            if (MinRevenuePerShare.HasValue)
+            {
+                financials = financials.Where(s => s.revenuePerShare >= MinRevenueGrowth.Value);
+                var symbols = financials.Select(p => p.Symbol).ToList();
+                prices = prices.Where(s => symbols.Contains(s.Symbol));
+                query = query.Where(s => symbols.Contains(s.Symbol));
+                model.profiles = query;
+                model.prices = prices;
+            }
 
             return View(model);
         }
@@ -221,12 +322,13 @@ namespace LiraOfInvestment.Controllers
             var asset = _profileService.TGetByID(cid);
             var symbol = asset.Symbol;
             var dates = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(t => t.Date).ToList();
-
+            var trimmedNums= new List<double>();
 
 
             var getRevenue = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Revenue).ToArray();
             var getEarnings = _barChartYearlyService.TGetList().Where(x => x.Symbol.Equals(symbol)).Select(x => x.Earnings).ToArray();
 
+           
 
             return new JsonResult(new { timestamp = dates, revenue = getRevenue, earnings = getEarnings });
         }

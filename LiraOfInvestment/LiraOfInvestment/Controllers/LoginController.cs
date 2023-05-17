@@ -101,7 +101,7 @@ namespace LiraOfInvestment.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
-            return RedirectToAction("Login", "Login");
+            return RedirectToAction("Index", "Default");
         }
         [AllowAnonymous]
         public IActionResult AccessDenied()

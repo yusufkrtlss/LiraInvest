@@ -203,32 +203,19 @@
                 </div>
                 <!-- /.col-md-6 -->
                 <div class="row" style="padding-top: 10px;" !important>
-                    <div class="col-lg-4">
-                        <div class="ibox ">
-                            <div class="ibox-title">
-                                <h5>News <small>News about @Model.Profile.LongName</small></h5>
+                   <div class="col-lg-4" style="max-height:fit-content;">
+                    <div class="ibox ">
+                        <div class="ibox-title">
+                            <h5>2 years Monthly Data <small>of @Model.Profile.LongName</small></h5>
 
-                            </div>
-                            <div class="ibox-content">
-                                @foreach (var item in Model.News)
-                                {
-                                    <div class="ibox-content">
-                                        <div>
-                                            <div class="float-right text-right">
-                                                <br />
-                                                <small class="font-bold">@item.Resource</small>
-                                            </div>
-                                            <h4>
-                                                <a href="@item.Link" class="small" target="_blank">@item.Title</a>
-                                                <br />
-                                                @*<small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>*@
-                                            </h4>
-                                        </div>
-                                    </div>
-                                }
+                        </div>
+                        <div class="ibox-content">
+                            <div class="line-chart">
+                                <canvas id="myChart"></canvas>
                             </div>
                         </div>
                     </div>
+                </div>
                     <div class="col-lg-4" style="max-height:fit-content;">
                         <div class="ibox ">
                             <div class="ibox-title">
@@ -237,7 +224,7 @@
                             </div>
                             <div class="ibox-content">
                                 <div class="bar-chart">
-                                    <canvas id="barChart1"></canvas>
+                                    <canvas id="barChart1" height="130"></canvas>
                                 </div>
                             </div>
                         </div>
@@ -249,7 +236,8 @@
                                 <h5>Company Details <small>of @Model.Profile.LongName</small></h5>
 
                             </div>
-                            <div class="row ibox-content">
+                            <div class="ibox-content">
+                                <div class="row">
                                 <table class="col-6">
                                     <tbody class="">
                                         <tr class="group hover:bg-gray-800">
@@ -282,6 +270,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
+
                                 <table class="col-6">
                                     <tbody class="">
                                         <tr class="group hover:bg-gray-800">
@@ -314,6 +303,7 @@
                                         </tr>
                                     </tbody>
                                 </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -371,37 +361,54 @@
                             <h5>News <small>News about @Model.Profile.LongName</small></h5>
 
                         </div>
-                        <div class="ibox-content">
-                            @foreach (var item in Model.News)
-                            {
-                                <div class="ibox-content">
-                                    <div>
-                                        <div class="float-right text-right">
-                                            <br />
-                                            <small class="font-bold">@item.Resource</small>
-                                        </div>
-                                        <h4>
-                                            <a href="@item.Link" class="small" target="_blank">@item.Title</a>
-                                            <br />
-                                            @*<small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>*@
-                                        </h4>
+                        @foreach (var item in Model.News)
+                        {
+                            <div class="ibox-content">
+
+
+                                <div>
+                                    <div class="float-right text-right">
+                                        <br />
+                                        <small class="font-bold">@item.Resource</small>
                                     </div>
+                                    <h4>
+                                        <a href="@item.Link" class="small" target="_blank">@item.Title</a>
+                                        <br />
+                                        @*<small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>*@
+                                    </h4>
                                 </div>
-                            }
-                        </div>
+
+
+                            </div>
+                        }
                     </div>
                 </div>
-                <div class="col-lg-4" style="max-height:fit-content;">
+                <div class="col-lg-4">
                     <div class="ibox ">
                         <div class="ibox-title">
-                            <h5>2 years Monthly Data <small>of @Model.Profile.LongName</small></h5>
+                            <h5>Competitors <small>of @Model.Profile.LongName</small></h5>
 
                         </div>
-                        <div class="ibox-content">
-                            <div class="line-chart">
-                                <canvas id="myChart"></canvas>
+                        @foreach (var item in Model.TopFiveProfile)
+                        {
+                            <div class="ibox-content">
+
+
+                                <div>
+                                    <div class="float-right text-right">
+                                        <br />
+                                        @*<small class="font-bold">@item.Resource</small>*@
+                                    </div>
+                                    <h4>
+                                        <a asp-controller="Company" asp-action="Index" asp-route-id="@item.Id" class="small" target="_blank">@item.LongName</a>
+                                        <br />
+                                        @*<small class="m-r"><a href="graph_flot.html"> Check the stock price! </a> </small>*@
+                                    </h4>
+                                </div>
+
+
                             </div>
-                        </div>
+                        }
                     </div>
                 </div>
 
@@ -578,12 +585,21 @@
                             text: 'Annual Financials'
                         },
                     },
-
+                    tooltips: {
+                       
+                    },
                     scales: {
-                        y: {
-                            display: false
-                        },
-
+                        yAxes: [{
+                            beginAtZero: true,
+                            ticks: {
+                                // Include a callback function to remove trailing zeros
+                                callback: function (value, index, values) {
+                                    console.log(value);
+                                    return value / 1000000000 + 'k';
+                                }
+                            }
+                        }],
+                        
                     }
 
                 }
@@ -634,7 +650,16 @@
                     },
 
                     scales: {
-
+                        yAxes: [{
+                            beginAtZero: true,
+                            ticks: {
+                                // Include a callback function to remove trailing zeros
+                                callback: function (value, index, values) {
+                                    console.log(value);
+                                    return value / 1000000 + 'k';
+                                }
+                            }
+                        }],
 
                     }
 
@@ -684,7 +709,16 @@
                     },
 
                     scales: {
-
+                        yAxes: [{
+                            beginAtZero: true,
+                            ticks: {
+                                // Include a callback function to remove trailing zeros
+                                callback: function (value, index, values) {
+                                    console.log(value);
+                                    return value / 1000000000 + 'k';
+                                }
+                            }
+                        }],
 
                     }
 
@@ -734,7 +768,16 @@
                     },
 
                     scales: {
-
+                        yAxes: [{
+                            beginAtZero: true,
+                            ticks: {
+                                // Include a callback function to remove trailing zeros
+                                callback: function (value, index, values) {
+                                    console.log(value);
+                                    return value / 1000000000 + 'k';
+                                }
+                            }
+                        }],
 
                     }
 
@@ -785,7 +828,16 @@
 
                     scales: {
 
-
+                        yAxes: [{
+                            beginAtZero: true,
+                            ticks: {
+                                // Include a callback function to remove trailing zeros
+                                callback: function (value, index, values) {
+                                    console.log(value);
+                                    return value / 1000000000 + 'k';
+                                }
+                            }
+                        }],
                     }
 
                 }
@@ -795,9 +847,9 @@
 </script>
 
 <style>
-    canvas {
+    /*canvas {
         width: 100% !important;
         height: 350px !important;
-    }
+    }*/
 </style>
 

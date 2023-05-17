@@ -16,27 +16,31 @@ namespace LiraOfInvestment.Controllers
         private readonly IProfileService _profileService;
         private readonly IFavoriteService _favoriteService;
         private readonly IUserService _userService;
+        private readonly INewsService _newsService;
         private readonly UserManager<AppUser> _userManager;
-        public AdminController(IProfileService profileService, IFavoriteService favoriteService, IUserService userService, UserManager<AppUser> userManager)
+        public AdminController(IProfileService profileService, IFavoriteService favoriteService, IUserService userService, UserManager<AppUser> userManager, INewsService newsService)
         {
             _profileService = profileService;
             _favoriteService = favoriteService;
             _userService = userService;
             _userManager = userManager;
+            _newsService = newsService;
         }
 
         public async Task<IActionResult> Index()
         {
             var user = await _userManager.FindByNameAsync(User.Identity.Name);
-            var values = _profileService.TGetList().Take(9).ToList();
+            var values = _profileService.TGetList().ToList();
             var favorites = _favoriteService.TGetList();
             var userfavs = _userService.GetAppUserIncludeFavoritesList(user.Id);
+            var news = _newsService.TGetList().Take(5).ToList();
             //var favs=userfavs.Favorites.Any(t => t.AppUserId);
 
             var f2=_favoriteService.GetFavoritesListIncludeProfile(user.Id);
             var model = new UserProfile();
             model.profiles = values;
             model.favs = f2;
+            model.news = news;
             return View(model);
         }
         public PartialViewResult PartialNavbar()
